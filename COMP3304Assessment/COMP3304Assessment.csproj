@@ -57,6 +57,9 @@
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -78,6 +81,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\AnglerFish_Lit.png" />
+    <Content Include="assets\AnglerFish_Unlit.png" />
+    <Content Include="assets\AquariumBackground.png" />
+    <Content Include="assets\JavaFish.png" />
+    <Content Include="assets\OrangeFish.png" />
+    <Content Include="assets\PiranhaGreen.png" />
+    <Content Include="assets\PiranhaRed.png" />
+    <Content Include="assets\Seahorse.png" />
+    <Content Include="assets\Urchin.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

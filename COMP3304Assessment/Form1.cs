@@ -12,9 +12,18 @@ namespace COMP3304Assessment
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private Image _img;
+
+        public Form1(Image img)
         {
+
             InitializeComponent();
+            _img = img;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = _img;
         }
     }
 }
