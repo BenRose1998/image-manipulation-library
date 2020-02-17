@@ -68,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -92,6 +93,12 @@
     <Content Include="assets\PiranhaRed.png" />
     <Content Include="assets\Seahorse.png" />
     <Content Include="assets\Urchin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageManipulationLibrary\ImageManipulationLibrary.csproj">
+      <Project>{0517c188-5651-4aa1-9c02-0c763f85dde7}</Project>
+      <Name>ImageManipulationLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,6 +10,7 @@ namespace COMP3304Assessment
 {
     class Controller
     {
+        // Move this code to a new class
         private IModel _model;
 
         private IList<string> pathfilenames;
@@ -28,7 +29,7 @@ namespace COMP3304Assessment
 
             keys = _model.load(pathfilenames);
 
-            Image img = _model.getImage(keys[0], 0, 0);
+            Image img = _model.getImage(keys[0], 480, 320);
 
             Application.Run(new Form1(img));
         }
