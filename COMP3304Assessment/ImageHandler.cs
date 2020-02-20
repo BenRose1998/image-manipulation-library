@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace COMP3304Assessment
         // ---------------------------------------------------------------------------------------------------------------------
         public void currentImage()
         {
-            // Call Image on 'pictureBox' display the next image
+            // Apply the returned 'filePathHandler' image to the local 'PictureBox.Image'
             pictureBox.Image = filePathHandler.getImage(imgIndex);
         }
 
@@ -61,8 +62,20 @@ namespace COMP3304Assessment
             // Increment the 'imgIndex' value 
             imgIndex++;
 
-            // Call xxx to display the next image
-            pictureBox.Image = filePathHandler.getImage(imgIndex);
+            // Store the next image in the local 'nextImage' value
+            Image nextImage = filePathHandler.getImage(imgIndex);
+
+            // If the 'nextImage' value is not Null
+            if (nextImage != null)
+            {
+                // Call 'currentImage' method
+                currentImage();
+            }
+            else
+            {
+                // Decrement the 'imgIndex' value
+                imgIndex--;
+            }
         }
 
 
@@ -71,11 +84,23 @@ namespace COMP3304Assessment
         // -----------------------------------------------------------------------------------------------------------------------
         public void previousImage()
         {
-            // Increment the 'imgIndex' value 
+            // Decrement the 'imgIndex' value 
             imgIndex--;
 
-            // Call xxx to display the next image
-            pictureBox.Image = filePathHandler.getImage(imgIndex);
+            // Store the previous image in the local 'nextImage' value
+            Image previousImage = filePathHandler.getImage(imgIndex);
+
+            // If the 'previousImage' value is not Null
+            if (previousImage != null)
+            {
+                // Call 'currentImage' method
+                currentImage();
+            }
+            else
+            {
+                // Increment the 'imgIndex' value
+                imgIndex++;
+            }
         }
     }
 }

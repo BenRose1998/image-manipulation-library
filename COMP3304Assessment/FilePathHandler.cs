@@ -38,9 +38,15 @@ namespace COMP3304Assessment
 
         public Image getImage(int index)
         {
-            return _model.getImage(keys[index], 480, 480);
+            //
+            if (keys.Count > index && index >= 0)
+            {
+                return _model.getImage(keys[index], 480, 480);
+            }
+            else
+            {
+                return null;
+            }          
         }
-
-
     }
 }
