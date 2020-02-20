@@ -47,10 +47,37 @@ namespace COMP3304Assessment
         // ---------------------------------------------------------------------------------------------------------------------
         // Current Image Method - Used to retreive the current image in the 'Model.cs' and apply the returned 'PictureBox.Image'
         // ---------------------------------------------------------------------------------------------------------------------
-        public void currentImage()
+        public void displayImage()
         {
             // Apply the returned 'filePathHandler' image to the local 'PictureBox.Image'
             pictureBox.Image = filePathHandler.getImage(imgIndex);
+        }
+
+
+        // ------------------------------------------------------------------------------------------
+        // Get Image Method - Used to retreive the next / previous image, actioned from button clicks
+        // ------------------------------------------------------------------------------------------
+        private void getImage()
+        {
+            // Store the next image in the local 'nextImage' value
+            Image nextImage = filePathHandler.getImage(imgIndex);
+
+            // If the 'nextImage' value is not Null
+            if (nextImage != null)
+            {
+                // Call the local 'displayImage' method
+                displayImage();
+            }
+            else if (imgIndex < 0)
+            {
+                // Increment the 'imgIndex' value
+                imgIndex++;
+            }
+            else
+            {
+                // Decrement the 'imgIndex' value 
+                imgIndex--;
+            }
         }
 
 
@@ -62,20 +89,8 @@ namespace COMP3304Assessment
             // Increment the 'imgIndex' value 
             imgIndex++;
 
-            // Store the next image in the local 'nextImage' value
-            Image nextImage = filePathHandler.getImage(imgIndex);
-
-            // If the 'nextImage' value is not Null
-            if (nextImage != null)
-            {
-                // Call 'currentImage' method
-                currentImage();
-            }
-            else
-            {
-                // Decrement the 'imgIndex' value
-                imgIndex--;
-            }
+            // Call the local 'getImage' method
+            getImage();
         }
 
 
@@ -87,20 +102,8 @@ namespace COMP3304Assessment
             // Decrement the 'imgIndex' value 
             imgIndex--;
 
-            // Store the previous image in the local 'nextImage' value
-            Image previousImage = filePathHandler.getImage(imgIndex);
-
-            // If the 'previousImage' value is not Null
-            if (previousImage != null)
-            {
-                // Call 'currentImage' method
-                currentImage();
-            }
-            else
-            {
-                // Increment the 'imgIndex' value
-                imgIndex++;
-            }
+            // Call the local 'getImage' method
+            getImage();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace COMP3304Assessment
         // Variables
         // ---------
 
-        private FilePathHandler _handler;
+        private FilePathHandler filePathHandler;
 
         private ImageHandler imageHandler;
 
@@ -25,19 +25,22 @@ namespace COMP3304Assessment
         // ------------
         // Constructor
         // ------------
-        public ImageViewer(FilePathHandler handler, ImageHandler imageHandler)
+        public ImageViewer(FilePathHandler filePathHandler, ImageHandler imageHandler)
         {
+            // Base method call
             InitializeComponent();
-            _handler = handler;
 
-            //
+            // Initiate the local 'filePathHandler', with the passed 'filePathHandler'
+            this.filePathHandler = filePathHandler;
+
+            // Initiate the local 'imageHandler', with the passed 'imageHandler'
             this.imageHandler = imageHandler;
 
             // Passed the 'PictureBox' to the 'imageHandler'
             imageHandler.addPictureBox(imageBox);
 
             // Calls on the FilePathHandler to Display the Current Image
-            imageHandler.currentImage();
+            imageHandler.displayImage();
         }
 
 
@@ -54,7 +57,9 @@ namespace COMP3304Assessment
             {
                 // Store the name of the file that has been selected, call it 'fileName':
                 string fileName = openFileDialog.FileName;
-                _handler.add(fileName);
+
+                // Calls the add method on the 'filePathHandler', passing the 'fileName'
+                filePathHandler.add(fileName);
 
                 // Calls on the FilePathHandler to Display the Next Image
                 imageHandler.nextImage();
