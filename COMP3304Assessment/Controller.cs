@@ -10,27 +10,34 @@ namespace COMP3304Assessment
 {
     class Controller
     {
+        // ---------
+        // Variables
+        // ---------
+
         // Move this code to a new class
         private IModel _model;
 
         private FilePathHandler _fileHandler;
 
+        private ImageHandler ImageHandler;
+
+
+        // ------------
+        // Constructor
+        // ------------
         public Controller()
         {
-            
-            //pathfilenames.add("../../assets/JavaFish.png");
-
+            //
             _model = new Model();
 
+            //
             _fileHandler = new FilePathHandler(_model);
 
+            // 
+            ImageHandler = new ImageHandler(_fileHandler);
+
             //
-
-            
-
-            //Image img = _model.getImage(keys[0], 480, 320);
-
-            Application.Run(new ImageViewer(_fileHandler));
+            Application.Run(new ImageViewer(_fileHandler, ImageHandler));
         }
     }
 }

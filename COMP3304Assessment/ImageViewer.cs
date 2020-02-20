@@ -13,31 +13,39 @@ namespace COMP3304Assessment
     // was public maybe fucked up
     partial class ImageViewer : Form
     {
-        private Image _img;
-
-        private int imgIndex = 0;
+        // ---------
+        // Variables
+        // ---------
 
         private FilePathHandler _handler;
 
+        private ImageHandler imageHandler;
 
-        public ImageViewer(FilePathHandler handler)
+
+        // ------------
+        // Constructor
+        // ------------
+        public ImageViewer(FilePathHandler handler, ImageHandler imageHandler)
         {
             InitializeComponent();
             _handler = handler;
-            displayImage();
+
+            //
+            this.imageHandler = imageHandler;
+
+            // Passed the 'PictureBox' to the 'imageHandler'
+            imageHandler.addPictureBox(imageBox);
+
+            // Calls on the FilePathHandler to Display the Current Image
+            imageHandler.currentImage();
         }
 
-        // DisplayImage
-        private void displayImage()
-        {
-            imageBox.Image = _handler.getImage(imgIndex);
-        }
-        
 
-        // Load an Image
+        // -------------------------------------------------------------------------------------
+        // Load Image Click - Event used to open a File Dialog popup to select an image to load
+        // -------------------------------------------------------------------------------------
         private void loadImageButton_Click(object sender, EventArgs e)
         {
-
             // Open file explorer dialog and store the result in a DialogResult, call it 'result':
             DialogResult result = openFileDialog.ShowDialog();
 
@@ -47,21 +55,30 @@ namespace COMP3304Assessment
                 // Store the name of the file that has been selected, call it 'fileName':
                 string fileName = openFileDialog.FileName;
                 _handler.add(fileName);
-                imgIndex++;
-                displayImage();
+
+                // Calls on the FilePathHandler to Display the Next Image
+                imageHandler.nextImage();
             }
         }
 
+
+        // -----------------------------------------------------------------------------------------
+        // Next Button Click - Event used to Display the next image by method call on 'imageHandler'
+        // -----------------------------------------------------------------------------------------
         private void nextButton_Click(object sender, EventArgs e)
         {
-            imgIndex++;
-            displayImage();
+            // Calls on the FilePathHandler to Display the Next Image
+            imageHandler.nextImage();
         }
 
+
+        // -------------------------------------------------------------------------------------------------
+        // Previous Button Click - Event used to Display the previous image by method call on 'imageHandler'
+        // -------------------------------------------------------------------------------------------------
         private void previousButton_Click(object sender, EventArgs e)
         {
-            imgIndex--;
-            displayImage();
+            // Calls on the FilePathHandler to Display the Previous Image
+            imageHandler.previousImage();
         }
     }
 }
