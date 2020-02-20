@@ -33,8 +33,11 @@ namespace COMP3304Assessment
             // Loop through all path file names
             foreach(string path in pathfilenames)
             {
-                // Use the Image.FromFile method to load the image from it's path and add it to the '_images' dictionary
-                _images.Add(path, Image.FromFile(path));
+                if (!_images.ContainsKey(path))
+                {
+                    // Use the Image.FromFile method to load the image from it's path and add it to the '_images' dictionary
+                    _images.Add(path, Image.FromFile(path));
+                }
             }
             
             // DECLARE & INSTANTIATE an IList container call it 'keys' and make it a List of type string

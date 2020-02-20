@@ -13,25 +13,24 @@ namespace COMP3304Assessment
         // Move this code to a new class
         private IModel _model;
 
-        private IList<string> pathfilenames;
-
-        private IList<string> keys;
+        private FilePathHandler _fileHandler;
 
         public Controller()
         {
-            keys = new List<string>();
-
-            pathfilenames = new List<string>();
             
-            pathfilenames.Add("../../assets/JavaFish.png");
+            //pathfilenames.add("../../assets/JavaFish.png");
 
             _model = new Model();
 
-            keys = _model.load(pathfilenames);
+            _fileHandler = new FilePathHandler(_model);
 
-            Image img = _model.getImage(keys[0], 480, 320);
+            //
 
-            Application.Run(new Form1(img));
+            
+
+            //Image img = _model.getImage(keys[0], 480, 320);
+
+            Application.Run(new ImageViewer(_fileHandler));
         }
     }
 }
