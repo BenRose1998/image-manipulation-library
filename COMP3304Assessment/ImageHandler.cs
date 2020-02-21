@@ -14,11 +14,11 @@ namespace COMP3304Assessment
         // Variables
         // ---------
 
-        private PictureBox pictureBox;
+        private PictureBox _pictureBox;
 
-        private FilePathHandler filePathHandler;
+        private FilePathHandler _filePathHandler;
 
-        private int imgIndex;
+        private int _imgIndex;
 
 
         // ------------
@@ -27,10 +27,10 @@ namespace COMP3304Assessment
         public ImageHandler(FilePathHandler filePathHandler)
         {
             // Initiate the local 'filePathHandler'
-            this.filePathHandler = filePathHandler;
+            this._filePathHandler = filePathHandler;
 
             // Initiate the local 'imgIndex'
-            imgIndex = 0;
+            _imgIndex = 0;
         }
 
 
@@ -40,7 +40,7 @@ namespace COMP3304Assessment
         public void addPictureBox(PictureBox pictureBox)
         {
             // Initiate the local 'pictureBox'
-            this.pictureBox = pictureBox;
+            this._pictureBox = pictureBox;
         }
 
 
@@ -50,7 +50,7 @@ namespace COMP3304Assessment
         public void displayImage()
         {
             // Apply the returned 'filePathHandler' image to the local 'PictureBox.Image'
-            pictureBox.Image = filePathHandler.getImage(imgIndex);
+            _pictureBox.Image = _filePathHandler.getImage(_imgIndex);
         }
 
 
@@ -60,7 +60,7 @@ namespace COMP3304Assessment
         private void getImage()
         {
             // Store the next image in the local 'nextImage' value
-            Image nextImage = filePathHandler.getImage(imgIndex);
+            Image nextImage = _filePathHandler.getImage(_imgIndex);
 
             // If the 'nextImage' value is not Null
             if (nextImage != null)
@@ -68,15 +68,15 @@ namespace COMP3304Assessment
                 // Call the local 'displayImage' method
                 displayImage();
             }
-            else if (imgIndex < 0)
+            else if (_imgIndex < 0)
             {
                 // Increment the 'imgIndex' value
-                imgIndex++;
+                _imgIndex++;
             }
             else
             {
                 // Decrement the 'imgIndex' value 
-                imgIndex--;
+                _imgIndex--;
             }
         }
 
@@ -87,7 +87,7 @@ namespace COMP3304Assessment
         public void nextImage()
         {
             // Increment the 'imgIndex' value 
-            imgIndex++;
+            _imgIndex++;
 
             // Call the local 'getImage' method
             getImage();
@@ -100,7 +100,7 @@ namespace COMP3304Assessment
         public void previousImage()
         {
             // Decrement the 'imgIndex' value 
-            imgIndex--;
+            _imgIndex--;
 
             // Call the local 'getImage' method
             getImage();

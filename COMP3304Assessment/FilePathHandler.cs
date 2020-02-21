@@ -13,11 +13,14 @@ namespace COMP3304Assessment
         // Variables
         // ---------
 
-        private IList<string> keys;
+        // DECLARE an IList interface for a List to store image keys as strings, call it '_keys':
+        private IList<string> _keys;
 
-        private IList<string> pathfilenames;
+        // DECLARE an IList interface for a List to store image file names as strings, call it '_pathfilenames':
+        private IList<string> _pathfilenames;
 
-        private IModel model;
+        // DECLARE an IModel interface to store a reference to the Model instance, call it '_model':
+        private IModel _model;
 
 
         // ------------
@@ -25,12 +28,12 @@ namespace COMP3304Assessment
         // ------------
         public FilePathHandler(IModel model)
         {
-            // Initaiate the local 'model', with the passed 'model'
-            this.model = model;
-            
-            // Initaiate the 'keys' & 'pathfilenames' Lists
-            keys = new List<string>();
-            pathfilenames = new List<string>();
+            // INSTANTIATE the local 'model', with the passed 'model'
+            this._model = model;
+
+            // INSTANTIATE the 'keys' & 'pathfilenames' Lists
+            _keys = new List<string>();
+            _pathfilenames = new List<string>();
 
 
             // -----------------------------------------
@@ -49,7 +52,7 @@ namespace COMP3304Assessment
         public void add(string filename)
         {
             // Adds the passed 'filename', to the local IList of strings 'pathfilenames'
-            pathfilenames.Add(filename);
+            _pathfilenames.Add(filename);
 
             // Call the local 'loadImages' method
             loadImages();
@@ -62,7 +65,7 @@ namespace COMP3304Assessment
         private void loadImages()
         {
             // Call load on the '_model', passing the IList of strings 'pathfilenames'
-            keys = model.load(pathfilenames);
+            _keys = _model.load(_pathfilenames);
         }
 
 
@@ -71,10 +74,10 @@ namespace COMP3304Assessment
         // --------------------------------------------------------------------------------------
         public Image getImage(int index)
         {
-            // If the count value of 'keys' is greater than the 'index' value but above 0
-            if (keys.Count > index && index >= 0)
+            // If the count value of '_keys' is greater than the 'index' value but above 0
+            if (_keys.Count > index && index >= 0)
             {
-                return model.getImage(keys[index], 480, 480);
+                return _model.getImage(_keys[index], 480, 480);
             }
             else
             {

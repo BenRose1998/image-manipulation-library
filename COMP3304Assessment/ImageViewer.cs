@@ -17,9 +17,9 @@ namespace COMP3304Assessment
         // Variables
         // ---------
 
-        private FilePathHandler filePathHandler;
+        private FilePathHandler _filePathHandler;
 
-        private ImageHandler imageHandler;
+        private ImageHandler _imageHandler;
 
 
         // ------------
@@ -31,15 +31,15 @@ namespace COMP3304Assessment
             InitializeComponent();
 
             // Initiate the local 'filePathHandler', with the passed 'filePathHandler'
-            this.filePathHandler = filePathHandler;
+            this._filePathHandler = filePathHandler;
 
             // Initiate the local 'imageHandler', with the passed 'imageHandler'
-            this.imageHandler = imageHandler;
+            this._imageHandler = imageHandler;
 
             // Passed the 'PictureBox' to the 'imageHandler'
             imageHandler.addPictureBox(imageBox);
 
-            // Calls on the FilePathHandler to Display the Current Image
+            // Calls on the ImageHandler instance to Display the Current Image
             imageHandler.displayImage();
         }
 
@@ -59,10 +59,10 @@ namespace COMP3304Assessment
                 string fileName = openFileDialog.FileName;
 
                 // Calls the add method on the 'filePathHandler', passing the 'fileName'
-                filePathHandler.add(fileName);
+                _filePathHandler.add(fileName);
 
-                // Calls on the FilePathHandler to Display the Next Image
-                imageHandler.nextImage();
+                // Calls on the ImageHandler instance to Display the Next Image
+                _imageHandler.nextImage();
             }
         }
 
@@ -72,8 +72,8 @@ namespace COMP3304Assessment
         // -----------------------------------------------------------------------------------------
         private void nextButton_Click(object sender, EventArgs e)
         {
-            // Calls on the FilePathHandler to Display the Next Image
-            imageHandler.nextImage();
+            // Calls on the ImageHandler instance to Display the Next Image
+            _imageHandler.nextImage();
         }
 
 
@@ -82,8 +82,8 @@ namespace COMP3304Assessment
         // -------------------------------------------------------------------------------------------------
         private void previousButton_Click(object sender, EventArgs e)
         {
-            // Calls on the FilePathHandler to Display the Previous Image
-            imageHandler.previousImage();
+            // Calls on the ImageHandler instance to Display the Previous Image
+            _imageHandler.previousImage();
         }
     }
 }
