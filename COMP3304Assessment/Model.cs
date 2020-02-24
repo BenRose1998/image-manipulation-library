@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ImageManipulationLibrary;
 
+/// <summary>
+/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// </summary>
 namespace COMP3304Assessment
 {
     class Model : IModel

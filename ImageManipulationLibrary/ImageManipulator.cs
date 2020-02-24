@@ -7,6 +7,9 @@ using System.Drawing;
 using System.IO;
 using ImageProcessor;
 
+/// <summary>
+/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// </summary>
 namespace ImageManipulationLibrary
 {
     public class ImageManipulator : IImageManipulator

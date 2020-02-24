@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// </summary>
 namespace COMP3304Assessment
 {
     // was public maybe fucked up
@@ -20,7 +23,6 @@ namespace COMP3304Assessment
         private IFilePathAdder _filePathHandler;
 
         private IImageHandler _imageHandler;
-
 
         // ------------
         // Constructor
@@ -37,10 +39,10 @@ namespace COMP3304Assessment
             this._imageHandler = imageHandler;
 
             // Passed the 'PictureBox' to the 'imageHandler'
-            imageHandler.Initialise(imageBox);
+            imageHandler.SetImageDisplay(imageBox);
 
             // Calls on the ImageHandler instance to Display the Current Image
-            imageHandler.displayImage();
+            imageHandler.DisplayImage();
         }
 
         // -------------------------------------------------------------------------------------
@@ -58,10 +60,10 @@ namespace COMP3304Assessment
                 string fileName = openFileDialog.FileName;
 
                 // Calls the add method on the 'filePathHandler', passing the 'fileName'
-                _filePathHandler.add(fileName);
+                _filePathHandler.Add(fileName);
 
                 // Calls on the ImageHandler instance to Display the Next Image
-                _imageHandler.nextImage();
+                _imageHandler.NextImage();
             }
         }
 
@@ -72,7 +74,7 @@ namespace COMP3304Assessment
         private void nextButton_Click(object sender, EventArgs e)
         {
             // Calls on the ImageHandler instance to Display the Next Image
-            _imageHandler.nextImage();
+            _imageHandler.NextImage();
         }
 
 
@@ -82,7 +84,7 @@ namespace COMP3304Assessment
         private void previousButton_Click(object sender, EventArgs e)
         {
             // Calls on the ImageHandler instance to Display the Previous Image
-            _imageHandler.previousImage();
+            _imageHandler.PreviousImage();
         }
     }
 }

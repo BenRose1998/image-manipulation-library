@@ -6,8 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// </summary>
 namespace COMP3304Assessment
 {
+    /// <summary>
+    /// 
+    /// </summary>
     class ImageHandler : IImageHandler
     {
         // ---------
@@ -37,90 +43,85 @@ namespace COMP3304Assessment
         }
 
         /// <summary>
-        /// Used to pass a reference to ImageViewer's PictureBox form object that displays the image
+        /// Used to get a reference to ImageViewer's PictureBox form object in which the image will be displayed
         /// </summary>
-        /// <param name="pictureBox"></param>
-        public void Initialise(PictureBox pictureBox)
+        /// <param name="pictureBox">The PictureBox form object that images will be displayed in</param>
+        public void SetImageDisplay(PictureBox pictureBox)
         {
             // Initiate the local 'pictureBox'
             this._pictureBox = pictureBox;
         }
 
-
-        // ---------------------------------------------------------------------------------------------------------------------
-        // Current Image Method - Used to retreive the current image in the 'Model.cs' and apply the returned 'PictureBox.Image'
-        // ---------------------------------------------------------------------------------------------------------------------
- 
-        public void displayImage()
+        /// <summary>
+        /// Retreive file path from FilePathHandler using '_imgIndex' and apply that image to the PictureBox
+        /// </summary>
+        public void DisplayImage()
         {
-            // Apply the returned 'filePathHandler' image to the local 'PictureBox.Image'
-            //_pictureBox.Image = _filePathHandler.getImage(_imgIndex);
+            string filePath = _filePathHandler.GetFilePath(_imgIndex);
 
-            string filepath = _filePathHandler.getFilePath(_imgIndex);
-
-            if(filepath != null)
+            if (filePath != null)
             {
-                _pictureBox.Image = _getImageDel(filepath, _pictureBox.Width, _pictureBox.Height);
+                _pictureBox.Image = _getImageDel(filePath, _pictureBox.Width, _pictureBox.Height);
             }
         }
+        
 
-        // ---------------------------------------------------------------------------------------------------------------
-        // Next Image Method - Used to retreive the next image in the 'Model.cs' and apply the returned 'PictureBox.Image'
-        // ---------------------------------------------------------------------------------------------------------------
-        public void nextImage()
+        /// <summary>
+        /// Increment '_imgIndex' value and call GetImage method to get the new image and apply it to the PictureBox
+        /// </summary>
+        public void NextImage()
         {
             // Increment the 'imgIndex' value 
             _imgIndex++;
 
             // Call the local 'getImage' method
-            getImage();
+            GetImage();
         }
 
-
-        // -----------------------------------------------------------------------------------------------------------------------
-        // Previous Image Method - Used to retreive the previous image in the 'Model.cs' and apply the returned 'PictureBox.Image'
-        // -----------------------------------------------------------------------------------------------------------------------
-        public void previousImage()
+        /// <summary>
+        /// Decrement '_imgIndex' value and call GetImage method to get the new image and apply it to the PictureBox
+        /// </summary>
+        public void PreviousImage()
         {
             // Decrement the 'imgIndex' value 
             _imgIndex--;
 
             // Call the local 'getImage' method
-            getImage();
+            GetImage();
         }
 
-        // ------------------------------------------------------------------------------------------
-        // Get Image Method - Used to retreive the next / previous image, actioned from button clicks
-        // ------------------------------------------------------------------------------------------
-        private void getImage()
+        /// <summary>
+        /// Retrieve file path from FilePathHandler by an index, using that file path retrieve an Image from model then set '_pictureBoxes' image to it.
+        /// </summary>
+        private void GetImage()
         {
-            // Store the next image in the local 'nextImage' value
-            //Image nextImage = _getImageDel(_filePathHandler.getFilePath(_imgIndex), _pictureBox.Width, _pictureBox.Height);
+            // DECLARE & INSTANIATE an temporary Image variable to null. Call it 'newImage':
+            Image newImage = null;
 
-            // Default to null
-            Image nextImage = null;
+            // DECLARE & INSTANIATE a temporary string variable. Give it the file path returned from the GetFilePath method after passing current _imgIndex. Call it 'filePath':
+            string filePath = _filePathHandler.GetFilePath(_imgIndex);
 
-            string filepath = _filePathHandler.getFilePath(_imgIndex);
-
-            if (filepath != null)
+            // Check if a filePath was found for that index
+            if (filePath != null)
             {
-                nextImage = _getImageDel(filepath, _pictureBox.Width, _pictureBox.Height);
+                // Call getImage method, passing filePath and _pictureBox's width and height properties, save result in 'newImage'
+                newImage = _getImageDel(filePath, _pictureBox.Width, _pictureBox.Height);
             }
 
-            // If the 'nextImage' value is not Null
-            if (nextImage != null)
+            // If the 'newImage' value is not null an image was found
+            if (newImage != null)
             {
-                // Call the local 'displayImage' method
-                displayImage();
+                // Apply 'newImage' to '_pictureBox's Image property
+                _pictureBox.Image = newImage;
             }
             else if (_imgIndex < 0)
             {
-                // Increment the 'imgIndex' value
-                _imgIndex++;
+                // Set index to 0 to prevent index going out of bounds
+                _imgIndex = 0;
             }
             else
             {
-                // Decrement the 'imgIndex' value 
+                // Decrement the 'imgIndex' value to prevent index going out of bounds
                 _imgIndex--;
             }
         }

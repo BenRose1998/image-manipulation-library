@@ -50,7 +50,7 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="FilePathHandler.cs" />
     <Compile Include="IFilePathGetter.cs" />
-    <Compile Include="IFilePathHandler.cs" />
+    <Compile Include="IFilePathAdder.cs" />
     <Compile Include="IImageHandler.cs" />
     <Compile Include="ImageHandler.cs" />
     <Compile Include="ImageViewer.cs">

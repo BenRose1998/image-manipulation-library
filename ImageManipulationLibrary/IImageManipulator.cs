@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
+/// <summary>
+/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// </summary>
 namespace ImageManipulationLibrary
 {
     public interface IImageManipulator

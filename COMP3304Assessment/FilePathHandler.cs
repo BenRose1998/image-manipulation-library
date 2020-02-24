@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// </summary>
 namespace COMP3304Assessment
 {
     class FilePathHandler : IFilePathAdder, IFilePathGetter
@@ -40,46 +43,35 @@ namespace COMP3304Assessment
             // --------------- TEMPORARY ---------------
             // (Should probably start with no images???)
             // -----------------------------------------
-            add("../../assets/JavaFish.png");
+            Add("../../assets/JavaFish.png");
             loadImages();
             // -----------------------------------------
         }
 
-
-        // -------------------------------------------------------------------------------------------
-        // Add Filename Method - Used by the 'ImageView.cs' to pass new filenames from the File Dialog
-        // -------------------------------------------------------------------------------------------
-        public void add(string filename)
+        /// <summary>
+        /// Recieves a string and adds it to the '_pathfilenames' list, calls loadImages method to pass the updated file names to model
+        /// </summary>
+        /// <param name="filename"></param>
+        public void Add(string filename)
         {
-            // Adds the passed 'filename', to the local IList of strings 'pathfilenames'
+            // Adds the passed 'filename', to the local IList of strings '_pathfilenames'
             _pathfilenames.Add(filename);
 
-            // Call the local 'loadImages' method
+            // Call the local 'loadImages' method to pass the updated file names to model
             loadImages();
         }
 
-        // --------------------------------------------------------------------------------------
-        // Get Image Method - Used by the 'ImageHandler.cs' to retreive loaded images by indexing
-        // --------------------------------------------------------------------------------------
-        //public Image getImage(int index)
-        //{
-        //    // If the count value of '_keys' is greater than the 'index' value but above 0
-        //    if (_keys.Count > index && index >= 0)
-        //    {
-        //        return _model.getImage(_keys[index], 480, 480);
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
-
-        // return key by index
-        public string getFilePath(int index)
+        /// <summary>
+        /// Recieves an index (int) and returns the file path string from '_keys' at that index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>File path string for specified index</returns>
+        public string GetFilePath(int index)
         {
             // If the count value of '_keys' is greater than the 'index' value but above 0
             if (_keys.Count > index && index >= 0)
             {
+                // Return the file path of the specified index
                 return _keys[index];
             }
             else
@@ -88,10 +80,9 @@ namespace COMP3304Assessment
             }
         }
 
-
-        // -------------------------------------------------------------------------------
-        // Load Image Method - Used to load new images by path filenames by the 'Model.cs'
-        // -------------------------------------------------------------------------------
+        /// <summary>
+        /// Calls model's load method passing a list of all pathnames
+        /// </summary>
         private void loadImages()
         {
             // Call load on the '_model', passing the IList of strings 'pathfilenames'

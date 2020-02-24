@@ -10,13 +10,12 @@ using System.Threading.Tasks;
 /// </summary>
 namespace COMP3304Assessment
 {
-    interface IFilePathGetter
+    interface IFilePathAdder
     {
         /// <summary>
-        /// Recieves an index (int) and returns the file path string from '_keys' at that index
+        /// Recieves a string and adds it to the '_pathfilenames' list, calls loadImages method to pass the updated file names to model
         /// </summary>
-        /// <param name="index"></param>
-        /// <returns>File path string for specified index</returns>
-        string GetFilePath(int index);
+        /// <param name="filename"></param>
+        void Add(string filename);
     }
 }
