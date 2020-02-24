@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace COMP3304Assessment
 {
-    class ImageHandler
+    class ImageHandler : IImageHandler
     {
         // ---------
         // Variables
@@ -16,21 +16,24 @@ namespace COMP3304Assessment
 
         private PictureBox _pictureBox;
 
-        private FilePathHandler _filePathHandler;
+        private IFilePathGetter _filePathHandler;
 
         private int _imgIndex;
 
+        private getImage _getImageDel;
 
         // ------------
         // Constructor
         // ------------
-        public ImageHandler(FilePathHandler filePathHandler)
+        public ImageHandler(IFilePathGetter filePathHandler, getImage getImage)
         {
             // Initiate the local 'filePathHandler'
             this._filePathHandler = filePathHandler;
 
             // Initiate the local 'imgIndex'
             _imgIndex = 0;
+
+            _getImageDel = getImage;
         }
 
         /// <summary>
@@ -51,7 +54,14 @@ namespace COMP3304Assessment
         public void displayImage()
         {
             // Apply the returned 'filePathHandler' image to the local 'PictureBox.Image'
-            _pictureBox.Image = _filePathHandler.getImage(_imgIndex);
+            //_pictureBox.Image = _filePathHandler.getImage(_imgIndex);
+
+            string filepath = _filePathHandler.getFilePath(_imgIndex);
+
+            if(filepath != null)
+            {
+                _pictureBox.Image = _getImageDel(filepath, _pictureBox.Width, _pictureBox.Height);
+            }
         }
 
         // ---------------------------------------------------------------------------------------------------------------
@@ -85,7 +95,17 @@ namespace COMP3304Assessment
         private void getImage()
         {
             // Store the next image in the local 'nextImage' value
-            Image nextImage = _filePathHandler.getImage(_imgIndex);
+            //Image nextImage = _getImageDel(_filePathHandler.getFilePath(_imgIndex), _pictureBox.Width, _pictureBox.Height);
+
+            // Default to null
+            Image nextImage = null;
+
+            string filepath = _filePathHandler.getFilePath(_imgIndex);
+
+            if (filepath != null)
+            {
+                nextImage = _getImageDel(filepath, _pictureBox.Width, _pictureBox.Height);
+            }
 
             // If the 'nextImage' value is not Null
             if (nextImage != null)

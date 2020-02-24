@@ -9,7 +9,7 @@ namespace COMP3304Assessment
 {
     interface IImageHandler
     {
-        void addPictureBox(PictureBox pictureBox);
+        void Initialise(PictureBox pictureBox);
 
         void displayImage();
 

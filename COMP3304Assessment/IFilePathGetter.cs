@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace COMP3304Assessment
 {
-    interface IFilePathAdder
+    interface IFilePathGetter
     {
-
-        void add(string filename);
+        string getFilePath(int index);
     }
 }

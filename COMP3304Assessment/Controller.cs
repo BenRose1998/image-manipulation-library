@@ -18,9 +18,9 @@ namespace COMP3304Assessment
 
         private IModel _model;
 
-        private FilePathHandler _fileHandler;
+        private IFilePathAdder _fileHandler;
 
-        private ImageHandler ImageHandler;
+        private IImageHandler ImageHandler;
 
 
         // ------------
@@ -35,7 +35,7 @@ namespace COMP3304Assessment
             _fileHandler = new FilePathHandler(_model);
 
             // 
-            ImageHandler = new ImageHandler(_fileHandler);
+            ImageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model.getImage);
 
             //
             Application.Run(new ImageViewer(_fileHandler, ImageHandler));

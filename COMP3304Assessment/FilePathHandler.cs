@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace COMP3304Assessment
 {
-    class FilePathHandler : IFilePathHandler
+    class FilePathHandler : IFilePathAdder, IFilePathGetter
     {
         // ---------
         // Variables
@@ -61,18 +61,33 @@ namespace COMP3304Assessment
         // --------------------------------------------------------------------------------------
         // Get Image Method - Used by the 'ImageHandler.cs' to retreive loaded images by indexing
         // --------------------------------------------------------------------------------------
-        public Image getImage(int index)
+        //public Image getImage(int index)
+        //{
+        //    // If the count value of '_keys' is greater than the 'index' value but above 0
+        //    if (_keys.Count > index && index >= 0)
+        //    {
+        //        return _model.getImage(_keys[index], 480, 480);
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        // return key by index
+        public string getFilePath(int index)
         {
             // If the count value of '_keys' is greater than the 'index' value but above 0
             if (_keys.Count > index && index >= 0)
             {
-                return _model.getImage(_keys[index], 480, 480);
+                return _keys[index];
             }
             else
             {
                 return null;
-            }          
+            }
         }
+
 
         // -------------------------------------------------------------------------------
         // Load Image Method - Used to load new images by path filenames by the 'Model.cs'

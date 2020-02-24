@@ -17,15 +17,15 @@ namespace COMP3304Assessment
         // Variables
         // ---------
 
-        private FilePathHandler _filePathHandler;
+        private IFilePathAdder _filePathHandler;
 
-        private ImageHandler _imageHandler;
+        private IImageHandler _imageHandler;
 
 
         // ------------
         // Constructor
         // ------------
-        public ImageViewer(FilePathHandler filePathHandler, ImageHandler imageHandler)
+        public ImageViewer(IFilePathAdder filePathHandler, IImageHandler imageHandler)
         {
             // Base method call
             InitializeComponent();

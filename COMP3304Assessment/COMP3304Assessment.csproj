@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="FilePathHandler.cs" />
+    <Compile Include="IFilePathGetter.cs" />
     <Compile Include="IFilePathHandler.cs" />
     <Compile Include="IImageHandler.cs" />
     <Compile Include="ImageHandler.cs" />
