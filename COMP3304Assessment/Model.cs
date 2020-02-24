@@ -11,6 +11,10 @@ using ImageManipulationLibrary;
 /// </summary>
 namespace COMP3304Assessment
 {
+    /// <summary>
+    /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's methods to
+    /// modify these images.
+    /// </summary>
     class Model : IModel
     {
         // DECLARE an IDictionary interface for a Dictionary to store Image objects, call it '_images':

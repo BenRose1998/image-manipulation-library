@@ -9,6 +9,9 @@ using System.Windows.Forms;
 /// </summary>
 namespace COMP3304Assessment
 {
+    /// <summary>
+    /// Progam - This is where the program starts when executed.
+    /// </summary>
     static class Program
     {
         /// <summary>

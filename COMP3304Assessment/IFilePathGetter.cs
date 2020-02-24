@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 /// </summary>
 namespace COMP3304Assessment
 {
+    /// <summary>
+    /// 
+    /// </summary>
     interface IFilePathGetter
     {
         /// <summary>

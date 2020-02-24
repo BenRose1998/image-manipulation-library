@@ -12,6 +12,9 @@ using ImageProcessor;
 /// </summary>
 namespace ImageManipulationLibrary
 {
+    /// <summary>
+    /// Image Manipulator - This class works as a wrapper or API around the ImageProcessor library.
+    /// </summary>
     public class ImageManipulator : IImageManipulator
     {
         // DECLARE an variable of type ImageFactory to hold a reference to the ImageProcessor's ImageFactory class, call it '_imageFactory':
@@ -24,12 +27,12 @@ namespace ImageManipulationLibrary
         }
 
         /// <summary>
-        /// 
+        /// Receives an Image and a desired width and height, uses ImageProcessor library to resize the image and it is returned
         /// </summary>
         /// <param name="image"></param>
         /// <param name="frameWidth"></param>
         /// <param name="frameHeight"></param>
-        /// <returns></returns>
+        /// <returns>Returns resized Image</returns>
         public Image Resize(Image image, int frameWidth, int frameHeight)
         {
             // Create a Size object to store the desired width and height values, call it 'size'

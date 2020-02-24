@@ -10,6 +10,9 @@ using System.Drawing;
 /// </summary>
 namespace ImageManipulationLibrary
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IImageManipulator
     {
         Image Resize(Image image, int frameWidth, int frameHeight);

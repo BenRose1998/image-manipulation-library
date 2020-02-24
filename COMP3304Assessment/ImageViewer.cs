@@ -13,13 +13,15 @@ using System.Windows.Forms;
 /// </summary>
 namespace COMP3304Assessment
 {
+    /// <summary>
+    /// 
+    /// </summary>
     // was public maybe fucked up
     partial class ImageViewer : Form
     {
         // ---------
         // Variables
         // ---------
-
         private IFilePathAdder _filePathHandler;
 
         private IImageHandler _imageHandler;

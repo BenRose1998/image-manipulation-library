@@ -11,6 +11,9 @@ using System.Windows.Forms;
 /// </summary>
 namespace COMP3304Assessment
 {
+    /// <summary>
+    /// Controller - A high level class used to instantiate all main classes.
+    /// </summary>
     class Controller
     {
         // ---------

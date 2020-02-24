@@ -11,6 +11,9 @@ using System.Windows.Forms;
 /// </summary>
 namespace COMP3304Assessment
 {
+    /// <summary>
+    /// 
+    /// </summary>
     interface IImageHandler
     {
         /// <summary>
