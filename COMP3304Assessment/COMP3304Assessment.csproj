@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="FilePathHandler.cs" />
+    <Compile Include="IFilePathHandler.cs" />
+    <Compile Include="IImageHandler.cs" />
     <Compile Include="ImageHandler.cs" />
     <Compile Include="ImageViewer.cs">
       <SubType>Form</SubType>

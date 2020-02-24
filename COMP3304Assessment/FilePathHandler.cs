@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace COMP3304Assessment
 {
-    class FilePathHandler
+    class FilePathHandler : IFilePathHandler
     {
         // ---------
         // Variables
@@ -58,17 +58,6 @@ namespace COMP3304Assessment
             loadImages();
         }
 
-
-        // -------------------------------------------------------------------------------
-        // Load Image Method - Used to load new images by path filenames by the 'Model.cs'
-        // -------------------------------------------------------------------------------
-        private void loadImages()
-        {
-            // Call load on the '_model', passing the IList of strings 'pathfilenames'
-            _keys = _model.load(_pathfilenames);
-        }
-
-
         // --------------------------------------------------------------------------------------
         // Get Image Method - Used by the 'ImageHandler.cs' to retreive loaded images by indexing
         // --------------------------------------------------------------------------------------
@@ -83,6 +72,15 @@ namespace COMP3304Assessment
             {
                 return null;
             }          
+        }
+
+        // -------------------------------------------------------------------------------
+        // Load Image Method - Used to load new images by path filenames by the 'Model.cs'
+        // -------------------------------------------------------------------------------
+        private void loadImages()
+        {
+            // Call load on the '_model', passing the IList of strings 'pathfilenames'
+            _keys = _model.load(_pathfilenames);
         }
     }
 }

@@ -37,12 +37,11 @@ namespace COMP3304Assessment
             this._imageHandler = imageHandler;
 
             // Passed the 'PictureBox' to the 'imageHandler'
-            imageHandler.addPictureBox(imageBox);
+            imageHandler.Initialise(imageBox);
 
             // Calls on the ImageHandler instance to Display the Current Image
             imageHandler.displayImage();
         }
-
 
         // -------------------------------------------------------------------------------------
         // Load Image Click - Event used to open a File Dialog popup to select an image to load
