@@ -24,12 +24,12 @@ namespace COMP3304Assessment
         // ---------
         private IFilePathAdder _filePathHandler;
 
-        private IImageHandler _imageHandler;
+        private IImageDisplaySetter _imageHandler;
 
         // ------------
         // Constructor
         // ------------
-        public ImageViewer(IFilePathAdder filePathHandler, IImageHandler imageHandler)
+        public ImageViewer(IFilePathAdder filePathHandler, IImageDisplaySetter imageHandler)
         {
             // Base method call
             InitializeComponent();
@@ -41,10 +41,10 @@ namespace COMP3304Assessment
             this._imageHandler = imageHandler;
 
             // Passed the 'PictureBox' to the 'imageHandler'
-            imageHandler.SetImageDisplay(imageBox);
+            _imageHandler.SetImageDisplay(imageBox);
 
             // Calls on the ImageHandler instance to Display the Current Image
-            imageHandler.DisplayImage();
+            //_imageHandler.DisplayImage();
         }
 
         // -------------------------------------------------------------------------------------
@@ -65,20 +65,18 @@ namespace COMP3304Assessment
                 _filePathHandler.Add(fileName);
 
                 // Calls on the ImageHandler instance to Display the Next Image
-                _imageHandler.NextImage();
+                (_imageHandler as IImageSetter).NextImage();
             }
         }
-
-
+        
         // -----------------------------------------------------------------------------------------
         // Next Button Click - Event used to Display the next image by method call on 'imageHandler'
         // -----------------------------------------------------------------------------------------
         private void nextButton_Click(object sender, EventArgs e)
         {
             // Calls on the ImageHandler instance to Display the Next Image
-            _imageHandler.NextImage();
+            (_imageHandler as IImageSetter).NextImage();
         }
-
 
         // -------------------------------------------------------------------------------------------------
         // Previous Button Click - Event used to Display the previous image by method call on 'imageHandler'
@@ -86,7 +84,7 @@ namespace COMP3304Assessment
         private void previousButton_Click(object sender, EventArgs e)
         {
             // Calls on the ImageHandler instance to Display the Previous Image
-            _imageHandler.PreviousImage();
+            (_imageHandler as IImageSetter).PreviousImage();
         }
     }
 }

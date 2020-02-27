@@ -12,34 +12,32 @@ using System.Windows.Forms;
 namespace COMP3304Assessment
 {
     /// <summary>
-    /// 
+    /// Responsible for retreiving the current image and setting the Form's PictureBox Image property to that image.
     /// </summary>
-    class ImageHandler : IImageHandler
+    class ImageHandler : IImageDisplaySetter, IImageSetter
     {
-        // ---------
-        // Variables
-        // ---------
-
+        // DECLARE a PictureBox to store a reference to Form's PictureBox which will display the image, call it '_pictureBox':
         private PictureBox _pictureBox;
-
+        // DECLARE an IFilePathGetter interface to store a reference to the FilePathHandler instance, call it '_filePathHandler':
         private IFilePathGetter _filePathHandler;
-
+        // DECLARE an int to keep track of which image to display, call it '_imgIndex':
         private int _imgIndex;
-
-        private getImage _getImageDel;
+        // DECLARE an IModel interface to store a reference to the Model instance, call it '_model':
+        private IModel _model;
 
         // ------------
         // Constructor
         // ------------
-        public ImageHandler(IFilePathGetter filePathHandler, getImage getImage)
+        public ImageHandler(IFilePathGetter filePathHandler, IModel model)
         {
-            // Initiate the local 'filePathHandler'
-            this._filePathHandler = filePathHandler;
+            // INSTANTIATE the local '_filePathHandler' with the passed reference
+            _filePathHandler = filePathHandler;
 
-            // Initiate the local 'imgIndex'
+            // INSTANTIATE the local 'imgIndex' to 0
             _imgIndex = 0;
 
-            _getImageDel = getImage;
+            // INSTANTIATE the local '_model' with the passed reference
+            _model = model;
         }
 
         /// <summary>
@@ -48,23 +46,11 @@ namespace COMP3304Assessment
         /// <param name="pictureBox">The PictureBox form object that images will be displayed in</param>
         public void SetImageDisplay(PictureBox pictureBox)
         {
-            // Initiate the local 'pictureBox'
-            this._pictureBox = pictureBox;
-        }
+            // INSTANTIATE the local '_pictureBox' with the passed reference
+            _pictureBox = pictureBox;
 
-        /// <summary>
-        /// Retreive file path from FilePathHandler using '_imgIndex' and apply that image to the PictureBox
-        /// </summary>
-        public void DisplayImage()
-        {
-            string filePath = _filePathHandler.GetFilePath(_imgIndex);
-
-            if (filePath != null)
-            {
-                _pictureBox.Image = _getImageDel(filePath, _pictureBox.Width, _pictureBox.Height);
-            }
+            GetImage();
         }
-        
 
         /// <summary>
         /// Increment '_imgIndex' value and call GetImage method to get the new image and apply it to the PictureBox
@@ -105,7 +91,7 @@ namespace COMP3304Assessment
             if (filePath != null)
             {
                 // Call getImage method, passing filePath and _pictureBox's width and height properties, save result in 'newImage'
-                newImage = _getImageDel(filePath, _pictureBox.Width, _pictureBox.Height);
+                newImage = _model.getImage(filePath, _pictureBox.Width, _pictureBox.Height);
             }
 
             // If the 'newImage' value is not null an image was found

@@ -47,11 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
-    <Compile Include="Delegates.cs" />
     <Compile Include="FilePathHandler.cs" />
     <Compile Include="IFilePathGetter.cs" />
     <Compile Include="IFilePathAdder.cs" />
-    <Compile Include="IImageHandler.cs" />
+    <Compile Include="IImageFactory.cs" />
+    <Compile Include="IImageDisplaySetter.cs" />
+    <Compile Include="IImageSetter.cs" />
+    <Compile Include="ImageFactory.cs" />
     <Compile Include="ImageHandler.cs" />
     <Compile Include="ImageViewer.cs">
       <SubType>Form</SubType>

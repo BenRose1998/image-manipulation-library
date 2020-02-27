@@ -16,35 +16,27 @@ namespace COMP3304Assessment
     /// </summary>
     class Controller
     {
-        // ---------
-        // Variables
-        // ---------
-
-        // Move this code to a new class
-
+        // DECLARE an IModel interface for an instance of Model to be stored in, call it '_model':
         private IModel _model;
-
+        // DECLARE an IFilePathAdder interface for an instance of FilePathHandler to be stored in, call it '_fileHandler':
         private IFilePathAdder _fileHandler;
+        // DECLARE an IImageDisplaySetter interface for an instance of ImageHandler to be stored in, call it '_imageHandler':
+        private IImageDisplaySetter _imageHandler;
 
-        private IImageHandler ImageHandler;
-
-
-        // ------------
-        // Constructor
-        // ------------
         public Controller()
         {
-            //
+            // INSTANTIATE '_model', with a new instance of Model
             _model = new Model();
-
-            //
+            // INSTANTIATE '_fileHandler', with a new instance of FilePathHandler, pass it a reference to '_model'
             _fileHandler = new FilePathHandler(_model);
+            // INSTANTIATE '_imageHandler', with a new instance of ImageHandler, pass it a reference to '_fileHandler' & '_model'
+            _imageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model);
 
-            // 
-            ImageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model.getImage);
-
-            //
-            Application.Run(new ImageViewer(_fileHandler, ImageHandler));
+            /* 
+             * Run the application and pass it a reference to a new ImageViewer form. 
+             * Pass this ImageViewer a reference to a FilePathHandler & ImageHandler instance.
+            */
+            Application.Run(new ImageViewer(_fileHandler, _imageHandler));
         }
     }
 }

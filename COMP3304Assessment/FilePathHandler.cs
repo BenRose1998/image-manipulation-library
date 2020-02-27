@@ -15,10 +15,6 @@ namespace COMP3304Assessment
     /// </summary>
     class FilePathHandler : IFilePathAdder, IFilePathGetter
     {
-        // ---------
-        // Variables
-        // ---------
-
         // DECLARE an IList interface for a List to store image keys as strings, call it '_keys':
         private IList<string> _keys;
 
@@ -47,7 +43,7 @@ namespace COMP3304Assessment
             // (Should probably start with no images???)
             // -----------------------------------------
             Add("../../assets/JavaFish.png");
-            loadImages();
+            LoadImages();
             // -----------------------------------------
         }
 
@@ -61,7 +57,7 @@ namespace COMP3304Assessment
             _pathfilenames.Add(filename);
 
             // Call the local 'loadImages' method to pass the updated file names to model
-            loadImages();
+            LoadImage(filename);
         }
 
         /// <summary>
@@ -84,12 +80,21 @@ namespace COMP3304Assessment
         }
 
         /// <summary>
-        /// Calls model's load method passing a list of all pathnames
+        /// Calls model's load method passing a list of all pathnames and set '_keys' to the returned keys
         /// </summary>
-        private void loadImages()
+        private void LoadImages()
         {
             // Call load on the '_model', passing the IList of strings 'pathfilenames'
             _keys = _model.load(_pathfilenames);
+        }
+
+        /// <summary>
+        /// Calls model's load method passing a single pathnames and set '_keys' to the returned keys
+        /// </summary>
+        private void LoadImage(string filename)
+        {
+            // Call load on the '_model', passing a single string 'filename'
+            _keys = _model.load(filename);
         }
     }
 }

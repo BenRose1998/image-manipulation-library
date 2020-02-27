@@ -21,6 +21,8 @@ namespace COMP3304Assessment
         private IDictionary<string, Image> _images;
         // DECLARE an IImageManipulator interface for the ImageManipulator object, call it '_manipulator':
         private IImageManipulator _manipulator;
+        // DECLARE an IImageFactory interface for the ImageFactory object, call it '_imageFactory':
+        private IImageFactory _imageFactory;
 
         public Model()
         {
@@ -28,6 +30,8 @@ namespace COMP3304Assessment
             _images = new Dictionary<string, Image>();
             // INSTANTIATE '_manipulator' as an instance of ImageManipulator:
             _manipulator = new ImageManipulator();
+            // INSTANTIATE '_imageFactory' as an instance of ImageFactory:
+            _imageFactory = new ImageFactory();
         }
 
         /// <summary>
@@ -42,23 +46,26 @@ namespace COMP3304Assessment
             {
                 if (!_images.ContainsKey(path))
                 {
-                    // Use the Image.FromFile method to load the image from it's path and add it to the '_images' dictionary
-                    _images.Add(path, Image.FromFile(path));
+                    // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary
+                    _images.Add(path, _imageFactory.Create(path));
                 }
-            }
-            
-            // DECLARE & INSTANTIATE an IList container call it 'keys' and make it a List of type string
-            IList<string> keys = new List<string>();
-
-            // Loop through all image's keys
-            foreach(string key in _images.Keys)
-            {
-                // Add each key to the 'keys' container
-                keys.Add(key);
             }
 
             // Return all image keys
-            return keys;
+            return GetKeys();
+        }
+
+        /// <summary>
+        /// Overloaded Load Method: add a single image pointed to by 'pathfilename' into the 'Model'
+        /// </summary>
+        /// <param name="pathfilename">a string containing a path/filename for an image file to be loaded</param>
+        /// <returns>the unique identifiers of the images that have been loaded</returns>
+        public IList<String> load(String pathfilename)
+        {
+            // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary
+            _images.Add(pathfilename, _imageFactory.Create(pathfilename));
+            // Return all image keys
+            return GetKeys();
         }
 
         /// <summary>
@@ -74,5 +81,20 @@ namespace COMP3304Assessment
             return _manipulator.Resize(_images[key], frameWidth, frameHeight);
         }
 
+        private IList<string> GetKeys()
+        {
+            // DECLARE & INSTANTIATE an IList container call it 'keys' and make it a List of type string
+            IList<string> keys = new List<string>();
+
+            // Loop through all image's keys
+            foreach (string key in _images.Keys)
+            {
+                // Add each key to the 'keys' container
+                keys.Add(key);
+            }
+
+            // Return all image keys
+            return keys;
+        }
     }
 }
