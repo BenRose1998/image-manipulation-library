@@ -11,23 +11,17 @@ using System.Threading.Tasks;
 namespace COMP3304Assessment
 {
     /// <summary>
-    /// 
+    /// FilePathHandler - Responsible for storing image file paths and passing them to Model
     /// </summary>
     class FilePathHandler : IFilePathAdder, IFilePathGetter
     {
         // DECLARE an IList interface for a List to store image keys as strings, call it '_keys':
         private IList<string> _keys;
-
         // DECLARE an IList interface for a List to store image file names as strings, call it '_pathfilenames':
-        private IList<string> _pathfilenames;
-
+        private IList<string> _pathFileNames;
         // DECLARE an IModel interface to store a reference to the Model instance, call it '_model':
         private IModel _model;
 
-
-        // ------------
-        // Constructor
-        // ------------
         public FilePathHandler(IModel model)
         {
             // INSTANTIATE the local 'model', with the passed 'model'
@@ -35,35 +29,26 @@ namespace COMP3304Assessment
 
             // INSTANTIATE the 'keys' & 'pathfilenames' Lists
             _keys = new List<string>();
-            _pathfilenames = new List<string>();
-
-
-            // -----------------------------------------
-            // --------------- TEMPORARY ---------------
-            // (Should probably start with no images???)
-            // -----------------------------------------
-            Add("../../assets/JavaFish.png");
-            LoadImages();
-            // -----------------------------------------
+            _pathFileNames = new List<string>();
         }
 
         /// <summary>
         /// Recieves a string and adds it to the '_pathfilenames' list, calls loadImages method to pass the updated file names to model
         /// </summary>
-        /// <param name="filename"></param>
-        public void Add(string filename)
+        /// <param name="filename">File path to be added to container</param>
+        public void Add(string fileName)
         {
-            // Adds the passed 'filename', to the local IList of strings '_pathfilenames'
-            _pathfilenames.Add(filename);
+            // Adds the passed 'fileName', to the local IList of strings '_pathfilenames'
+            _pathFileNames.Add(fileName);
 
             // Call the local 'loadImages' method to pass the updated file names to model
-            LoadImage(filename);
+            LoadImage(fileName);
         }
 
         /// <summary>
         /// Recieves an index (int) and returns the file path string from '_keys' at that index
         /// </summary>
-        /// <param name="index"></param>
+        /// <param name="index">Index of image of which file path is being requested</param>
         /// <returns>File path string for specified index</returns>
         public string GetFilePath(int index)
         {
@@ -84,17 +69,17 @@ namespace COMP3304Assessment
         /// </summary>
         private void LoadImages()
         {
-            // Call load on the '_model', passing the IList of strings 'pathfilenames'
-            _keys = _model.load(_pathfilenames);
+            // Call load on the '_model', passing the IList of strings '_pathFileNames'
+            _keys = _model.load(_pathFileNames);
         }
 
         /// <summary>
         /// Calls model's load method passing a single pathnames and set '_keys' to the returned keys
         /// </summary>
-        private void LoadImage(string filename)
+        private void LoadImage(string fileName)
         {
-            // Call load on the '_model', passing a single string 'filename'
-            _keys = _model.load(filename);
+            // Call load on the '_model', passing a single string 'fileName'
+            _keys = _model.load(fileName);
         }
     }
 }

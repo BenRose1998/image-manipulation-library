@@ -25,9 +25,6 @@ namespace COMP3304Assessment
         // DECLARE an IModel interface to store a reference to the Model instance, call it '_model':
         private IModel _model;
 
-        // ------------
-        // Constructor
-        // ------------
         public ImageHandler(IFilePathGetter filePathHandler, IModel model)
         {
             // INSTANTIATE the local '_filePathHandler' with the passed reference
@@ -41,14 +38,14 @@ namespace COMP3304Assessment
         }
 
         /// <summary>
-        /// Used to get a reference to ImageViewer's PictureBox form object in which the image will be displayed
+        /// Used to recieve a reference to ImageViewer's PictureBox form object in which the image will be displayed, then Display an image
         /// </summary>
         /// <param name="pictureBox">The PictureBox form object that images will be displayed in</param>
         public void SetImageDisplay(PictureBox pictureBox)
         {
             // INSTANTIATE the local '_pictureBox' with the passed reference
             _pictureBox = pictureBox;
-
+            // Call the local 'getImage' method to display the current image
             GetImage();
         }
 
@@ -60,7 +57,7 @@ namespace COMP3304Assessment
             // Increment the 'imgIndex' value 
             _imgIndex++;
 
-            // Call the local 'getImage' method
+            // Call the local 'getImage' method to display the current image
             GetImage();
         }
 
@@ -72,7 +69,7 @@ namespace COMP3304Assessment
             // Decrement the 'imgIndex' value 
             _imgIndex--;
 
-            // Call the local 'getImage' method
+            // Call the local 'getImage' method to display the current image
             GetImage();
         }
 

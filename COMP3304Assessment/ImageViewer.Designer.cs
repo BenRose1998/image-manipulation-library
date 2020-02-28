@@ -52,7 +52,7 @@
             this.loadImageButton.TabIndex = 1;
             this.loadImageButton.Text = "Load Image";
             this.loadImageButton.UseVisualStyleBackColor = true;
-            this.loadImageButton.Click += new System.EventHandler(this.loadImageButton_Click);
+            this.loadImageButton.Click += new System.EventHandler(this.LoadImageButton_Click);
             // 
             // openFileDialog
             // 
@@ -66,7 +66,7 @@
             this.nextButton.TabIndex = 2;
             this.nextButton.Text = ">";
             this.nextButton.UseVisualStyleBackColor = true;
-            this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
+            this.nextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
             // previousButton
             // 
@@ -76,7 +76,7 @@
             this.previousButton.TabIndex = 3;
             this.previousButton.Text = "<";
             this.previousButton.UseVisualStyleBackColor = true;
-            this.previousButton.Click += new System.EventHandler(this.previousButton_Click);
+            this.previousButton.Click += new System.EventHandler(this.PreviousButton_Click);
             // 
             // ImageViewer
             // 

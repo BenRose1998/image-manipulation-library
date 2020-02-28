@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace COMP3304Assessment
 {
     /// <summary>
-    /// 
+    /// Allows for image file paths to be added to the file path container
     /// </summary>
     interface IFilePathAdder
     {

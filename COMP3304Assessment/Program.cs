@@ -22,8 +22,9 @@ namespace COMP3304Assessment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
 
+            // DECLARE & INSTANIATE a Controller set it to a new instance of Controller, call it 'controller':
+            // This class will start the application
             Controller controller = new Controller();
         }
     }

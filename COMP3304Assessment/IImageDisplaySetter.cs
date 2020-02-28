@@ -12,12 +12,12 @@ using System.Windows.Forms;
 namespace COMP3304Assessment
 {
     /// <summary>
-    /// IImageDisplaySetter - Used to give ImageHandler a reference to the PictureBox in which an image will be displayed
+    /// IImageDisplaySetter - Used to give ImageHandler a reference to the PictureBox in which an image will be displayed, then Display an image
     /// </summary>
     interface IImageDisplaySetter
     {
         /// <summary>
-        /// Used to get a reference to ImageViewer's PictureBox form object in which the image will be displayed
+        /// Used to recieve a reference to ImageViewer's PictureBox form object in which the image will be displayed
         /// </summary>
         /// <param name="pictureBox">The PictureBox form object that images will be displayed in</param>
         void SetImageDisplay(PictureBox pictureBox);

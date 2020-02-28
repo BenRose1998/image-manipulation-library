@@ -34,7 +34,7 @@ namespace COMP3304Assessment
 
             /* 
              * Run the application and pass it a reference to a new ImageViewer form. 
-             * Pass this ImageViewer a reference to a FilePathHandler & ImageHandler instance.
+             * Pass this ImageViewer a reference to the FilePathHandler & ImageHandler instances.
             */
             Application.Run(new ImageViewer(_fileHandler, _imageHandler));
         }

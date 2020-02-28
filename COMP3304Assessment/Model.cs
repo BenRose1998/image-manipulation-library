@@ -12,7 +12,7 @@ using ImageManipulationLibrary;
 namespace COMP3304Assessment
 {
     /// <summary>
-    /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's methods to
+    /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's method to
     /// modify these images.
     /// </summary>
     class Model : IModel
@@ -81,6 +81,10 @@ namespace COMP3304Assessment
             return _manipulator.Resize(_images[key], frameWidth, frameHeight);
         }
 
+        /// <summary>
+        /// Loops through '_images' container and adds each key to a list of strings, returns this list (returned all image keys)
+        /// </summary>
+        /// <returns>A string list of all image keys</returns>
         private IList<string> GetKeys()
         {
             // DECLARE & INSTANTIATE an IList container call it 'keys' and make it a List of type string

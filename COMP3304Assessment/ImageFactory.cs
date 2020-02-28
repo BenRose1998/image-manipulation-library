@@ -17,7 +17,7 @@ namespace COMP3304Assessment
     {
         public ImageFactory()
         {
-
+            // Do nothing
         }
 
         /// <summary>
