@@ -12,7 +12,7 @@ namespace COMP3304Assessment
     /// <summary>
     /// Used to increment or decrement the image index, doing this will display the previous or next image
     /// </summary>
-    interface IImageSetter
+    public interface IImageSetter
     {
         /// <summary>
         /// Increment '_imgIndex' value and call GetImage method to get the new image and apply it to the PictureBox

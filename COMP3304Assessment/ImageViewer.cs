@@ -16,7 +16,7 @@ namespace COMP3304Assessment
     /// <summary>
     /// ImageViewer - The Windows Form class responsible for rendering a Form displaying Images and taking inputs (next image, previous image, upload image)
     /// </summary>
-    public partial class ImageViewer : Form
+    partial class ImageViewer : Form
     {
         // DECLARE an IFilePathAdder interface to store a reference to the FilePathHandler instance, call it '_filePathHandler':
         private IFilePathAdder _filePathHandler;
