@@ -14,7 +14,7 @@ namespace COMP3304Assessment
     /// <summary>
     /// Responsible for retreiving the current image and setting the Form's PictureBox Image property to that image.
     /// </summary>
-    class ImageHandler : IImageDisplaySetter, IImageSetter
+    public class ImageHandler : IImageDisplaySetter, IImageSetter
     {
         // DECLARE a PictureBox to store a reference to Form's PictureBox which will display the image, call it '_pictureBox':
         private PictureBox _pictureBox;

@@ -15,7 +15,7 @@ namespace COMP3304Assessment
     /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's method to
     /// modify these images.
     /// </summary>
-    class Model : IModel
+    public class Model : IModel
     {
         // DECLARE an IDictionary interface for a Dictionary to store Image objects, call it '_images':
         private IDictionary<string, Image> _images;

@@ -13,7 +13,7 @@ namespace COMP3304Assessment
     /// <summary>
     /// Allows for a file path of a specific image's index to be requested
     /// </summary>
-    interface IFilePathGetter
+    public interface IFilePathGetter
     {
         /// <summary>
         /// Recieves an index (int) and returns the file path string from '_keys' at that index

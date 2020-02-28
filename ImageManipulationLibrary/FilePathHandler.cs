@@ -13,7 +13,7 @@ namespace COMP3304Assessment
     /// <summary>
     /// FilePathHandler - Responsible for storing image file paths and passing them to Model
     /// </summary>
-    class FilePathHandler : IFilePathAdder, IFilePathGetter
+    public class FilePathHandler : IFilePathAdder, IFilePathGetter
     {
         // DECLARE an IList interface for a List to store image keys as strings, call it '_keys':
         private IList<string> _keys;

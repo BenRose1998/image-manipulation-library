@@ -47,27 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
-    <Compile Include="FilePathHandler.cs" />
-    <Compile Include="IFilePathGetter.cs" />
-    <Compile Include="IFilePathAdder.cs" />
-    <Compile Include="IImageFactory.cs" />
-    <Compile Include="IImageDisplaySetter.cs" />
-    <Compile Include="IImageSetter.cs" />
-    <Compile Include="ImageFactory.cs" />
-    <Compile Include="ImageHandler.cs" />
-    <Compile Include="ImageViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImageViewer.Designer.cs">
-      <DependentUpon>ImageViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IModel.cs" />
-    <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ImageViewer.resx">
-      <DependentUpon>ImageViewer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -90,17 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="assets\AnglerFish_Lit.png" />
-    <Content Include="assets\AnglerFish_Unlit.png" />
-    <Content Include="assets\AquariumBackground.png" />
-    <Content Include="assets\JavaFish.png" />
-    <Content Include="assets\OrangeFish.png" />
-    <Content Include="assets\PiranhaGreen.png" />
-    <Content Include="assets\PiranhaRed.png" />
-    <Content Include="assets\Seahorse.png" />
-    <Content Include="assets\Urchin.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImageManipulationLibrary\ImageManipulationLibrary.csproj">

@@ -13,7 +13,7 @@ namespace COMP3304Assessment
     /// <summary>
     /// Allows for image file paths to be added to the file path container
     /// </summary>
-    interface IFilePathAdder
+    public interface IFilePathAdder
     {
         /// <summary>
         /// Recieves a string and adds it to the '_pathfilenames' list, calls loadImages method to pass the updated file names to model

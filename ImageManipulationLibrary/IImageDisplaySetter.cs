@@ -14,7 +14,7 @@ namespace COMP3304Assessment
     /// <summary>
     /// IImageDisplaySetter - Used to give ImageHandler a reference to the PictureBox in which an image will be displayed, then Display an image
     /// </summary>
-    interface IImageDisplaySetter
+    public interface IImageDisplaySetter
     {
         /// <summary>
         /// Used to recieve a reference to ImageViewer's PictureBox form object in which the image will be displayed
