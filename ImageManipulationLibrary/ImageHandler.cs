@@ -14,16 +14,16 @@ namespace COMP3304Assessment
     /// <summary>
     /// Responsible for retreiving the current image and setting the Form's PictureBox Image property to that image.
     /// </summary>
-    public class ImageHandler : IImageDisplaySetter, IImageSetter
+    public class ImageHandler : IImageGetter, IImageSetter, IEventPublisher
     {
-        // DECLARE a PictureBox to store a reference to Form's PictureBox which will display the image, call it '_pictureBox':
-        private PictureBox _pictureBox;
         // DECLARE an IFilePathGetter interface to store a reference to the FilePathHandler instance, call it '_filePathHandler':
         private IFilePathGetter _filePathHandler;
         // DECLARE an int to keep track of which image to display, call it '_imgIndex':
         private int _imgIndex;
         // DECLARE an IModel interface to store a reference to the Model instance, call it '_model':
         private IModel _model;
+        // DECLARE an event to store image event handlers, call it '_imageEvent':
+        private event EventHandler<ImageEventArgs> _imageEvent;
 
         public ImageHandler(IFilePathGetter filePathHandler, IModel model)
         {
@@ -38,45 +38,46 @@ namespace COMP3304Assessment
         }
 
         /// <summary>
-        /// Used to recieve a reference to ImageViewer's PictureBox form object in which the image will be displayed, then Display an image
+        /// Implements RetrieveImageDelegate - Gets the image and triggers the OnNewImage event
         /// </summary>
-        /// <param name="pictureBox">The PictureBox form object that images will be displayed in</param>
-        public void SetImageDisplay(PictureBox pictureBox)
+        public void RetrieveImage()
         {
-            // INSTANTIATE the local '_pictureBox' with the passed reference
-            _pictureBox = pictureBox;
-            // Call the local 'getImage' method to display the current image
-            GetImage();
+            Image img = GetImage();
+            // If image was retrieved, trigger event
+            if (img != null)
+            {
+                OnNewImage(img);
+            }
         }
 
         /// <summary>
-        /// Increment '_imgIndex' value and call GetImage method to get the new image and apply it to the PictureBox
+        /// Increment '_imgIndex' value and dispay image
         /// </summary>
         public void NextImage()
         {
             // Increment the 'imgIndex' value 
             _imgIndex++;
 
-            // Call the local 'getImage' method to display the current image
-            GetImage();
+            // Call the local 'RetrieveImage' method to display the current image
+            RetrieveImage();
         }
 
         /// <summary>
-        /// Decrement '_imgIndex' value and call GetImage method to get the new image and apply it to the PictureBox
+        /// Decrement '_imgIndex' value and dispay image
         /// </summary>
         public void PreviousImage()
         {
             // Decrement the 'imgIndex' value 
             _imgIndex--;
 
-            // Call the local 'getImage' method to display the current image
-            GetImage();
+            // Call the local 'RetrieveImage' method to display the current image
+            RetrieveImage();
         }
 
         /// <summary>
         /// Retrieve file path from FilePathHandler by an index, using that file path retrieve an Image from model then set '_pictureBoxes' image to it.
         /// </summary>
-        private void GetImage()
+        private Image GetImage()
         {
             // DECLARE & INSTANIATE an temporary Image variable to null. Call it 'newImage':
             Image newImage = null;
@@ -88,14 +89,14 @@ namespace COMP3304Assessment
             if (filePath != null)
             {
                 // Call getImage method, passing filePath and _pictureBox's width and height properties, save result in 'newImage'
-                newImage = _model.getImage(filePath, _pictureBox.Width, _pictureBox.Height);
+                newImage = _model.getImage(filePath, 400, 400);
             }
 
             // If the 'newImage' value is not null an image was found
             if (newImage != null)
             {
                 // Apply 'newImage' to '_pictureBox's Image property
-                _pictureBox.Image = newImage;
+                return newImage;
             }
             else if (_imgIndex < 0)
             {
@@ -107,7 +108,38 @@ namespace COMP3304Assessment
                 // Decrement the 'imgIndex' value to prevent index going out of bounds
                 _imgIndex--;
             }
+
+            return null;
         }
 
+        /// <summary>
+        /// Called when new image is recieved
+        /// </summary>
+        /// <param name="data">The image</param>
+        private void OnNewImage(Image data)
+        {
+            ImageEventArgs imageArgs = new ImageEventArgs(data);
+            _imageEvent(this, imageArgs);
+        }
+
+        #region Implements Event Publisher
+        /// <summary>
+        /// Subscribe a listener to image events
+        /// </summary>
+        /// <param name="listener">references the listener method</param>
+        public void Subscribe(EventHandler<ImageEventArgs> listener)
+        {
+            _imageEvent += listener;
+        }
+
+        /// <summary>
+        /// Unsubscribe a listener to image events
+        /// </summary>
+        /// <param name="listener">references the listener method</param>
+        public void Unsubscribe(EventHandler<ImageEventArgs> listener)
+        {
+            _imageEvent -= listener;
+        }
+        #endregion
     }
 }

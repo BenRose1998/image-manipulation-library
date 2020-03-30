@@ -45,13 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="FilePathHandler.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="IEventListener.cs" />
+    <Compile Include="IEventPublisher.cs" />
     <Compile Include="IFilePathAdder.cs" />
     <Compile Include="IFilePathGetter.cs" />
     <Compile Include="IImageDisplaySetter.cs" />
     <Compile Include="IImageFactory.cs" />
+    <Compile Include="IImageGetter.cs" />
     <Compile Include="IImageManipulator.cs" />
     <Compile Include="IImageSetter.cs" />
+    <Compile Include="ImageEventArgs.cs" />
     <Compile Include="ImageFactory.cs" />
     <Compile Include="ImageHandler.cs" />
     <Compile Include="ImageManipulator.cs" />

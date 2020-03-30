@@ -30,13 +30,26 @@ namespace COMP3304Assessment
             // DECLARE & INSTANTIATE '_fileHandler', with a new instance of FilePathHandler, pass it a reference to '_model'
             IFilePathAdder _fileHandler = new FilePathHandler(_model);
             // DECLARE & INSTANTIATE '_imageHandler', with a new instance of ImageHandler, pass it a reference to '_fileHandler' & '_model'
-            IImageDisplaySetter _imageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model);
+            IImageGetter _imageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model);
 
             /* 
              * Run the application and pass it a reference to a new ImageViewer form. 
              * Pass this ImageViewer a reference to the FilePathHandler & ImageHandler instances.
             */
-            Application.Run(new ImageViewer(_fileHandler, _imageHandler));
+
+            ImageViewer viewer = new ImageViewer(_fileHandler, ExecuteCommand, _imageHandler.RetrieveImage, 
+                                                 (_imageHandler as IImageSetter).NextImage, (_imageHandler as IImageSetter).PreviousImage);
+            (_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnNewInput);
+            Application.Run(viewer);
+        }
+
+        /// <summary>
+        /// Implementation of ExecuteDelegate (Command pattern)
+        /// </summary>
+        /// <param name="command">The command</param>
+        public void ExecuteCommand(ICommand command)
+        {
+            command.Execute();
         }
     }
 }
