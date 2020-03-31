@@ -56,19 +56,6 @@ namespace COMP3304Assessment
         }
 
         /// <summary>
-        /// Overloaded Load Method: add a single image pointed to by 'pathfilename' into the 'Model'
-        /// </summary>
-        /// <param name="pathfilename">a string containing a path/filename for an image file to be loaded</param>
-        /// <returns>the unique identifiers of the images that have been loaded</returns>
-        public IList<String> load(String pathfilename)
-        {
-            // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary
-            _images.Add(pathfilename, _imageFactory.Create(pathfilename));
-            // Return all image keys
-            return GetKeys();
-        }
-
-        /// <summary>
         /// Return a copy of the image specified by 'key', scaled according to the dimentsions of the visual container (ie frame) it will be viewed in.
         /// </summary>
         /// <param name="key">the unique identifier for the image to be returned</param>

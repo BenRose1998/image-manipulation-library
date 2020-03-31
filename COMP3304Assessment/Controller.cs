@@ -30,7 +30,7 @@ namespace COMP3304Assessment
              * Pass this ImageViewer a reference to the FilePathHandler & ImageHandler instances.
             */
 
-            ImageViewer viewer = new ImageViewer(_fileHandler, ExecuteCommand, _imageHandler.RetrieveImage,
+            ImageViewer viewer = new ImageViewer(ExecuteCommand, _fileHandler.Add, _imageHandler.RetrieveImage,
                                                  (_imageHandler as IImageSetter).NextImage, (_imageHandler as IImageSetter).PreviousImage);
 
             (_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnNewInput);

@@ -18,11 +18,11 @@ namespace COMP3304Assessment
     /// </summary>
     partial class ImageViewer : Form, IEventListener
     {
-        // DECLARE an IFilePathAdder interface to store a reference to the FilePathHandler instance, call it '_filePathHandler':
-        private IFilePathAdder _filePathHandler;
-
         // DECLARE a ExecuteDelegate to store the delegate to be called to issue a command:
         private ExecuteDelegate _execute;
+
+        // DECLARE an Action<Size> to store the action that requests the next image, call it '_nextImageAction':
+        private Action<String> _addImageAction;
 
         // DECLARE an Action<Size> to store the action that requests the next image, call it '_nextImageAction':
         private Action<Size> _retrieveImageAction;
@@ -33,16 +33,16 @@ namespace COMP3304Assessment
         // DECLARE an Action to store the action that requests the previous image, call it '_previousImageAction':
         private Action _previousImageAction;
 
-        public ImageViewer(IFilePathAdder filePathHandler, ExecuteDelegate execute, Action<Size> retrieveImage, Action nextImage, Action previousImage)
+        public ImageViewer(ExecuteDelegate execute, Action<String> addImage, Action<Size> retrieveImage, Action nextImage, Action previousImage)
         {
             // Base method call
             InitializeComponent();
 
-            // INSTANTIATE the local '_filePathHandler', with the passed 'filePathHandler'
-            _filePathHandler = filePathHandler;
-
             // INSTANTIATE '_execute' with the passed delegate:
             _execute = execute;
+
+            // INSTANTIATE '_addImageAction' with the passed action:
+            _addImageAction = addImage;
 
             // INSTANTIATE '_retrieveImageAction' with the passed action:
             _retrieveImageAction = retrieveImage;
@@ -70,8 +70,9 @@ namespace COMP3304Assessment
                 // Store the name of the file that has been selected, call it 'fileName':
                 string fileName = openFileDialog.FileName;
 
-                // Calls the add method on the 'filePathHandler', passing the 'fileName'
-                _filePathHandler.Add(fileName);
+                // Execute the add image command
+                ICommand addImage = new Command<String>(_addImageAction, fileName);
+                _execute(addImage);
 
                 // Execute the retrieve image command
                 ICommand retImage = new Command<Size>(_retrieveImageAction, imageBox.Size);
@@ -124,8 +125,6 @@ namespace COMP3304Assessment
             // Execute the retrieve image command
             ICommand retImage = new Command<Size>(_retrieveImageAction, imageBox.Size);
             _execute(retImage);
-
-            Console.WriteLine(imageBox.Image.Height);
         }
     }
 }

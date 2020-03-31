@@ -41,8 +41,8 @@ namespace COMP3304Assessment
             // Adds the passed 'fileName', to the local IList of strings '_pathfilenames'
             _pathFileNames.Add(fileName);
 
-            // Call the local 'loadImages' method to pass the updated file names to model
-            LoadImage(fileName);
+            // Call load on the '_model', passing a single string 'fileName'
+            _keys = _model.load(new List<String> { fileName });
         }
 
         /// <summary>
@@ -62,24 +62,6 @@ namespace COMP3304Assessment
             {
                 return null;
             }
-        }
-
-        /// <summary>
-        /// Calls model's load method passing a list of all pathnames and set '_keys' to the returned keys
-        /// </summary>
-        private void LoadImages()
-        {
-            // Call load on the '_model', passing the IList of strings '_pathFileNames'
-            _keys = _model.load(_pathFileNames);
-        }
-
-        /// <summary>
-        /// Calls model's load method passing a single pathnames and set '_keys' to the returned keys
-        /// </summary>
-        private void LoadImage(string fileName)
-        {
-            // Call load on the '_model', passing a single string 'fileName'
-            _keys = _model.load(fileName);
         }
     }
 }

@@ -16,21 +16,6 @@ namespace COMP3304Assessment
         /// <returns>the unique identifiers of the images that have been loaded</returns>
         IList<String> load(IList<String> pathfilenames);
 
-        // --------------------------------------------------------------------------------------------------------
-
-        /// <summary>
-        /// COMP3304 Assessment - EDITED by Ben Rose & Luke Mitchell
-        /// </summary>
-
-        /// <summary>
-        /// Overloaded Load Method: add a single image pointed to by 'pathfilename' into the 'Model'
-        /// </summary>
-        /// <param name="pathfilename">a string containing a path/filename for an image file to be loaded</param>
-        /// <returns>the unique identifiers of the images that have been loaded</returns>
-        IList<String> load(String pathfilename);
-
-        // --------------------------------------------------------------------------------------------------------
-
         /// <summary>
         /// Return a copy of the image specified by 'key', scaled according to the dimentsions of the visual container (ie frame) it will be viewed in.
         /// </summary>
