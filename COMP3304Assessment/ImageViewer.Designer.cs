@@ -38,12 +38,11 @@
             // 
             // imageBox
             // 
-            this.imageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.imageBox.Location = new System.Drawing.Point(134, 12);
+            this.imageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageBox.Location = new System.Drawing.Point(0, 0);
+            this.imageBox.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(480, 480);
+            this.imageBox.Size = new System.Drawing.Size(748, 549);
             this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageBox.TabIndex = 0;
             this.imageBox.TabStop = false;
@@ -103,12 +102,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox imageBox;
         private System.Windows.Forms.Button loadImageButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Button previousButton;
+        private System.Windows.Forms.PictureBox imageBox;
     }
 }
 

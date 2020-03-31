@@ -33,7 +33,8 @@ namespace COMP3304Assessment
             ImageViewer viewer = new ImageViewer(ExecuteCommand, _fileHandler.Add, _imageHandler.RetrieveImage,
                                                  (_imageHandler as IImageSetter).NextImage, (_imageHandler as IImageSetter).PreviousImage);
 
-            (_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnNewInput);
+            // Subscribe Viewer form's OnNewImage method to the ImageHandler event
+            (_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnImageChanged);
             Application.Run(viewer);
         }
 

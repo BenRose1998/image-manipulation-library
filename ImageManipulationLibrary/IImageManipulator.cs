@@ -16,5 +16,7 @@ namespace ImageManipulationLibrary
     public interface IImageManipulator
     {
         Image Resize(Image image, int frameWidth, int frameHeight);
+
+        Image Flip(Image image);
     }
 }

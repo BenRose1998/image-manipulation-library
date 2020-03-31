@@ -61,18 +61,21 @@ namespace COMP3304Assessment
         /// <param name="e"></param>
         private void LoadImageButton_Click(object sender, EventArgs e)
         {
+            // Enable multi-select so that user can upload multiple images at once
+            openFileDialog.Multiselect = true;
             // Open file explorer dialog and store the result in a DialogResult, call it 'result':
             DialogResult result = openFileDialog.ShowDialog();
 
             // Check if the result is OK
             if(result == DialogResult.OK)
             {
-                // Store the name of the file that has been selected, call it 'fileName':
-                string fileName = openFileDialog.FileName;
-
-                // Execute the add image command
-                ICommand addImage = new Command<String>(_addImageAction, fileName);
-                _execute(addImage);
+                // Loop through all filenames
+                foreach (String filename in openFileDialog.FileNames)
+                {
+                    // Execute the add image command
+                    ICommand addImage = new Command<String>(_addImageAction, filename);
+                    _execute(addImage);
+                }
 
                 // Execute the retrieve image command
                 ICommand retImage = new Command<Size>(_retrieveImageAction, imageBox.Size);
@@ -81,7 +84,7 @@ namespace COMP3304Assessment
         }
 
         // Event Listener
-        public void OnNewInput(object source, ImageEventArgs args)
+        public void OnImageChanged(object source, ImageEventArgs args)
         {
             // Check for the new image data
             if (args.image != null)

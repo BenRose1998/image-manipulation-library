@@ -16,6 +16,6 @@ namespace COMP3304Assessment
         /// </summary>
         /// <param name="source"></param>
         /// <param name="args"></param>
-        void OnNewInput(object source, ImageEventArgs args);
+        void OnImageChanged(object source, ImageEventArgs args);
     }
 }

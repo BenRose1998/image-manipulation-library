@@ -65,7 +65,7 @@ namespace COMP3304Assessment
         public Image getImage(String key, int frameWidth, int frameHeight)
         {
             // Call ImageManipulator's Resize method, pass the requested image, width and height and return it
-            return _manipulator.Resize(_images[key], frameWidth, frameHeight);
+            return _manipulator.Flip(_manipulator.Resize(_images[key], frameWidth, frameHeight));
         }
 
         /// <summary>

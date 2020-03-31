@@ -101,7 +101,7 @@ namespace COMP3304Assessment
             if (filePath != null)
             {
                 // Call getImage method, passing filePath and _pictureBox's width and height properties, save result in 'newImage'
-                newImage = _model.getImage(filePath, _imageSize.Height, _imageSize.Width);
+                newImage = _model.getImage(filePath, _imageSize.Width, _imageSize.Height);
             }
 
             // If the 'newImage' value is not null an image was found
