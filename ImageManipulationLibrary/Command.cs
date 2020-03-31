@@ -11,7 +11,7 @@ namespace COMP3304Assessment
     /// </summary>
     public class Command : ICommand
     {
-        // DECLARE an Action to be executed, call it _action:
+        // DECLARE an Action to be executed, call it '_action':
         private Action _action;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace COMP3304Assessment
         /// <param name="action"></param>
         public Command(Action action)
         {
-            // INTIANIATE _action with action passed as parameter:
+            // INTIANIATE '_action' with action passed as parameter:
             _action = action;
         }
 
@@ -33,4 +33,40 @@ namespace COMP3304Assessment
             _action();
         }
     }
+
+    /// <summary>
+    /// Genereic Command Class - Executes an action with one parameter
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class Command<T> : ICommand
+    {
+        // DECLARE an Action to be executed, call it '_action':
+        private Action<T> _action;
+
+        // DECLARE a variable type T to store parameter passed, call it '_parameter':
+        private T _parameter;
+
+        /// <summary>
+        /// Constructor of generic command
+        /// </summary>
+        /// <param name="action">Action to be executed</param>
+        /// <param name="parameter">Parameter passed for the action</param>
+        public Command(Action<T> action, T parameter)
+        {
+            // Store passed action in local '_action' variable:
+            _action = action;
+            // Store passed parameter in local '_parameter' variable:
+            _parameter = parameter;
+        }
+
+        /// <summary>
+        /// Execute the generic command's action
+        /// </summary>
+        public void Execute()
+        {
+            _action(_parameter);
+        }
+    }
+
+
 }

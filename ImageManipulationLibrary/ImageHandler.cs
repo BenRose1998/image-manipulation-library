@@ -25,6 +25,8 @@ namespace COMP3304Assessment
         // DECLARE an event to store image event handlers, call it '_imageEvent':
         private event EventHandler<ImageEventArgs> _imageEvent;
 
+        private Size _imageSize;
+
         public ImageHandler(IFilePathGetter filePathHandler, IModel model)
         {
             // INSTANTIATE the local '_filePathHandler' with the passed reference
@@ -40,8 +42,10 @@ namespace COMP3304Assessment
         /// <summary>
         /// Implements RetrieveImageDelegate - Gets the image and triggers the OnNewImage event
         /// </summary>
-        public void RetrieveImage()
+        public void RetrieveImage(Size size)
         {
+            _imageSize = size;
+
             Image img = GetImage();
             // If image was retrieved, trigger event
             if (img != null)
@@ -58,8 +62,12 @@ namespace COMP3304Assessment
             // Increment the 'imgIndex' value 
             _imgIndex++;
 
-            // Call the local 'RetrieveImage' method to display the current image
-            RetrieveImage();
+            Image img = GetImage();
+            // If image was retrieved, trigger event
+            if (img != null)
+            {
+                OnNewImage(img);
+            }
         }
 
         /// <summary>
@@ -70,8 +78,12 @@ namespace COMP3304Assessment
             // Decrement the 'imgIndex' value 
             _imgIndex--;
 
-            // Call the local 'RetrieveImage' method to display the current image
-            RetrieveImage();
+            Image img = GetImage();
+            // If image was retrieved, trigger event
+            if (img != null)
+            {
+                OnNewImage(img);
+            }
         }
 
         /// <summary>
@@ -89,7 +101,7 @@ namespace COMP3304Assessment
             if (filePath != null)
             {
                 // Call getImage method, passing filePath and _pictureBox's width and height properties, save result in 'newImage'
-                newImage = _model.getImage(filePath, 400, 400);
+                newImage = _model.getImage(filePath, _imageSize.Height, _imageSize.Width);
             }
 
             // If the 'newImage' value is not null an image was found

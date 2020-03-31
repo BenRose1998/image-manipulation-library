@@ -38,15 +38,20 @@
             // 
             // imageBox
             // 
+            this.imageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.imageBox.Location = new System.Drawing.Point(134, 12);
             this.imageBox.Name = "imageBox";
             this.imageBox.Size = new System.Drawing.Size(480, 480);
+            this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageBox.TabIndex = 0;
             this.imageBox.TabStop = false;
             // 
             // loadImageButton
             // 
-            this.loadImageButton.Location = new System.Drawing.Point(254, 509);
+            this.loadImageButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.loadImageButton.Location = new System.Drawing.Point(253, 509);
             this.loadImageButton.Name = "loadImageButton";
             this.loadImageButton.Size = new System.Drawing.Size(242, 28);
             this.loadImageButton.TabIndex = 1;
@@ -60,7 +65,8 @@
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(523, 509);
+            this.nextButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.nextButton.Location = new System.Drawing.Point(562, 509);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(40, 28);
             this.nextButton.TabIndex = 2;
@@ -70,7 +76,8 @@
             // 
             // previousButton
             // 
-            this.previousButton.Location = new System.Drawing.Point(186, 509);
+            this.previousButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.previousButton.Location = new System.Drawing.Point(146, 509);
             this.previousButton.Name = "previousButton";
             this.previousButton.Size = new System.Drawing.Size(40, 28);
             this.previousButton.TabIndex = 3;
@@ -84,11 +91,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 549);
             this.Controls.Add(this.previousButton);
-            this.Controls.Add(this.nextButton);
             this.Controls.Add(this.loadImageButton);
+            this.Controls.Add(this.nextButton);
             this.Controls.Add(this.imageBox);
             this.Name = "ImageViewer";
             this.Text = "Image Viewer";
+            this.ResizeEnd += new System.EventHandler(this.ImageViewer_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
             this.ResumeLayout(false);
 

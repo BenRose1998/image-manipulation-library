@@ -16,13 +16,6 @@ namespace COMP3304Assessment
     /// </summary>
     class Controller
     {
-        // DECLARE an IModel interface for an instance of Model to be stored in, call it '_model':
-        //private IModel _model;
-        // DECLARE an IFilePathAdder interface for an instance of FilePathHandler to be stored in, call it '_fileHandler':
-        //private IFilePathAdder _fileHandler;
-        // DECLARE an IImageDisplaySetter interface for an instance of ImageHandler to be stored in, call it '_imageHandler':
-        //private IImageDisplaySetter _imageHandler;
-
         public Controller()
         {
             // DECLARE & INSTANTIATE '_model', with a new instance of Model
@@ -37,8 +30,9 @@ namespace COMP3304Assessment
              * Pass this ImageViewer a reference to the FilePathHandler & ImageHandler instances.
             */
 
-            ImageViewer viewer = new ImageViewer(_fileHandler, ExecuteCommand, _imageHandler.RetrieveImage, 
+            ImageViewer viewer = new ImageViewer(_fileHandler, ExecuteCommand, _imageHandler.RetrieveImage,
                                                  (_imageHandler as IImageSetter).NextImage, (_imageHandler as IImageSetter).PreviousImage);
+
             (_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnNewInput);
             Application.Run(viewer);
         }

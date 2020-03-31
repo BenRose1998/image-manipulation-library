@@ -20,37 +20,37 @@ namespace COMP3304Assessment
     {
         // DECLARE an IFilePathAdder interface to store a reference to the FilePathHandler instance, call it '_filePathHandler':
         private IFilePathAdder _filePathHandler;
-        // DECLARE an IImageDisplaySetter interface to store a reference to the ImageHandler instance, call it '_imageHandler':
-        private IImageDisplaySetter _imageHandler;
 
         // DECLARE a ExecuteDelegate to store the delegate to be called to issue a command:
         private ExecuteDelegate _execute;
 
-        // DECLARE an Action to store the action that requests an image, call it '_getImageAction':
-        private Action _getImageAction;
+        // DECLARE an Action<Size> to store the action that requests the next image, call it '_nextImageAction':
+        private Action<Size> _retrieveImageAction;
+
         // DECLARE an Action to store the action that requests the next image, call it '_nextImageAction':
         private Action _nextImageAction;
+
         // DECLARE an Action to store the action that requests the previous image, call it '_previousImageAction':
         private Action _previousImageAction;
 
-        public ImageViewer(IFilePathAdder filePathHandler, ExecuteDelegate execute, Action retrieveImage, Action nextImage, Action previousImage)
+        public ImageViewer(IFilePathAdder filePathHandler, ExecuteDelegate execute, Action<Size> retrieveImage, Action nextImage, Action previousImage)
         {
             // Base method call
             InitializeComponent();
 
-            // Initiate the local '_filePathHandler', with the passed 'filePathHandler'
+            // INSTANTIATE the local '_filePathHandler', with the passed 'filePathHandler'
             _filePathHandler = filePathHandler;
 
-            // INSTANIATE '_execute' with the passed delegate:
+            // INSTANTIATE '_execute' with the passed delegate:
             _execute = execute;
 
-            // INSTANIATE '_getImageAction' with the passed action:
-            _getImageAction = retrieveImage;
+            // INSTANTIATE '_retrieveImageAction' with the passed action:
+            _retrieveImageAction = retrieveImage;
 
-            // INSTANIATE '_nextImageAction' with the passed action:
+            // INSTANTIATE '_nextImageAction' with the passed action:
             _nextImageAction = nextImage;
 
-            // INSTANIATE '_previousImageAction' with the passed action:
+            // INSTANTIATE '_previousImageAction' with the passed action:
             _previousImageAction = previousImage;
         }
 
@@ -73,8 +73,9 @@ namespace COMP3304Assessment
                 // Calls the add method on the 'filePathHandler', passing the 'fileName'
                 _filePathHandler.Add(fileName);
 
-                ICommand getImage = new Command(_getImageAction);
-                _execute(getImage);
+                // Execute the retrieve image command
+                ICommand retImage = new Command<Size>(_retrieveImageAction, imageBox.Size);
+                _execute(retImage);
             }
         }
 
@@ -89,33 +90,42 @@ namespace COMP3304Assessment
             }
         }
 
-
         /// <summary>
-        /// Called when 'nextButton' button is clicked. Event used to display the next image by calling '_imageHandler''s method
+        /// Called when 'nextButton' button is clicked. Event used to display the next image by executing nextImage command
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void NextButton_Click(object sender, EventArgs e)
         {
-            // Calls on the ImageHandler instance to Display the Next Image
-            //(_imageHandler as IImageSetter).NextImage();
-
+            // Execute the next image command
             ICommand nextImage = new Command(_nextImageAction);
             _execute(nextImage);
         }
 
         /// <summary>
-        /// Called when 'previousButton' button is clicked. Event used to display the previous image by calling '_imageHandler''s method
+        /// Called when 'previousButton' button is clicked. Event used to display the previous image by executing previousImage command
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PreviousButton_Click(object sender, EventArgs e)
         {
-            // Calls on the ImageHandler instance to Display the Previous Image
-            //(_imageHandler as IImageSetter).PreviousImage();
-
+            // Execute the previous image command
             ICommand previousImage = new Command(_previousImageAction);
             _execute(previousImage);
+        }
+
+        /// <summary>
+        /// When form is resized - retrieve the image again with new image box size to rescale
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ImageViewer_ResizeEnd(object sender, EventArgs e)
+        {
+            // Execute the retrieve image command
+            ICommand retImage = new Command<Size>(_retrieveImageAction, imageBox.Size);
+            _execute(retImage);
+
+            Console.WriteLine(imageBox.Image.Height);
         }
     }
 }
