@@ -42,17 +42,17 @@ namespace COMP3304Assessment
         /// <summary>
         /// Implements RetrieveImageDelegate - Gets the image and triggers the OnNewImage event
         /// </summary>
-        public void RetrieveImage(Size size)
-        {
-            _imageSize = size;
+        //public void RetrieveImage(Size size)
+        //{
+        //    _imageSize = size;
 
-            Image img = GetImage();
-            // If image was retrieved, trigger event
-            if (img != null)
-            {
-                OnNewImage(img);
-            }
-        }
+        //    Image img = GetImage();
+        //    // If image was retrieved, trigger event
+        //    if (img != null)
+        //    {
+        //        OnNewImage(img);
+        //    }
+        //}
 
         /// <summary>
         /// Increment '_imgIndex' value and dispay image
@@ -128,11 +128,11 @@ namespace COMP3304Assessment
         /// Called when new image is recieved
         /// </summary>
         /// <param name="data">The image</param>
-        private void OnNewImage(Image data)
-        {
-            ImageEventArgs imageArgs = new ImageEventArgs(data);
-            _imageEvent(this, imageArgs);
-        }
+        //private void OnNewImage(Image data)
+        //{
+        //    ImageEventArgs imageArgs = new ImageEventArgs(data);
+        //    _imageEvent(this, imageArgs);
+        //}
 
         #region Implements Event Publisher
         /// <summary>

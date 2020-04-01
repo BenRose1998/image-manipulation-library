@@ -16,26 +16,37 @@ namespace COMP3304Assessment
     /// </summary>
     class Controller
     {
+
+        private IList<String> _fileNames;
+
+        private IModel _model;
+
+        
+
         public Controller()
         {
             // DECLARE & INSTANTIATE '_model', with a new instance of Model
-            IModel _model = new Model();
+            _model = new Model();
             // DECLARE & INSTANTIATE '_fileHandler', with a new instance of FilePathHandler, pass it a reference to '_model'
             IFilePathAdder _fileHandler = new FilePathHandler(_model);
             // DECLARE & INSTANTIATE '_imageHandler', with a new instance of ImageHandler, pass it a reference to '_fileHandler' & '_model'
             IImageGetter _imageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model);
+
+            _fileNames = new List<String>();
 
             /* 
              * Run the application and pass it a reference to a new ImageViewer form. 
              * Pass this ImageViewer a reference to the FilePathHandler & ImageHandler instances.
             */
 
-            ImageViewer viewer = new ImageViewer(ExecuteCommand, _fileHandler.Add, _imageHandler.RetrieveImage,
-                                                 (_imageHandler as IImageSetter).NextImage, (_imageHandler as IImageSetter).PreviousImage);
+            //ImageViewer viewer = new ImageViewer(ExecuteCommand, _fileHandler.Add, _imageHandler.RetrieveImage, (_imageHandler as IImageSetter).NextImage, (_imageHandler as IImageSetter).PreviousImage);
 
             // Subscribe Viewer form's OnNewImage method to the ImageHandler event
-            (_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnImageChanged);
-            Application.Run(viewer);
+            //(_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnNewImage);
+
+            CollectionView collectionViewer = new CollectionView(ExecuteCommand, _imageHandler.RetrieveImage, AddImage);
+            (_model as IEventPublisher).Subscribe((collectionViewer as IEventListener).OnNewImage);
+            Application.Run(collectionViewer);
         }
 
         /// <summary>
@@ -46,5 +57,14 @@ namespace COMP3304Assessment
         {
             command.Execute();
         }
+
+
+        public void AddImage(String file, Size size)
+        {
+            _fileNames.Add(file);
+
+            _model.getImage(file, size.Width, size.Height);
+        }
+
     }
 }

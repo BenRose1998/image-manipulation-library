@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+using System.Drawing;
 
 namespace COMP3304Assessment
 {
@@ -13,4 +14,7 @@ namespace COMP3304Assessment
     /// </summary>
     /// <returns>The note text</returns>
     public delegate void RetrieveImageDelegate();
+
+
+    public delegate void AddImageDelegate(String file, Size size);
 }

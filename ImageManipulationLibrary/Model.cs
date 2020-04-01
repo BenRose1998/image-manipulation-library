@@ -15,7 +15,7 @@ namespace COMP3304Assessment
     /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's method to
     /// modify these images.
     /// </summary>
-    public class Model : IModel
+    public class Model : IModel, IEventPublisher
     {
         // DECLARE an IDictionary interface for a Dictionary to store Image objects, call it '_images':
         private IDictionary<string, Image> _images;
@@ -23,6 +23,9 @@ namespace COMP3304Assessment
         private IImageManipulator _manipulator;
         // DECLARE an IImageFactory interface for the ImageFactory object, call it '_imageFactory':
         private IImageFactory _imageFactory;
+
+        // DECLARE an event to store image event handlers, call it '_imageEvent':
+        private event EventHandler<ImageEventArgs> _imageEvent;
 
         public Model()
         {
@@ -62,11 +65,44 @@ namespace COMP3304Assessment
         /// <param name="frameWidth">the width (in pixels) of the 'frame' it is to occupy</param>
         /// <param name="frameHeight">the height (in pixles) of the 'frame' it is to occupy</param>
         /// <returns>the Image pointed identified by key</returns>
-        public Image getImage(String key, int frameWidth, int frameHeight)
+        public void getImage(String key, int frameWidth, int frameHeight)
         {
             // Call ImageManipulator's Resize method, pass the requested image, width and height and return it
-            return _manipulator.Flip(_manipulator.Resize(_images[key], frameWidth, frameHeight));
+            OnNewImage(_manipulator.Flip(_manipulator.Resize(_images[key], frameWidth, frameHeight)));
+
         }
+
+
+        /// <summary>
+        /// Called when new image is recieved
+        /// </summary>
+        /// <param name="data">The image</param>
+        private void OnNewImage(Image data)
+        {
+            ImageEventArgs imageArgs = new ImageEventArgs(data);
+            _imageEvent(this, imageArgs);
+        }
+
+        #region Implements Event Publisher
+        /// <summary>
+        /// Subscribe a listener to image events
+        /// </summary>
+        /// <param name="listener">references the listener method</param>
+        public void Subscribe(EventHandler<ImageEventArgs> listener)
+        {
+            _imageEvent += listener;
+        }
+
+        /// <summary>
+        /// Unsubscribe a listener to image events
+        /// </summary>
+        /// <param name="listener">references the listener method</param>
+        public void Unsubscribe(EventHandler<ImageEventArgs> listener)
+        {
+            _imageEvent -= listener;
+        }
+        #endregion
+
 
         /// <summary>
         /// Loops through '_images' container and adds each key to a list of strings, returns this list (returned all image keys)

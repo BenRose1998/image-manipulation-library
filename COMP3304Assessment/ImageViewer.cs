@@ -59,32 +59,32 @@ namespace COMP3304Assessment
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void LoadImageButton_Click(object sender, EventArgs e)
-        {
-            // Enable multi-select so that user can upload multiple images at once
-            openFileDialog.Multiselect = true;
-            // Open file explorer dialog and store the result in a DialogResult, call it 'result':
-            DialogResult result = openFileDialog.ShowDialog();
+        //private void LoadImageButton_Click(object sender, EventArgs e)
+        //{
+        //    // Enable multi-select so that user can upload multiple images at once
+        //    openFileDialog.Multiselect = true;
+        //    // Open file explorer dialog and store the result in a DialogResult, call it 'result':
+        //    DialogResult result = openFileDialog.ShowDialog();
 
-            // Check if the result is OK
-            if(result == DialogResult.OK)
-            {
-                // Loop through all filenames
-                foreach (String filename in openFileDialog.FileNames)
-                {
-                    // Execute the add image command
-                    ICommand addImage = new Command<String>(_addImageAction, filename);
-                    _execute(addImage);
-                }
+        //    // Check if the result is OK
+        //    if(result == DialogResult.OK)
+        //    {
+        //        // Loop through all filenames
+        //        foreach (String filename in openFileDialog.FileNames)
+        //        {
+        //            // Execute the add image command
+        //            ICommand addImage = new Command<String>(_addImageAction, filename);
+        //            _execute(addImage);
+        //        }
 
-                // Execute the retrieve image command
-                ICommand retImage = new Command<Size>(_retrieveImageAction, imageBox.Size);
-                _execute(retImage);
-            }
-        }
+        //        // Execute the retrieve image command
+        //        ICommand retImage = new Command<Size>(_retrieveImageAction, imageBox.Size);
+        //        _execute(retImage);
+        //    }
+        //}
 
         // Event Listener
-        public void OnImageChanged(object source, ImageEventArgs args)
+        public void OnNewImage(object source, ImageEventArgs args)
         {
             // Check for the new image data
             if (args.image != null)

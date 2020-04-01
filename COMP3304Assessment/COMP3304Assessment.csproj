@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CollectionView.Designer.cs">
+      <DependentUpon>CollectionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="ImageViewer.cs">
       <SubType>Form</SubType>
@@ -55,6 +61,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CollectionView.resx">
+      <DependentUpon>CollectionView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageViewer.resx">
       <DependentUpon>ImageViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -86,6 +95,9 @@
       <Project>{0517c188-5651-4aa1-9c02-0c763f85dde7}</Project>
       <Name>ImageManipulationLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="test.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

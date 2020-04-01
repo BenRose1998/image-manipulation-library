@@ -23,6 +23,6 @@ namespace COMP3304Assessment
         /// <param name="frameWidth">the width (in pixels) of the 'frame' it is to occupy</param>
         /// <param name="frameHeight">the height (in pixles) of the 'frame' it is to occupy</param>
         /// <returns>the Image pointed identified by key</returns>
-        Image getImage(String key, int frameWidth, int frameHeight);
+        void getImage(String key, int frameWidth, int frameHeight);
     }
 }
