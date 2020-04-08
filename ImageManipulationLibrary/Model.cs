@@ -18,7 +18,7 @@ namespace COMP3304Assessment
     public class Model : IModel, IEventPublisher
     {
         // DECLARE an IDictionary interface for a Dictionary to store Image objects, call it '_images':
-        private IDictionary<string, Image> _images;
+        private IDictionary<int, Image> _images;
         // DECLARE an IImageManipulator interface for the ImageManipulator object, call it '_manipulator':
         private IImageManipulator _manipulator;
         // DECLARE an IImageFactory interface for the ImageFactory object, call it '_imageFactory':
@@ -30,7 +30,7 @@ namespace COMP3304Assessment
         public Model()
         {
             // INSTANTIATE '_images' as a new Dictionary to store a key and an Image object:
-            _images = new Dictionary<string, Image>();
+            _images = new Dictionary<int, Image>();
             // INSTANTIATE '_manipulator' as an instance of ImageManipulator:
             _manipulator = new ImageManipulator();
             // INSTANTIATE '_imageFactory' as an instance of ImageFactory:
@@ -42,18 +42,22 @@ namespace COMP3304Assessment
         /// </summary>
         /// <param name="pathfilenames">a vector of strings; each string containing path/filename for an image file to be loaded</param>
         /// <returns>the unique identifiers of the images that have been loaded</returns>
-        public IList<String> load(IList<String> pathfilenames)
+        public IList<int> load(IList<String> pathfilenames)
         {
+            Random rand = new System.Random();
             // Loop through all path file names
-            foreach(string path in pathfilenames)
+            foreach (string path in pathfilenames)
             {
-                if (!_images.ContainsKey(path))
+                int key = rand.Next(0, int.MaxValue);
+
+                if (!_images.ContainsKey(key))
                 {
                     // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary
-                    _images.Add(path, _imageFactory.Create(path));
+                    _images.Add(key, _imageFactory.Create(path));
+                    OnNewImage(_manipulator.Flip(_manipulator.Resize(_images[key], 130, 130)), key);
                 }
             }
-
+            
             // Return all image keys
             return GetKeys();
         }
@@ -65,11 +69,10 @@ namespace COMP3304Assessment
         /// <param name="frameWidth">the width (in pixels) of the 'frame' it is to occupy</param>
         /// <param name="frameHeight">the height (in pixles) of the 'frame' it is to occupy</param>
         /// <returns>the Image pointed identified by key</returns>
-        public void getImage(String key, int frameWidth, int frameHeight)
+        public void getImage(int key, int frameWidth, int frameHeight)
         {
             // Call ImageManipulator's Resize method, pass the requested image, width and height and return it
-            OnNewImage(_manipulator.Flip(_manipulator.Resize(_images[key], frameWidth, frameHeight)));
-
+            OnDisplayImage(_manipulator.Flip(_manipulator.Resize(_images[key], frameWidth, frameHeight)));
         }
 
 
@@ -77,9 +80,9 @@ namespace COMP3304Assessment
         /// Called when new image is recieved
         /// </summary>
         /// <param name="data">The image</param>
-        private void OnNewImage(Image data)
+        private void OnNewImage(Image img, int key)
         {
-            ImageEventArgs imageArgs = new ImageEventArgs(data);
+            ImageEventArgs imageArgs = new ImageEventArgs(img, key);
             _imageEvent(this, imageArgs);
         }
 
@@ -108,13 +111,13 @@ namespace COMP3304Assessment
         /// Loops through '_images' container and adds each key to a list of strings, returns this list (returned all image keys)
         /// </summary>
         /// <returns>A string list of all image keys</returns>
-        private IList<string> GetKeys()
+        private IList<int> GetKeys()
         {
             // DECLARE & INSTANTIATE an IList container call it 'keys' and make it a List of type string
-            IList<string> keys = new List<string>();
+            IList<int> keys = new List<int>();
 
             // Loop through all image's keys
-            foreach (string key in _images.Keys)
+            foreach (int key in _images.Keys)
             {
                 // Add each key to the 'keys' container
                 keys.Add(key);

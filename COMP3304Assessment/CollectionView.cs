@@ -18,12 +18,9 @@ namespace COMP3304Assessment
         // DECLARE an AddImageDelegate to store the delegate that requests the next image, call it '_addImageAction':
         private AddImageDelegate _addImage;
 
-        // DECLARE an Action<Size> to store the action that requests the next image, call it '_nextImageAction':
-        private Action<Size> _retrieveImageAction;
+        private IDictionary<int, PictureBox> _pictureBoxes;
 
-        private IList<PictureBox> _pictureBoxes;
-
-        public CollectionView(ExecuteDelegate execute, Action<Size> retrieveImage, AddImageDelegate addImage)
+        public CollectionView(ExecuteDelegate execute, AddImageDelegate addImage)
         {
             // Base method call
             InitializeComponent();
@@ -34,14 +31,11 @@ namespace COMP3304Assessment
             // INSTANTIATE '_addImage' with the passed delegate:
             _addImage = addImage;
 
-            // INSTANTIATE '_retrieveImageAction' with the passed action:
-            _retrieveImageAction = retrieveImage;
-
-            _pictureBoxes = new List<PictureBox>();
+            _pictureBoxes = new Dictionary<int, PictureBox>();
 
             foreach (PictureBox pb in this.Controls.OfType<PictureBox>())
             {
-                _pictureBoxes.Add(pb);
+                _pictureBoxes.Add(0, pb);
             }
 
             Console.WriteLine(_pictureBoxes.Count);
@@ -53,16 +47,15 @@ namespace COMP3304Assessment
             // Check for the new image data
             if (args.image != null)
             {
-                Console.WriteLine(_pictureBoxes);
-                // Set form's image box to that image
-                //_pictureBoxes[_pictureBoxes.Count - 1].Image = args.image;
-                //this.Controls.Add(_pictureBoxes[_pictureBoxes.Count - 1]);
-                _pictureBoxes[0].Image = args.image;
-                foreach (PictureBox pb in _pictureBoxes)
+                // Loop through all picture boxes
+                foreach (PictureBox pb in this.Controls.OfType<PictureBox>())
                 {
+                    // If picture doesn't currently have an image
                     if (pb.Image == null)
                     {
-                        pb.Image = args.image;
+                        _pictureBoxes.Add(args.key, pb);
+                        // Set it to this image and break from loop
+                        _pictureBoxes[args.key].Image = args.image;
                         break;
                     }
                 }
@@ -90,11 +83,13 @@ namespace COMP3304Assessment
                     // Execute the add image command
                     _addImage(filename, _pictureBoxes[0].Size);
                 }
-
-                // Execute the retrieve image command
-                //ICommand retImage = new Command<Size>(_retrieveImageAction, _pictureBoxes[0].Size);
-                //_execute(retImage);
             }
+        }
+
+
+        private void PictureBox_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

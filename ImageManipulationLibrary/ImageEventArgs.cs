@@ -12,11 +12,13 @@ namespace COMP3304Assessment
         /// <summary>
         /// Property stores updated image
         /// </summary>
+        public int key { get; }
         public Image image { get; }
 
-        public ImageEventArgs(Image data)
+        public ImageEventArgs(Image img, int k)
         {
-            image = data;
+            image = img;
+            key = k;
         }
     }
 }

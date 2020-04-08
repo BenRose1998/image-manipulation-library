@@ -63,6 +63,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(130, 130);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.PictureBox_Click);
             // 
             // pictureBox2
             // 
@@ -71,6 +72,7 @@
             this.pictureBox2.Size = new System.Drawing.Size(130, 130);
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.PictureBox_Click);
             // 
             // pictureBox3
             // 
@@ -79,6 +81,7 @@
             this.pictureBox3.Size = new System.Drawing.Size(130, 130);
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.PictureBox_Click);
             // 
             // pictureBox4
             // 
@@ -87,6 +90,7 @@
             this.pictureBox4.Size = new System.Drawing.Size(130, 130);
             this.pictureBox4.TabIndex = 4;
             this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.PictureBox_Click);
             // 
             // pictureBox5
             // 
@@ -95,6 +99,7 @@
             this.pictureBox5.Size = new System.Drawing.Size(130, 130);
             this.pictureBox5.TabIndex = 5;
             this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.PictureBox_Click);
             // 
             // CollectionView
             // 

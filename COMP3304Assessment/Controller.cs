@@ -28,9 +28,9 @@ namespace COMP3304Assessment
             // DECLARE & INSTANTIATE '_model', with a new instance of Model
             _model = new Model();
             // DECLARE & INSTANTIATE '_fileHandler', with a new instance of FilePathHandler, pass it a reference to '_model'
-            IFilePathAdder _fileHandler = new FilePathHandler(_model);
+            //IFilePathAdder _fileHandler = new FilePathHandler(_model);
             // DECLARE & INSTANTIATE '_imageHandler', with a new instance of ImageHandler, pass it a reference to '_fileHandler' & '_model'
-            IImageGetter _imageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model);
+            //IImageGetter _imageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model);
 
             _fileNames = new List<String>();
 
@@ -44,7 +44,7 @@ namespace COMP3304Assessment
             // Subscribe Viewer form's OnNewImage method to the ImageHandler event
             //(_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnNewImage);
 
-            CollectionView collectionViewer = new CollectionView(ExecuteCommand, _imageHandler.RetrieveImage, AddImage);
+            CollectionView collectionViewer = new CollectionView(ExecuteCommand, AddImage);
             (_model as IEventPublisher).Subscribe((collectionViewer as IEventListener).OnNewImage);
             Application.Run(collectionViewer);
         }
@@ -61,9 +61,17 @@ namespace COMP3304Assessment
 
         public void AddImage(String file, Size size)
         {
-            _fileNames.Add(file);
+            //_fileNames.Add(file);
 
-            _model.getImage(file, size.Width, size.Height);
+            _model.load(new List<String> { file });
+
+            //_model.getImage(key, size.Width, size.Height);
+        }
+
+        public void DisplayImage(int key)
+        {
+            new ImageViewer()
+            _model.getImage(key, 400, 400);
         }
 
     }

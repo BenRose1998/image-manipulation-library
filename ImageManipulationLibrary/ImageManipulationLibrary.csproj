@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Command.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="FilePathHandler.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IEventListener.cs" />
     <Compile Include="IEventPublisher.cs" />
@@ -60,7 +59,6 @@
     <Compile Include="IImageSetter.cs" />
     <Compile Include="ImageEventArgs.cs" />
     <Compile Include="ImageFactory.cs" />
-    <Compile Include="ImageHandler.cs" />
     <Compile Include="ImageManipulator.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="Model.cs" />
