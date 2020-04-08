@@ -21,6 +21,8 @@ namespace COMP3304Assessment
 
         private IModel _model;
 
+        private ImageViewer _viewer;
+
         
 
         public Controller()
@@ -34,6 +36,9 @@ namespace COMP3304Assessment
 
             _fileNames = new List<String>();
 
+            _viewer = new ImageViewer(0, ExecuteCommand, RequestImage);
+            (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
+
             /* 
              * Run the application and pass it a reference to a new ImageViewer form. 
              * Pass this ImageViewer a reference to the FilePathHandler & ImageHandler instances.
@@ -44,8 +49,8 @@ namespace COMP3304Assessment
             // Subscribe Viewer form's OnNewImage method to the ImageHandler event
             //(_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnNewImage);
 
-            CollectionView collectionViewer = new CollectionView(ExecuteCommand, AddImage);
-            (_model as IEventPublisher).Subscribe((collectionViewer as IEventListener).OnNewImage);
+            CollectionView collectionViewer = new CollectionView(ExecuteCommand, AddImages, DisplayImage);
+            (_model as INewImagesEventPublisher).Subscribe((collectionViewer as INewImagesEventListener).OnNewImages);
             Application.Run(collectionViewer);
         }
 
@@ -59,19 +64,25 @@ namespace COMP3304Assessment
         }
 
 
-        public void AddImage(String file, Size size)
+        public void AddImages(IList<String> filenames, Size size)
         {
             //_fileNames.Add(file);
 
-            _model.load(new List<String> { file });
+            _model.Load(filenames);
 
             //_model.getImage(key, size.Width, size.Height);
         }
 
         public void DisplayImage(int key)
         {
-            new ImageViewer()
-            _model.getImage(key, 400, 400);
+            Console.WriteLine("Displaying image of key: " + key);
+            _viewer.UpdateKey(key);
+            _viewer.Show();
+        }
+
+        public void RequestImage(int key, Size size)
+        {
+            _model.GetImage(key, size);
         }
 
     }

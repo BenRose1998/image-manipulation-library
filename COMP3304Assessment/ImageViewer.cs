@@ -16,28 +16,44 @@ namespace COMP3304Assessment
     /// <summary>
     /// ImageViewer - The Windows Form class responsible for rendering a Form displaying Images and taking inputs (next image, previous image, upload image)
     /// </summary>
-    partial class ImageViewer : Form, IEventListener
+    partial class ImageViewer : Form, IDisplayImageEventListener
     {
+        private int _key;
+
         // DECLARE a ExecuteDelegate to store the delegate to be called to issue a command:
         private ExecuteDelegate _execute;
 
-        public ImageViewer(Image img, ExecuteDelegate execute)
+        private RequestImageDelegate _requestImage;
+
+        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage)
         {
             // Base method call
             InitializeComponent();
 
+            _key = imageKey;
+
             // INSTANTIATE '_execute' with the passed delegate:
             _execute = execute;
+
+            _requestImage = requestImage;
+
+            
+        }
+
+        public void UpdateKey(int key)
+        {
+            _key = key;
+            _requestImage(_key, pictureBox.Size);
         }
 
         // Event Listener
-        public void OnDisplayImage(object source, ImageEventArgs args)
+        public void OnDisplayImage(object source, DisplayImageEventArgs args)
         {
             // Check for the new image data
             if (args.image != null)
             {
                 // Set form's image box to that image
-                imageBox.Image = args.image;
+                this.pictureBox.Image = args.image;
             }
         }
 

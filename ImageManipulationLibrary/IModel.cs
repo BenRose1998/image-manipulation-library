@@ -14,15 +14,14 @@ namespace COMP3304Assessment
         /// </summary>
         /// <param name="pathfilenames">a vector of strings; each string containing path/filename for an image file to be loaded</param>
         /// <returns>the unique identifiers of the images that have been loaded</returns>
-        IList<int> load(IList<String> pathfilenames);
+        IList<int> Load(IList<String> pathfilenames);
 
         /// <summary>
         /// Return a copy of the image specified by 'key', scaled according to the dimentsions of the visual container (ie frame) it will be viewed in.
         /// </summary>
         /// <param name="key">the unique identifier for the image to be returned</param>
-        /// <param name="frameWidth">the width (in pixels) of the 'frame' it is to occupy</param>
-        /// <param name="frameHeight">the height (in pixles) of the 'frame' it is to occupy</param>
+        /// <param name="size">size object, holds width & height of image</param>
         /// <returns>the Image pointed identified by key</returns>
-        void getImage(String key, int frameWidth, int frameHeight);
+        void GetImage(int key, Size size);
     }
 }

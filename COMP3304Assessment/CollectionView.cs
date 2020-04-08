@@ -10,17 +10,20 @@ using System.Windows.Forms;
 
 namespace COMP3304Assessment
 {
-    public partial class CollectionView : Form, IEventListener
+    public partial class CollectionView : Form, INewImagesEventListener
     {
         // DECLARE a ExecuteDelegate to store the delegate to be called to issue a command:
         private ExecuteDelegate _execute;
 
         // DECLARE an AddImageDelegate to store the delegate that requests the next image, call it '_addImageAction':
-        private AddImageDelegate _addImage;
+        private AddImageDelegate _addImages;
+
+        private DisplayImageDelegate _displayImage;
+
 
         private IDictionary<int, PictureBox> _pictureBoxes;
 
-        public CollectionView(ExecuteDelegate execute, AddImageDelegate addImage)
+        public CollectionView(ExecuteDelegate execute, AddImageDelegate addImages, DisplayImageDelegate displayImage)
         {
             // Base method call
             InitializeComponent();
@@ -29,36 +32,38 @@ namespace COMP3304Assessment
             _execute = execute;
 
             // INSTANTIATE '_addImage' with the passed delegate:
-            _addImage = addImage;
+            _addImages = addImages;
+
+            _displayImage = displayImage;
+
 
             _pictureBoxes = new Dictionary<int, PictureBox>();
-
-            foreach (PictureBox pb in this.Controls.OfType<PictureBox>())
-            {
-                _pictureBoxes.Add(0, pb);
-            }
 
             Console.WriteLine(_pictureBoxes.Count);
         }
 
         // Event Listener
-        public void OnNewImage(object source, ImageEventArgs args)
+        public void OnNewImages(object source, NewImagesEventArgs args)
         {
             // Check for the new image data
-            if (args.image != null)
+            if (args.images != null)
             {
-                // Loop through all picture boxes
-                foreach (PictureBox pb in this.Controls.OfType<PictureBox>())
+                foreach(KeyValuePair<int, Image> img in args.images)
                 {
-                    // If picture doesn't currently have an image
-                    if (pb.Image == null)
+                    // Loop through all picture boxes
+                    foreach (PictureBox pb in this.Controls.OfType<PictureBox>())
                     {
-                        _pictureBoxes.Add(args.key, pb);
-                        // Set it to this image and break from loop
-                        _pictureBoxes[args.key].Image = args.image;
-                        break;
+                        // If picture doesn't currently have an image
+                        if (pb.Image == null)
+                        {
+                            _pictureBoxes.Add(img.Key, pb);
+                            // Set it to this image and break from loop
+                            _pictureBoxes[img.Key].Image = img.Value;
+                            break;
+                        }
                     }
                 }
+
             }
         }
 
@@ -77,19 +82,15 @@ namespace COMP3304Assessment
             // Check if the result is OK
             if (result == DialogResult.OK)
             {
-                // Loop through all filenames
-                foreach (String filename in openFileDialog.FileNames)
-                {
-                    // Execute the add image command
-                    _addImage(filename, _pictureBoxes[0].Size);
-                }
+                // Execute the add images command, pass all uploaded filenames, pass the size of the first PictureBox
+                _addImages(openFileDialog.FileNames, this.Controls["pictureBox1"].Size);
             }
         }
 
 
         private void PictureBox_Click(object sender, EventArgs e)
         {
-            
+            _displayImage(_pictureBoxes.FirstOrDefault(x => x.Value == sender).Key);
         }
     }
 }

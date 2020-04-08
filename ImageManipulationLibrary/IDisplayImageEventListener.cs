@@ -9,13 +9,13 @@ namespace COMP3304Assessment
     /// <summary>
     /// 
     /// </summary>
-    public interface IEventListener
+    public interface IDisplayImageEventListener
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="source"></param>
         /// <param name="args"></param>
-        void OnNewImage(object source, ImageEventArgs args);
+        void OnDisplayImage(object source, DisplayImageEventArgs args);
     }
 }

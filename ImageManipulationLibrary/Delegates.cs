@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace COMP3304Assessment
@@ -16,5 +17,9 @@ namespace COMP3304Assessment
     public delegate void RetrieveImageDelegate();
 
 
-    public delegate void AddImageDelegate(String file, Size size);
+    public delegate void AddImageDelegate(IList<String> filenames, Size size);
+
+    public delegate void DisplayImageDelegate(int key);
+
+    public delegate void RequestImageDelegate(int key, Size size);
 }

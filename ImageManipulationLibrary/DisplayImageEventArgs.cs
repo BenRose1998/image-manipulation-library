@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 
 namespace COMP3304Assessment
 {
-    public class ImageEventArgs : EventArgs
+    public class DisplayImageEventArgs : EventArgs
     {
         /// <summary>
         /// Property stores updated image
         /// </summary>
-        public int key { get; }
         public Image image { get; }
 
-        public ImageEventArgs(Image img, int k)
+        public DisplayImageEventArgs(Image img)
         {
             image = img;
-            key = k;
         }
     }
 }
