@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace COMP3304Assessment
+/// <summary>
+/// COMP3304 Assessment Final Milestone - by Ben Rose
+/// </summary>
+namespace ImageManipulationLibrary
 {
     /// <summary>
     /// 

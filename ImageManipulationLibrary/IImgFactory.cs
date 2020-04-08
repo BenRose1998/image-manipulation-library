@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace COMP3304Assessment
+namespace ImageManipulationLibrary
 {
     /// <summary>
     /// Interface used to create an instance of Image from a file
     /// </summary>
-    interface IImageFactory
+    interface IImgFactory
     {
         /// <summary>
         /// Instantiates an instance of Image using FromFile method

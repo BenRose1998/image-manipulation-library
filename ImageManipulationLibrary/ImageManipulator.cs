@@ -8,7 +8,7 @@ using System.IO;
 using ImageProcessor;
 
 /// <summary>
-/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
 namespace ImageManipulationLibrary
 {

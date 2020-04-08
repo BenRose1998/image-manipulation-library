@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace COMP3304Assessment
+/// <summary>
+/// COMP3304 Assessment Final Milestone - by Ben Rose
+/// </summary>
+namespace ImageManipulationLibrary
 {
     /// <summary>
     /// Declare a delegate that is used to excute commands, call it ExecuteDelegate.
@@ -17,7 +20,7 @@ namespace COMP3304Assessment
     public delegate void RetrieveImageDelegate();
 
 
-    public delegate void AddImageDelegate(IList<String> filenames, Size size);
+    public delegate void AddImageDelegate(IList<String> filenames);
 
     public delegate void DisplayImageDelegate(int key);
 

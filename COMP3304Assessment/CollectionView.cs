@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageManipulationLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/// <summary>
+/// COMP3304 Assessment Final Milestone - by Ben Rose
+/// </summary>
 namespace COMP3304Assessment
 {
     public partial class CollectionView : Form, INewImagesEventListener
@@ -83,7 +87,7 @@ namespace COMP3304Assessment
             if (result == DialogResult.OK)
             {
                 // Execute the add images command, pass all uploaded filenames, pass the size of the first PictureBox
-                _addImages(openFileDialog.FileNames, this.Controls["pictureBox1"].Size);
+                _addImages(openFileDialog.FileNames);
             }
         }
 

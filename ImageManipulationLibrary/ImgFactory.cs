@@ -6,16 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace COMP3304Assessment
+namespace ImageManipulationLibrary
 {
     /// <summary>
     /// Used to create an instance of Image from a file
     /// </summary>
-    class ImageFactory : IImageFactory
+    class ImgFactory : IImgFactory
     {
-        public ImageFactory()
+        public ImgFactory()
         {
             // Do nothing
         }

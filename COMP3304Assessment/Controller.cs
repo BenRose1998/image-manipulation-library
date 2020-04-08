@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageManipulationLibrary;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /// <summary>
-/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
 namespace COMP3304Assessment
 {
@@ -16,41 +17,27 @@ namespace COMP3304Assessment
     /// </summary>
     class Controller
     {
-
-        private IList<String> _fileNames;
-
+        // DECLARE an instance of the IModel interface, call it '_model':
         private IModel _model;
-
-        private ImageViewer _viewer;
-
-        
+        // DECLARE an instance of the IImageViewer interface, call it '_viewer':
+        private IImageViewer _viewer;
 
         public Controller()
         {
-            // DECLARE & INSTANTIATE '_model', with a new instance of Model
+            // DECLARE & INSTANTIATE '_model', with a new instance of Model:
             _model = new Model();
-            // DECLARE & INSTANTIATE '_fileHandler', with a new instance of FilePathHandler, pass it a reference to '_model'
-            //IFilePathAdder _fileHandler = new FilePathHandler(_model);
-            // DECLARE & INSTANTIATE '_imageHandler', with a new instance of ImageHandler, pass it a reference to '_fileHandler' & '_model'
-            //IImageGetter _imageHandler = new ImageHandler(_fileHandler as IFilePathGetter, _model);
 
-            _fileNames = new List<String>();
-
+            // DECLARE & INSTANTIATE '_viewer', with a new instance of ImageViewer, set image key to default of 0, pass delegates:
             _viewer = new ImageViewer(0, ExecuteCommand, RequestImage);
+            // Subscribe '_viewer' as a listener to the OnDisplayImage event:
             (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
 
-            /* 
-             * Run the application and pass it a reference to a new ImageViewer form. 
-             * Pass this ImageViewer a reference to the FilePathHandler & ImageHandler instances.
-            */
-
-            //ImageViewer viewer = new ImageViewer(ExecuteCommand, _fileHandler.Add, _imageHandler.RetrieveImage, (_imageHandler as IImageSetter).NextImage, (_imageHandler as IImageSetter).PreviousImage);
-
-            // Subscribe Viewer form's OnNewImage method to the ImageHandler event
-            //(_imageHandler as IEventPublisher).Subscribe((viewer as IEventListener).OnNewImage);
-
+            // DECLARE & INSTANTIATE 'collectionViewer', pass delegates:
             CollectionView collectionViewer = new CollectionView(ExecuteCommand, AddImages, DisplayImage);
+            // Subscribe 'collectionViewer' as a listener to the OnNewImages event:
             (_model as INewImagesEventPublisher).Subscribe((collectionViewer as INewImagesEventListener).OnNewImages);
+
+            // Run the application, passing collectionViewer as the main form:
             Application.Run(collectionViewer);
         }
 
@@ -63,25 +50,44 @@ namespace COMP3304Assessment
             command.Execute();
         }
 
-
-        public void AddImages(IList<String> filenames, Size size)
+        /// <summary>
+        /// Implementation of AddImageDelegate - Recieves filenames and loads images
+        /// </summary>
+        /// <param name="filenames">File path names of images</param>
+        public void AddImages(IList<String> filenames)
         {
-            //_fileNames.Add(file);
-
+            // Call IModel's Load method, pass file names to be loaded
             _model.Load(filenames);
-
-            //_model.getImage(key, size.Width, size.Height);
         }
 
+        /// <summary>
+        /// Implementation of DisplayImageDelegate
+        /// </summary>
+        /// <param name="key">The key of image to be displayed</param>
         public void DisplayImage(int key)
         {
-            Console.WriteLine("Displaying image of key: " + key);
+            // Check if the ImageViewer form has been disposed (user exited window)
+            if ((_viewer as Form).IsDisposed)
+            {
+                // Re-instantiate '_viewer' as a new viewer
+                _viewer = new ImageViewer(key, ExecuteCommand, RequestImage);
+                // Re-subscribe '_viewer' as an listener to the OnDisplayImage event
+                (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
+            }
+            // Call IImageViewer's 'UpdateKey' method to pass a new image key
             _viewer.UpdateKey(key);
-            _viewer.Show();
+            // Call ImageViewer's form Show method to display the form
+            (_viewer as Form).Show();
         }
 
+        /// <summary>
+        /// Implementation of RequestImageDelegate
+        /// </summary>
+        /// <param name="key">The key of image being requested</param>
+        /// <param name="size">Size image should be (width & height)</param>
         public void RequestImage(int key, Size size)
         {
+            // Call Model's GetImage method, pass the image key and requested image size
             _model.GetImage(key, size);
         }
 

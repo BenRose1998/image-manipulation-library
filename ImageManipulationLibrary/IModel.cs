@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace COMP3304Assessment
+/// <summary>
+/// COMP3304 Assessment Final Milestone - by Ben Rose
+/// </summary>
+namespace ImageManipulationLibrary
 {
     public interface IModel
     {

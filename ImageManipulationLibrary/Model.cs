@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using ImageManipulationLibrary;
 
 /// <summary>
-/// COMP3304 Assessment - by Ben Rose & Luke Mitchell
+/// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace COMP3304Assessment
+namespace ImageManipulationLibrary
 {
     /// <summary>
     /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's method to
@@ -22,7 +22,7 @@ namespace COMP3304Assessment
         // DECLARE an IImageManipulator interface for the ImageManipulator object, call it '_manipulator':
         private IImageManipulator _manipulator;
         // DECLARE an IImageFactory interface for the ImageFactory object, call it '_imageFactory':
-        private IImageFactory _imageFactory;
+        private IImgFactory _imageFactory;
 
         // DECLARE an event to store the new images event handler, call it '_newImagesEvent':
         private event EventHandler<NewImagesEventArgs> _newImagesEvent;
@@ -37,7 +37,7 @@ namespace COMP3304Assessment
             // INSTANTIATE '_manipulator' as an instance of ImageManipulator:
             _manipulator = new ImageManipulator();
             // INSTANTIATE '_imageFactory' as an instance of ImageFactory:
-            _imageFactory = new ImageFactory();
+            _imageFactory = new ImgFactory();
         }
 
         /// <summary>
