@@ -17,6 +17,6 @@ namespace ImageManipulationLibrary
     {
         Image Resize(Image image, int frameWidth, int frameHeight);
 
-        Image Flip(Image image);
+        Image Flip(Image image, Boolean flipVertical);
     }
 }

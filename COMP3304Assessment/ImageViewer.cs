@@ -26,7 +26,12 @@ namespace COMP3304Assessment
 
         private RequestImageDelegate _requestImage;
 
-        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage)
+        private Action<int> _flipHorizontal;
+
+        private Action<int> _flipVertical;
+
+
+        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, Action<int> flipHorizontal, Action<int> flipVertical)
         {
             // Base method call
             InitializeComponent();
@@ -38,7 +43,9 @@ namespace COMP3304Assessment
 
             _requestImage = requestImage;
 
-            
+            _flipHorizontal = flipHorizontal;
+
+            _flipVertical = flipVertical;
         }
 
         public void UpdateKey(int key)
@@ -56,6 +63,18 @@ namespace COMP3304Assessment
                 // Set form's image box to that image
                 this.pictureBox.Image = args.image;
             }
+        }
+
+        private void FlipHorizontalButton_Click(object sender, EventArgs e)
+        {
+            _flipHorizontal(_key);
+            _requestImage(_key, pictureBox.Size);
+        }
+
+        private void FlipVerticallyButton_Click(object sender, EventArgs e)
+        {
+            _flipVertical(_key);
+            _requestImage(_key, pictureBox.Size);
         }
 
         /// <summary>

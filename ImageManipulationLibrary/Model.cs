@@ -44,8 +44,7 @@ namespace ImageManipulationLibrary
         /// Load the media items pointed to by 'pathfilenames' into the 'Model'
         /// </summary>
         /// <param name="pathfilenames">a vector of strings; each string containing path/filename for an image file to be loaded</param>
-        /// <returns>the unique identifiers of the images that have been loaded</returns>
-        public IList<int> Load(IList<String> pathfilenames)
+        public void Load(IList<String> pathfilenames)
         {
             Random rand = new System.Random();
 
@@ -61,14 +60,11 @@ namespace ImageManipulationLibrary
                 {
                     // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary
                     _images.Add(key, _imageFactory.Create(path));
-                    newImages.Add(key, _manipulator.Flip(_manipulator.Resize(_images[key], 130, 130)));
+                    newImages.Add(key, _manipulator.Resize(_images[key], 130, 130));
                 }
             }
             // Call 'OnNewImages' event, pass newImages dictionary
             OnNewImages(newImages);
-
-            // Return all image keys
-            return GetKeys();
         }
 
         /// <summary>
@@ -80,7 +76,17 @@ namespace ImageManipulationLibrary
         public void GetImage(int key, Size size)
         {
             // Call ImageManipulator's Resize method, pass the requested image, width and height and return it
-            OnDisplayImage(_manipulator.Flip(_manipulator.Resize(_images[key], size.Width, size.Height)));
+            OnDisplayImage(_manipulator.Resize(_images[key], size.Width, size.Height));
+        }
+
+        public void FlipVertical(int key)
+        {
+            _images[key] = _manipulator.Flip(_images[key], true);
+        }
+
+        public void FlipHorizontal(int key)
+        {
+            _images[key] = _manipulator.Flip(_images[key], false);
         }
 
         /// <summary>

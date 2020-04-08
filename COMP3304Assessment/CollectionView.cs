@@ -20,14 +20,14 @@ namespace COMP3304Assessment
         private ExecuteDelegate _execute;
 
         // DECLARE an AddImageDelegate to store the delegate that requests the next image, call it '_addImageAction':
-        private AddImageDelegate _addImages;
+        private Action<IList<String>> _addImages;
 
         private DisplayImageDelegate _displayImage;
 
 
         private IDictionary<int, PictureBox> _pictureBoxes;
 
-        public CollectionView(ExecuteDelegate execute, AddImageDelegate addImages, DisplayImageDelegate displayImage)
+        public CollectionView(ExecuteDelegate execute, Action<IList<String>> addImages, DisplayImageDelegate displayImage)
         {
             // Base method call
             InitializeComponent();

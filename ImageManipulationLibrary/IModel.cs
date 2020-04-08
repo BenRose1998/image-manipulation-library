@@ -16,8 +16,7 @@ namespace ImageManipulationLibrary
         /// Load the media items pointed to by 'pathfilenames' into the 'Model'
         /// </summary>
         /// <param name="pathfilenames">a vector of strings; each string containing path/filename for an image file to be loaded</param>
-        /// <returns>the unique identifiers of the images that have been loaded</returns>
-        IList<int> Load(IList<String> pathfilenames);
+        void Load(IList<String> pathfilenames);
 
         /// <summary>
         /// Return a copy of the image specified by 'key', scaled according to the dimentsions of the visual container (ie frame) it will be viewed in.
@@ -26,5 +25,8 @@ namespace ImageManipulationLibrary
         /// <param name="size">size object, holds width & height of image</param>
         /// <returns>the Image pointed identified by key</returns>
         void GetImage(int key, Size size);
+
+        void FlipVertical(int key);
+        void FlipHorizontal(int key);
     }
 }

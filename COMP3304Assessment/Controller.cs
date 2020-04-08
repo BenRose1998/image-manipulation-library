@@ -28,12 +28,12 @@ namespace COMP3304Assessment
             _model = new Model();
 
             // DECLARE & INSTANTIATE '_viewer', with a new instance of ImageViewer, set image key to default of 0, pass delegates:
-            _viewer = new ImageViewer(0, ExecuteCommand, RequestImage);
+            _viewer = new ImageViewer(0, ExecuteCommand, RequestImage, _model.FlipHorizontal, _model.FlipVertical);
             // Subscribe '_viewer' as a listener to the OnDisplayImage event:
             (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
 
             // DECLARE & INSTANTIATE 'collectionViewer', pass delegates:
-            CollectionView collectionViewer = new CollectionView(ExecuteCommand, AddImages, DisplayImage);
+            CollectionView collectionViewer = new CollectionView(ExecuteCommand, _model.Load, DisplayImage);
             // Subscribe 'collectionViewer' as a listener to the OnNewImages event:
             (_model as INewImagesEventPublisher).Subscribe((collectionViewer as INewImagesEventListener).OnNewImages);
 
@@ -54,11 +54,11 @@ namespace COMP3304Assessment
         /// Implementation of AddImageDelegate - Recieves filenames and loads images
         /// </summary>
         /// <param name="filenames">File path names of images</param>
-        public void AddImages(IList<String> filenames)
-        {
-            // Call IModel's Load method, pass file names to be loaded
-            _model.Load(filenames);
-        }
+        //public void AddImages(IList<String> filenames)
+        //{
+        //    // Call IModel's Load method, pass file names to be loaded
+        //    _model.Load(filenames);
+        //}
 
         /// <summary>
         /// Implementation of DisplayImageDelegate
@@ -70,7 +70,7 @@ namespace COMP3304Assessment
             if ((_viewer as Form).IsDisposed)
             {
                 // Re-instantiate '_viewer' as a new viewer
-                _viewer = new ImageViewer(key, ExecuteCommand, RequestImage);
+                _viewer = new ImageViewer(key, ExecuteCommand, RequestImage, _model.FlipHorizontal, _model.FlipVertical);
                 // Re-subscribe '_viewer' as an listener to the OnDisplayImage event
                 (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
             }
