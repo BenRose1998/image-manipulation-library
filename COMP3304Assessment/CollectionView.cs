@@ -88,7 +88,9 @@ namespace COMP3304Assessment
             if (result == DialogResult.OK)
             {
                 // Execute the add images command, pass all uploaded filenames, pass the size of the first PictureBox
-                _addImages(openFileDialog.FileNames);
+                //_addImages(openFileDialog.FileNames);
+                ICommand addImages = new GenericCommand<IList<String>>(_addImages, openFileDialog.FileNames);
+                _execute(addImages);
             }
         }
 

@@ -28,7 +28,7 @@ namespace COMP3304Assessment
             _model = new Model();
 
             // DECLARE & INSTANTIATE '_viewer', with a new instance of ImageViewer, set image key to default of 0, pass delegates:
-            _viewer = new ImageViewer(0, ExecuteCommand, RequestImage, _model.FlipHorizontal, _model.FlipVertical);
+            _viewer = new ImageViewer(0, ExecuteCommand, RequestImage, _model.FlipImage);
             // Subscribe '_viewer' as a listener to the OnDisplayImage event:
             (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
 
@@ -51,16 +51,6 @@ namespace COMP3304Assessment
         }
 
         /// <summary>
-        /// Implementation of AddImageDelegate - Recieves filenames and loads images
-        /// </summary>
-        /// <param name="filenames">File path names of images</param>
-        //public void AddImages(IList<String> filenames)
-        //{
-        //    // Call IModel's Load method, pass file names to be loaded
-        //    _model.Load(filenames);
-        //}
-
-        /// <summary>
         /// Implementation of DisplayImageDelegate
         /// </summary>
         /// <param name="key">The key of image to be displayed</param>
@@ -70,12 +60,13 @@ namespace COMP3304Assessment
             if ((_viewer as Form).IsDisposed)
             {
                 // Re-instantiate '_viewer' as a new viewer
-                _viewer = new ImageViewer(key, ExecuteCommand, RequestImage, _model.FlipHorizontal, _model.FlipVertical);
+                _viewer = new ImageViewer(key, ExecuteCommand, RequestImage, _model.FlipImage);
                 // Re-subscribe '_viewer' as an listener to the OnDisplayImage event
                 (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
             }
             // Call IImageViewer's 'UpdateKey' method to pass a new image key
             _viewer.UpdateKey(key);
+            Console.WriteLine(key);
             // Call ImageViewer's form Show method to display the form
             (_viewer as Form).Show();
         }

@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
+    <Compile Include="FlipCommand.cs" />
+    <Compile Include="GenericCommand.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IDisplayImageEventListener.cs" />

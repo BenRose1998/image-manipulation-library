@@ -27,12 +27,9 @@ namespace COMP3304Assessment
 
         private RequestImageDelegate _requestImage;
 
-        private Action<int> _flipHorizontal;
+        private FlipImageDelegate _flipImageCommand;
 
-        private Action<int> _flipVertical;
-
-
-        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, Action<int> flipHorizontal, Action<int> flipVertical)
+        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage)
         {
             // Base method call
             InitializeComponent();
@@ -46,11 +43,7 @@ namespace COMP3304Assessment
             // INSTANTIATE '_requestImage' with the passed delegate:
             _requestImage = requestImage;
 
-            // INSTANTIATE '_flipHorizontal' with the passed action:
-            _flipHorizontal = flipHorizontal;
-
-            // INSTANTIATE '_flipVertical' with the passed action:
-            _flipVertical = flipVertical;
+            _flipImageCommand += flipImage;
         }
 
         public void UpdateKey(int key)
@@ -74,14 +67,16 @@ namespace COMP3304Assessment
 
         private void FlipHorizontalButton_Click(object sender, EventArgs e)
         {
-            _flipHorizontal(_key);
-            _requestImage(_key, pictureBox.Size);
+            Console.WriteLine(_key);
+            ICommand flip = new FlipCommand(_flipImageCommand, _key, this.pictureBox.Image.Size, false);
+            _execute(flip);
         }
 
         private void FlipVerticallyButton_Click(object sender, EventArgs e)
         {
-            _flipVertical(_key);
-            _requestImage(_key, pictureBox.Size);
+            Console.WriteLine(_key);
+            ICommand flip = new FlipCommand(_flipImageCommand, _key, this.pictureBox.Image.Size, true);
+            _execute(flip);
         }
 
         /// <summary>

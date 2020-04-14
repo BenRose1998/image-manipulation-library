@@ -79,14 +79,9 @@ namespace ImageManipulationLibrary
             OnDisplayImage(_manipulator.Resize(_images[key], size.Width, size.Height));
         }
 
-        public void FlipVertical(int key)
+        public void FlipImage(int key, Size size, Boolean flipVertical)
         {
-            _images[key] = _manipulator.Flip(_images[key], true);
-        }
-
-        public void FlipHorizontal(int key)
-        {
-            _images[key] = _manipulator.Flip(_images[key], false);
+            OnDisplayImage(_manipulator.Flip(_images[key], false));
         }
 
         /// <summary>

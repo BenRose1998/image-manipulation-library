@@ -25,4 +25,6 @@ namespace ImageManipulationLibrary
     public delegate void DisplayImageDelegate(int key);
 
     public delegate void RequestImageDelegate(int key, Size size);
+
+    public delegate void FlipImageDelegate(int key, Size size, Boolean flipVertical);
 }

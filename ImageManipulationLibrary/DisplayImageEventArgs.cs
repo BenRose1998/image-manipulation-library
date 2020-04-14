@@ -17,16 +17,9 @@ namespace ImageManipulationLibrary
         /// </summary>
         public Image image { get; }
 
-        public IDictionary<int, Image> images { get; }
-
         public DisplayImageEventArgs(Image img)
         {
             image = img;
-        }
-
-        public DisplayImageEventArgs(IDictionary<int, Image> imgs)
-        {
-            images = imgs;
         }
     }
 }
