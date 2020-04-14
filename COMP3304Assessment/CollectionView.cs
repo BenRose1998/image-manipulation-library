@@ -22,9 +22,10 @@ namespace COMP3304Assessment
         // DECLARE an AddImageDelegate to store the delegate that requests the next image, call it '_addImageAction':
         private Action<IList<String>> _addImages;
 
+        //
         private DisplayImageDelegate _displayImage;
 
-
+        //
         private IDictionary<int, PictureBox> _pictureBoxes;
 
         public CollectionView(ExecuteDelegate execute, Action<IList<String>> addImages, DisplayImageDelegate displayImage)
@@ -91,9 +92,14 @@ namespace COMP3304Assessment
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PictureBox_Click(object sender, EventArgs e)
         {
+            // Find the key of the PictureBox that was clicked in the '_pictureBoxes' dictionary, call '_displayImage' pass the key
             _displayImage(_pictureBoxes.FirstOrDefault(x => x.Value == sender).Key);
         }
     }

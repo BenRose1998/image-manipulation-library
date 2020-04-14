@@ -49,18 +49,18 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="IDisplayImageEventListener.cs" />
+    <Compile Include="IDisplayImageEventPublisher.cs" />
     <Compile Include="IImageViewer.cs" />
     <Compile Include="INewImagesEventListener.cs" />
-    <Compile Include="IDisplayImageEventPublisher.cs" />
     <Compile Include="INewImagesEventPublisher.cs" />
     <Compile Include="IImgFactory.cs" />
     <Compile Include="IImageManipulator.cs" />
     <Compile Include="DisplayImageEventArgs.cs" />
-    <Compile Include="NewImagesEventArgs.cs" />
     <Compile Include="ImgFactory.cs" />
     <Compile Include="ImageManipulator.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="Model.cs" />
+    <Compile Include="NewImagesEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

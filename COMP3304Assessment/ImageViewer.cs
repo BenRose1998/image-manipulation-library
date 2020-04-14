@@ -19,6 +19,7 @@ namespace COMP3304Assessment
     /// </summary>
     partial class ImageViewer : Form, IImageViewer, IDisplayImageEventListener
     {
+        // DECLARE
         private int _key;
 
         // DECLARE a ExecuteDelegate to store the delegate to be called to issue a command:
@@ -36,21 +37,27 @@ namespace COMP3304Assessment
             // Base method call
             InitializeComponent();
 
+            // INSTANTIATE '_key' with the passed image key:
             _key = imageKey;
 
             // INSTANTIATE '_execute' with the passed delegate:
             _execute = execute;
 
+            // INSTANTIATE '_requestImage' with the passed delegate:
             _requestImage = requestImage;
 
+            // INSTANTIATE '_flipHorizontal' with the passed action:
             _flipHorizontal = flipHorizontal;
 
+            // INSTANTIATE '_flipVertical' with the passed action:
             _flipVertical = flipVertical;
         }
 
         public void UpdateKey(int key)
         {
+            // Set '_key' to the updated key passed as a parameter
             _key = key;
+            //
             _requestImage(_key, pictureBox.Size);
         }
 

@@ -109,7 +109,7 @@ namespace ImageManipulationLibrary
             _displayImageEvent(this, imageArgs);
         }
 
-        #region Implements Event Publisher
+        #region Implements Event Publishers & Listeners
         /// <summary>
         /// Subscribe a listener to image events
         /// </summary>
