@@ -66,6 +66,21 @@ namespace ImageManipulationLibrary
             return img;
         }
 
+        public Image Rotate(Image image, int degrees)
+        {
+            // DECLARE & INSTANTIATE a Stream, call it 'stream'. Make it a new MemoryStream to store the image sent from the ImageFactory when saved:
+            Stream stream = new MemoryStream();
+
+            // Load the image into the ImageFactory, resize it by passing the size object and save it to the stream object
+            _imageFactory.Load(image).Rotate(degrees).Save(stream);
+
+            // Convert the stream back to an Image object
+            Image img = Image.FromStream(stream);
+
+            // Return the image
+            return img;
+        }
+
 
 
     }

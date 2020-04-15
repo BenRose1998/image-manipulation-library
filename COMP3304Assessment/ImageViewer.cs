@@ -29,9 +29,11 @@ namespace COMP3304Assessment
 
         private FlipImageDelegate _flipImageCommand;
 
+        private RotateImageDelegate _rotateImageCommand;
+
         private SaveImageDelegate _saveImageCommand;
 
-        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, SaveImageDelegate saveImage)
+        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, RotateImageDelegate rotateImage, SaveImageDelegate saveImage)
         {
             // Base method call
             InitializeComponent();
@@ -47,6 +49,9 @@ namespace COMP3304Assessment
 
             // INSTANTIATE '_flipImageCommand' to flipImage:
             _flipImageCommand += flipImage;
+
+            // INSTANTIATE '_rotateImageCommand' to rotateImage:
+            _rotateImageCommand += rotateImage;
 
             // INSTANTIATE '_saveImageCommand' to saveImage:
             _saveImageCommand += saveImage;
@@ -72,18 +77,55 @@ namespace COMP3304Assessment
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FlipHorizontalButton_Click(object sender, EventArgs e)
         {
             ICommand flip = new FlipCommand(_flipImageCommand, _key, false);
             _execute(flip);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FlipVerticallyButton_Click(object sender, EventArgs e)
         {
             ICommand flip = new FlipCommand(_flipImageCommand, _key, true);
             _execute(flip);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RotateNegative90Button_Click(object sender, EventArgs e)
+        {
+            ICommand rotate = new RotateCommand(_rotateImageCommand, _key, -90);
+            _execute(rotate);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RotatePositive90Button_Click(object sender, EventArgs e)
+        {
+            ICommand rotate = new RotateCommand(_rotateImageCommand, _key, 90);
+            _execute(rotate);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
             // Open save file explorer dialog and store the result in a DialogResult, call it 'result':

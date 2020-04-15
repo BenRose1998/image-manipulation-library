@@ -28,6 +28,8 @@ namespace ImageManipulationLibrary
 
         void FlipImage(int key, Boolean flipVertical);
 
+        void RotateImage(int key, int degrees);
+
         void SaveImage(int key, String filePath);
     }
 }

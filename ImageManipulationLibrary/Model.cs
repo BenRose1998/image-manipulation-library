@@ -93,6 +93,23 @@ namespace ImageManipulationLibrary
             OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="degrees"></param>
+        public void RotateImage(int key, int degrees)
+        {
+            _images[key] = _manipulator.Rotate(_images[key], degrees);
+            OnDisplayImage(_images[key]);
+            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="filePath"></param>
         public void SaveImage(int key, String filePath)
         {
             // Create an ImageFormat variable call it 'format', default it to a Jpeg format:

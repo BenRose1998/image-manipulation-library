@@ -19,7 +19,6 @@ namespace ImageManipulationLibrary
     /// <returns>The note text</returns>
     public delegate void RetrieveImageDelegate();
 
-
     public delegate void AddImageDelegate(IList<String> filenames);
 
     public delegate void DisplayImageDelegate(int key);
@@ -27,6 +26,8 @@ namespace ImageManipulationLibrary
     public delegate void RequestImageDelegate(int key, Size size);
 
     public delegate void FlipImageDelegate(int key, Boolean flipVertical);
+
+    public delegate void RotateImageDelegate(int key, int degrees);
 
     public delegate void SaveImageDelegate(int key, String filePath);
 }
