@@ -29,7 +29,9 @@ namespace COMP3304Assessment
 
         private FlipImageDelegate _flipImageCommand;
 
-        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage)
+        private SaveImageDelegate _saveImageCommand;
+
+        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, SaveImageDelegate saveImage)
         {
             // Base method call
             InitializeComponent();
@@ -44,6 +46,8 @@ namespace COMP3304Assessment
             _requestImage = requestImage;
 
             _flipImageCommand += flipImage;
+
+            _saveImageCommand += saveImage;
         }
 
         public void UpdateKey(int key)
@@ -68,15 +72,22 @@ namespace COMP3304Assessment
         private void FlipHorizontalButton_Click(object sender, EventArgs e)
         {
             Console.WriteLine(_key);
-            ICommand flip = new FlipCommand(_flipImageCommand, _key, this.pictureBox.Image.Size, false);
+            ICommand flip = new FlipCommand(_flipImageCommand, this.pictureBox.Image, this.pictureBox.Image.Size, false);
             _execute(flip);
         }
 
         private void FlipVerticallyButton_Click(object sender, EventArgs e)
         {
             Console.WriteLine(_key);
-            ICommand flip = new FlipCommand(_flipImageCommand, _key, this.pictureBox.Image.Size, true);
+            ICommand flip = new FlipCommand(_flipImageCommand, this.pictureBox.Image, this.pictureBox.Image.Size, true);
             _execute(flip);
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            // Save image
+            ICommand save = new SaveImageCommand(_saveImageCommand, _key, this.pictureBox.Image);
+            _execute(save);
         }
 
         /// <summary>

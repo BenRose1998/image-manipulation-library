@@ -11,27 +11,25 @@ using System.Threading.Tasks;
 namespace ImageManipulationLibrary
 {
     /// <summary>
-    /// Flip Command Class - Executes an the Flip command
+    /// Save Image Command Class - Executes an the Save Image command
     /// </summary>
-    public class FlipCommand : ICommand
+    public class SaveImageCommand : ICommand
     {
         // DECLARE an Action to be executed, call it '_action':
-        private FlipImageDelegate _action;
+        private SaveImageDelegate _action;
+        private int _key;
         private Image _image;
-        private Size _size;
-        private Boolean _flipVertical;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="action"></param>
-        public FlipCommand(FlipImageDelegate action, Image image, Size size, Boolean flipVertical)
+        public SaveImageCommand(SaveImageDelegate action, int key, Image image)
         {
             // INTIANIATE '_action' with action passed as parameter:
             _action = action;
+            _key = key;
             _image = image;
-            _size = size;
-            _flipVertical = flipVertical;
         }
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace ImageManipulationLibrary
         public void Execute()
         {
             // Execute
-            _action(_image, _size, _flipVertical);
+            _action(_key, _image);
         }
     }
 

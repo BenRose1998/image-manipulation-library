@@ -26,6 +26,8 @@ namespace ImageManipulationLibrary
         /// <returns>the Image pointed identified by key</returns>
         void GetImage(int key, Size size);
 
-        void FlipImage(int key, Size size, Boolean flipVertical);
+        void FlipImage(Image image, Size size, Boolean flipVertical);
+
+        void SaveImage(int key, Image image);
     }
 }
