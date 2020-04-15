@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,6 +93,25 @@ namespace ImageManipulationLibrary
             OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
         }
 
+        public void SaveImage(int key, String filePath)
+        {
+            // Create an ImageFormat variable call it 'format', default it to a Jpeg format:
+            ImageFormat format = ImageFormat.Jpeg;
+
+            // Extract file path extension
+            string extension = System.IO.Path.GetExtension(filePath);
+
+            // Check if the extension is '.png':
+            if (extension == ".png")
+            {
+                // Set format to Png format:
+                format = ImageFormat.Png;
+            }
+
+            // Save image to file
+            _images[key].Save(filePath, format);
+        }
+
         /// <summary>
         /// Called when new images are loaded
         /// </summary>
@@ -113,8 +133,11 @@ namespace ImageManipulationLibrary
         }
 
         #region Implements Event Publishers & Listeners
+        // -----------------------------------------------------------------------------------
+        // NewImagesEvent
+
         /// <summary>
-        /// Subscribe a listener to image events
+        /// Subscribe a listener to NewImagesEvent
         /// </summary>
         /// <param name="listener">references the listener method</param>
         public void Subscribe(EventHandler<NewImagesEventArgs> listener)
@@ -123,7 +146,7 @@ namespace ImageManipulationLibrary
         }
 
         /// <summary>
-        /// Unsubscribe a listener to image events
+        /// Unsubscribe a listener to NewImagesEvent
         /// </summary>
         /// <param name="listener">references the listener method</param>
         public void Unsubscribe(EventHandler<NewImagesEventArgs> listener)
@@ -131,8 +154,11 @@ namespace ImageManipulationLibrary
             _newImagesEvent -= listener;
         }
 
+        // -----------------------------------------------------------------------------------
+        // DisplayImageEvent
+
         /// <summary>
-        /// Subscribe a listener to image events
+        /// Subscribe a listener to DisplayImageEvent
         /// </summary>
         /// <param name="listener">references the listener method</param>
         public void Subscribe(EventHandler<DisplayImageEventArgs> listener)
@@ -141,7 +167,7 @@ namespace ImageManipulationLibrary
         }
 
         /// <summary>
-        /// Unsubscribe a listener to image events
+        /// Unsubscribe a listener to DisplayImageEvent
         /// </summary>
         /// <param name="listener">references the listener method</param>
         public void Unsubscribe(EventHandler<DisplayImageEventArgs> listener)
@@ -150,25 +176,5 @@ namespace ImageManipulationLibrary
         }
         #endregion
 
-
-        /// <summary>
-        /// Loops through '_images' container and adds each key to a list of strings, returns this list (returned all image keys)
-        /// </summary>
-        /// <returns>A string list of all image keys</returns>
-        private IList<int> GetKeys()
-        {
-            // DECLARE & INSTANTIATE an IList container call it 'keys' and make it a List of type string
-            IList<int> keys = new List<int>();
-
-            // Loop through all image's keys
-            foreach (int key in _images.Keys)
-            {
-                // Add each key to the 'keys' container
-                keys.Add(key);
-            }
-
-            // Return all image keys
-            return keys;
-        }
     }
 }

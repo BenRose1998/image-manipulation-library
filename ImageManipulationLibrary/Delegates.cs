@@ -28,5 +28,5 @@ namespace ImageManipulationLibrary
 
     public delegate void FlipImageDelegate(int key, Boolean flipVertical);
 
-    public delegate void SaveImageDelegate(int key, Image image);
+    public delegate void SaveImageDelegate(int key, String filePath);
 }

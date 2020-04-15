@@ -89,6 +89,10 @@
             this.panel1.Size = new System.Drawing.Size(600, 80);
             this.panel1.TabIndex = 4;
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "JPG Image(*.jpg)|*.jpg|PNG Image(*.png)|*.png";
+            // 
             // ImageViewer
             // 
             this.ClientSize = new System.Drawing.Size(600, 680);

@@ -29,7 +29,9 @@ namespace COMP3304Assessment
 
         private FlipImageDelegate _flipImageCommand;
 
-        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage)
+        private SaveImageDelegate _saveImageCommand;
+
+        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, SaveImageDelegate saveImage)
         {
             // Base method call
             InitializeComponent();
@@ -45,6 +47,9 @@ namespace COMP3304Assessment
 
             // INSTANTIATE '_flipImageCommand' to flipImage:
             _flipImageCommand += flipImage;
+
+            // INSTANTIATE '_saveImageCommand' to saveImage:
+            _saveImageCommand += saveImage;
         }
 
         public void UpdateKey(int key)
@@ -81,7 +86,15 @@ namespace COMP3304Assessment
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            // Open save file explorer dialog and store the result in a DialogResult, call it 'result':
+            DialogResult result = saveFileDialog1.ShowDialog();
 
+            // Check if the result is OK
+            if (result == DialogResult.OK)
+            {
+                ICommand save = new SaveImageCommand(_saveImageCommand, _key, saveFileDialog1.FileName);
+                _execute(save);
+            }
         }
 
         /// <summary>

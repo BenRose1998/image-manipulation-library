@@ -18,18 +18,18 @@ namespace ImageManipulationLibrary
         // DECLARE an Action to be executed, call it '_action':
         private SaveImageDelegate _action;
         private int _key;
-        private Image _image;
+        private String _filePath;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="action"></param>
-        public SaveImageCommand(SaveImageDelegate action, int key, Image image)
+        public SaveImageCommand(SaveImageDelegate action, int key, String filePath)
         {
             // INTIANIATE '_action' with action passed as parameter:
             _action = action;
             _key = key;
-            _image = image;
+            _filePath = filePath;
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace ImageManipulationLibrary
         public void Execute()
         {
             // Execute
-            _action(_key, _image);
+            _action(_key, _filePath);
         }
     }
 
