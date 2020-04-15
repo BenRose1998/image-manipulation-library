@@ -85,22 +85,11 @@ namespace ImageManipulationLibrary
         /// <param name="image"></param>
         /// <param name="size"></param>
         /// <param name="flipVertical"></param>
-        public void FlipImage(Image image, Size size, Boolean flipVertical)
+        public void FlipImage(int key, Boolean flipVertical)
         {
-            OnDisplayImage(_manipulator.Resize(_manipulator.Flip(image, flipVertical), size.Width, size.Height));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="image"></param>
-        public void SaveImage(int key, Image image)
-        {
-            _images[key] = image;
-            // Resize image to be displayed on CollectionView
-            //image = _manipulator.Resize(image, 130, 130);
-            OnNewImages(new Dictionary<int, Image>() { {key, image} });
+            _images[key] = _manipulator.Flip(_images[key], flipVertical);
+            OnDisplayImage(_images[key]);
+            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
         }
 
         /// <summary>

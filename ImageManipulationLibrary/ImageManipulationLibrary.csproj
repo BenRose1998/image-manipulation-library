@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RequestImageCommand.cs" />
     <Compile Include="SaveImageCommand.cs" />
     <Compile Include="FlipCommand.cs" />
     <Compile Include="GenericCommand.cs" />

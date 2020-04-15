@@ -25,13 +25,11 @@ namespace COMP3304Assessment
         // DECLARE a ExecuteDelegate to store the delegate to be called to issue a command:
         private ExecuteDelegate _execute;
 
-        private RequestImageDelegate _requestImage;
+        private RequestImageDelegate _requestImageCommand;
 
         private FlipImageDelegate _flipImageCommand;
 
-        private SaveImageDelegate _saveImageCommand;
-
-        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, SaveImageDelegate saveImage)
+        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage)
         {
             // Base method call
             InitializeComponent();
@@ -39,15 +37,14 @@ namespace COMP3304Assessment
             // INSTANTIATE '_key' with the passed image key:
             _key = imageKey;
 
-            // INSTANTIATE '_execute' with the passed delegate:
-            _execute = execute;
+            // INSTANTIATE '_execute' to execute:
+            _execute += execute;
 
-            // INSTANTIATE '_requestImage' with the passed delegate:
-            _requestImage = requestImage;
+            // INSTANTIATE '_requestImageCommand' to requestImage:
+            _requestImageCommand += requestImage;
 
+            // INSTANTIATE '_flipImageCommand' to flipImage:
             _flipImageCommand += flipImage;
-
-            _saveImageCommand += saveImage;
         }
 
         public void UpdateKey(int key)
@@ -55,7 +52,8 @@ namespace COMP3304Assessment
             // Set '_key' to the updated key passed as a parameter
             _key = key;
             //
-            _requestImage(_key, pictureBox.Size);
+            ICommand requestImage = new RequestImageCommand(_requestImageCommand, _key, pictureBox.Size);
+            _execute(requestImage);
         }
 
         // Event Listener
@@ -71,23 +69,19 @@ namespace COMP3304Assessment
 
         private void FlipHorizontalButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(_key);
-            ICommand flip = new FlipCommand(_flipImageCommand, this.pictureBox.Image, this.pictureBox.Image.Size, false);
+            ICommand flip = new FlipCommand(_flipImageCommand, _key, false);
             _execute(flip);
         }
 
         private void FlipVerticallyButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(_key);
-            ICommand flip = new FlipCommand(_flipImageCommand, this.pictureBox.Image, this.pictureBox.Image.Size, true);
+            ICommand flip = new FlipCommand(_flipImageCommand, _key, true);
             _execute(flip);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            // Save image
-            ICommand save = new SaveImageCommand(_saveImageCommand, _key, this.pictureBox.Image);
-            _execute(save);
+
         }
 
         /// <summary>
@@ -95,11 +89,11 @@ namespace COMP3304Assessment
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        //private void ImageViewer_ResizeEnd(object sender, EventArgs e)
-        //{
-        //    // Execute the retrieve image command
-        //    ICommand retImage = new Command<Size>(_retrieveImageAction, imageBox.Size);
-        //    _execute(retImage);
-        //}
+        private void ImageViewer_ResizeEnd(object sender, EventArgs e)
+        {
+            // Execute the retrieve image command
+            ICommand requestImage = new RequestImageCommand(_requestImageCommand, _key, pictureBox.Size);
+            _execute(requestImage);
+        }
     }
 }
