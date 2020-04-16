@@ -28,7 +28,7 @@ namespace COMP3304Assessment
             _model = new Model();
 
             // DECLARE & INSTANTIATE '_viewer', with a new instance of ImageViewer, set image key to default of 0, pass delegates:
-            _viewer = new ImageViewer(0, ExecuteCommand, RequestImage, _model.FlipImage, _model.RotateImage, _model.SaveImage);
+            _viewer = new ImageViewer(0, ExecuteCommand, RequestImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
             // Subscribe '_viewer' as a listener to the OnDisplayImage event:
             (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
 
@@ -60,7 +60,7 @@ namespace COMP3304Assessment
             if ((_viewer as Form).IsDisposed)
             {
                 // Re-instantiate '_viewer' as a new viewer
-                _viewer = new ImageViewer(key, ExecuteCommand, RequestImage, _model.FlipImage, _model.RotateImage, _model.SaveImage);
+                _viewer = new ImageViewer(key, ExecuteCommand, RequestImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
                 // Re-subscribe '_viewer' as an listener to the OnDisplayImage event
                 (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
             }

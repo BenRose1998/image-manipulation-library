@@ -44,25 +44,33 @@ namespace ImageManipulationLibrary
         /// <summary>
         /// Load the media items pointed to by 'pathfilenames' into the 'Model'
         /// </summary>
-        /// <param name="pathfilenames">a vector of strings; each string containing path/filename for an image file to be loaded</param>
+        /// <param name="pathfilenames">a list of strings; each string containing path/filename for an image file to be loaded</param>
         public void Load(IList<String> pathfilenames)
         {
+            // DECLARE & INSTANTIATE an a Random object, call it 'rand':
             Random rand = new System.Random();
 
+            // DECLARE & INSTANTIATE an IDictionary with a new Dictionary to store a key (int) and an Image, call it 'newImages':
             IDictionary<int, Image> newImages = new Dictionary<int, Image>();
 
             // Loop through all path file names
             foreach (string path in pathfilenames)
             {
-                int key = rand.Next(0, int.MaxValue);
+                // DECLARE an integer call it 'key', unique identifier for each image
+                int key;
 
-                // 
-                if (!_images.ContainsKey(key))
+                // Loop - generate a random number, generate a new one if it already exists in the '_images' dictionary:
+                do
                 {
-                    // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary
-                    _images.Add(key, _imageFactory.Create(path));
-                    newImages.Add(key, _manipulator.Resize(_images[key], 130, 130));
+                    // Generate a random number between 0 - max integer value
+                    key = rand.Next(0, int.MaxValue);
                 }
+                while (_images.ContainsKey(key));
+
+                // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary (with generated key):
+                _images.Add(key, _imageFactory.Create(path));
+                // Add the image (resized) to the 'newImages' array:
+                newImages.Add(key, _manipulator.Resize(_images[key], 130, 130));
             }
             // Call 'OnNewImages' event, pass newImages dictionary
             OnNewImages(newImages);
@@ -101,6 +109,18 @@ namespace ImageManipulationLibrary
         public void RotateImage(int key, int degrees)
         {
             _images[key] = _manipulator.Rotate(_images[key], degrees);
+            OnDisplayImage(_images[key]);
+            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="size"></param>
+        public void ScaleImage(int key, Size size)
+        {
+            _images[key] = _manipulator.Resize(_images[key], size.Width, size.Height);
             OnDisplayImage(_images[key]);
             OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
         }

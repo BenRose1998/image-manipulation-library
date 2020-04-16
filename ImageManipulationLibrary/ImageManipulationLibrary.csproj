@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScaleCommand.cs" />
     <Compile Include="RotateCommand.cs" />
     <Compile Include="RequestImageCommand.cs" />
     <Compile Include="SaveImageCommand.cs" />

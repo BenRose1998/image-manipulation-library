@@ -31,9 +31,12 @@ namespace COMP3304Assessment
 
         private RotateImageDelegate _rotateImageCommand;
 
+        private ScaleImageDelegate _scaleImageCommand;
+
         private SaveImageDelegate _saveImageCommand;
 
-        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, RotateImageDelegate rotateImage, SaveImageDelegate saveImage)
+        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, 
+                            RotateImageDelegate rotateImage, ScaleImageDelegate scaleImage, SaveImageDelegate saveImage)
         {
             // Base method call
             InitializeComponent();
@@ -52,6 +55,9 @@ namespace COMP3304Assessment
 
             // INSTANTIATE '_rotateImageCommand' to rotateImage:
             _rotateImageCommand += rotateImage;
+
+            // INSTANTIATE '_scaleImageCommand' to scaleImage:
+            _scaleImageCommand += scaleImage;
 
             // INSTANTIATE '_saveImageCommand' to saveImage:
             _saveImageCommand += saveImage;
@@ -126,6 +132,23 @@ namespace COMP3304Assessment
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ScaleButton_Click(object sender, EventArgs e)
+        {
+            Size size = new Size
+            {
+                Width = Int32.Parse(textBoxScaleWidth.Text),
+                Height = Int32.Parse(textBoxScaleHeight.Text)
+            };
+
+            ICommand scale = new ScaleCommand(_scaleImageCommand, _key, size);
+            _execute(scale);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
             // Open save file explorer dialog and store the result in a DialogResult, call it 'result':
@@ -150,5 +173,6 @@ namespace COMP3304Assessment
             ICommand requestImage = new RequestImageCommand(_requestImageCommand, _key, pictureBox.Size);
             _execute(requestImage);
         }
+
     }
 }

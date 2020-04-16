@@ -30,6 +30,8 @@ namespace ImageManipulationLibrary
 
         void RotateImage(int key, int degrees);
 
+        void ScaleImage(int key, Size size);
+
         void SaveImage(int key, String filePath);
     }
 }

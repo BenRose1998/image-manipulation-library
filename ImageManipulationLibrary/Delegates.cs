@@ -29,5 +29,7 @@ namespace ImageManipulationLibrary
 
     public delegate void RotateImageDelegate(int key, int degrees);
 
+    public delegate void ScaleImageDelegate(int key, Size size);
+
     public delegate void SaveImageDelegate(int key, String filePath);
 }
