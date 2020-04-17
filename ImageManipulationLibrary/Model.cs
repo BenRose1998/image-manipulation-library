@@ -97,8 +97,7 @@ namespace ImageManipulationLibrary
         public void FlipImage(int key, Boolean flipVertical)
         {
             _images[key] = _manipulator.Flip(_images[key], flipVertical);
-            OnDisplayImage(_images[key]);
-            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
+            ImageUpdated(key);
         }
 
         /// <summary>
@@ -109,8 +108,7 @@ namespace ImageManipulationLibrary
         public void RotateImage(int key, int degrees)
         {
             _images[key] = _manipulator.Rotate(_images[key], degrees);
-            OnDisplayImage(_images[key]);
-            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
+            ImageUpdated(key);
         }
 
         /// <summary>
@@ -120,9 +118,8 @@ namespace ImageManipulationLibrary
         /// <param name="size"></param>
         public void ScaleImage(int key, Size size)
         {
-            _images[key] = _manipulator.Resize(_images[key], size.Width, size.Height);
-            OnDisplayImage(_images[key]);
-            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
+            _images[key] = _manipulator.Resize(_images[key], size.Width, size.Height, true);
+            ImageUpdated(key);
         }
 
         /// <summary>
@@ -147,6 +144,16 @@ namespace ImageManipulationLibrary
 
             // Save image to file
             _images[key].Save(filePath, format);
+        }
+
+        /// <summary>
+        /// Calls OnDisplayImage and OnNewImages methods, triggering events (and passing the image) so that form image can be updated
+        /// </summary>
+        /// <param name="key">unique identifier of image</param>
+        private void ImageUpdated(int key)
+        {
+            OnDisplayImage(_images[key]);
+            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
         }
 
         /// <summary>
