@@ -35,8 +35,8 @@ namespace ViewLibrary
 
         private SaveImageDelegate _saveImageCommand;
 
-        public ImageViewer(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, 
-                            RotateImageDelegate rotateImage, ScaleImageDelegate scaleImage, SaveImageDelegate saveImage)
+        public void Initialise(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, 
+                               RotateImageDelegate rotateImage, ScaleImageDelegate scaleImage, SaveImageDelegate saveImage)
         {
             // Base method call
             InitializeComponent();
@@ -67,7 +67,7 @@ namespace ViewLibrary
         {
             // Set '_key' to the updated key passed as a parameter
             _key = key;
-            //
+            // 
             ICommand requestImage = new RequestImageCommand(_requestImageCommand, _key, pictureBox.Size);
             _execute(requestImage);
         }
@@ -174,5 +174,12 @@ namespace ViewLibrary
             _execute(requestImage);
         }
 
+        private void ImageViewer_Closing(object sender, FormClosingEventArgs e)
+        {
+            // Hide the form
+            this.Hide();
+            // Cancel the closing event
+            e.Cancel = true; 
+        }
     }
 }

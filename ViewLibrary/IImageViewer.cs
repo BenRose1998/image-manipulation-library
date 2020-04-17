@@ -12,6 +12,9 @@ namespace ViewLibrary
 {
     public interface IImageViewer
     {
+        void Initialise(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage,
+                               RotateImageDelegate rotateImage, ScaleImageDelegate scaleImage, SaveImageDelegate saveImage);
+
         void UpdateKey(int key);
 
         void OnDisplayImage(object source, DisplayImageEventArgs args);

@@ -33,16 +33,16 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxScaleHeight = new System.Windows.Forms.TextBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxScaleWidth = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxScaleWidth = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBoxScaleHeight = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -107,6 +107,68 @@
             this.panel1.Size = new System.Drawing.Size(600, 80);
             this.panel1.TabIndex = 4;
             // 
+            // textBoxScaleHeight
+            // 
+            this.textBoxScaleHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxScaleHeight.Location = new System.Drawing.Point(351, 30);
+            this.textBoxScaleHeight.Name = "textBoxScaleHeight";
+            this.textBoxScaleHeight.Size = new System.Drawing.Size(48, 30);
+            this.textBoxScaleHeight.TabIndex = 16;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(405, 30);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(42, 30);
+            this.button6.TabIndex = 15;
+            this.button6.Text = "Go";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.ScaleButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(331, 39);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(14, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "X";
+            // 
+            // textBoxScaleWidth
+            // 
+            this.textBoxScaleWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxScaleWidth.Location = new System.Drawing.Point(277, 30);
+            this.textBoxScaleWidth.Name = "textBoxScaleWidth";
+            this.textBoxScaleWidth.Size = new System.Drawing.Size(48, 30);
+            this.textBoxScaleWidth.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(274, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Scale";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(163, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Rotate";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(23, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Flip";
+            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(214, 30);
@@ -131,68 +193,6 @@
             // 
             this.saveFileDialog1.Filter = "JPG Image(*.jpg)|*.jpg|PNG Image(*.png)|*.png";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(23, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Flip";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(163, 14);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Rotate";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(274, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Scale";
-            // 
-            // textBoxScaleWidth
-            // 
-            this.textBoxScaleWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxScaleWidth.Location = new System.Drawing.Point(277, 30);
-            this.textBoxScaleWidth.Name = "textBoxScaleWidth";
-            this.textBoxScaleWidth.Size = new System.Drawing.Size(48, 30);
-            this.textBoxScaleWidth.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(331, 39);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "X";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(405, 30);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(42, 30);
-            this.button6.TabIndex = 15;
-            this.button6.Text = "Go";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.ScaleButton_Click);
-            // 
-            // textBoxScaleHeight
-            // 
-            this.textBoxScaleHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxScaleHeight.Location = new System.Drawing.Point(351, 30);
-            this.textBoxScaleHeight.Name = "textBoxScaleHeight";
-            this.textBoxScaleHeight.Size = new System.Drawing.Size(48, 30);
-            this.textBoxScaleHeight.TabIndex = 16;
-            // 
             // ImageViewer
             // 
             this.ClientSize = new System.Drawing.Size(600, 680);
@@ -200,6 +200,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "ImageViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImageViewer_Closing);
             this.ResizeEnd += new System.EventHandler(this.ImageViewer_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);

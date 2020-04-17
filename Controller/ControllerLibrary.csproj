@@ -43,6 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="FactoryLocator.cs" />
+    <Compile Include="IFactory.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="IServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

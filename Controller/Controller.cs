@@ -20,16 +20,26 @@ namespace ControllerLibrary
     {
         // DECLARE an instance of the IModel interface, call it '_model':
         private IModel _model;
+
+        // DECLARE an instance of the IServiceLocator interface, call it '_factoryLocator':
+        private IServiceLocator _factoryLocator;
+
         // DECLARE an instance of the IImageViewer interface, call it '_viewer':
         private IImageViewer _viewer;
 
         public Controller()
         {
-            // DECLARE & INSTANTIATE '_model', with a new instance of Model:
+            // INSTANTIATE '_model', with a new instance of Model:
             _model = new Model();
 
-            // DECLARE & INSTANTIATE '_viewer', with a new instance of ImageViewer, set image key to default of 0, pass delegates:
-            _viewer = new ImageViewer(0, ExecuteCommand, RequestImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
+            // INSTANTIATE '_factoryLocator', with a new instance of FactoryLocator:
+            _factoryLocator = new FactoryLocator();
+
+            // INSTANTIATE '_viewer', with a new instance of ImageViewer
+            _viewer = (_factoryLocator.Get<IImageViewer>() as IFactory<IImageViewer>).Create<ImageViewer>();
+            // Initialise '_viewer', setting image key to 0 (as default) and passing delegates:
+            _viewer.Initialise(0, ExecuteCommand, RequestImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
+
             // Subscribe '_viewer' as a listener to the OnDisplayImage event:
             (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
 
@@ -60,10 +70,10 @@ namespace ControllerLibrary
             // Check if the ImageViewer form has been disposed (user exited window)
             if ((_viewer as Form).IsDisposed)
             {
-                // Re-instantiate '_viewer' as a new viewer
-                _viewer = new ImageViewer(key, ExecuteCommand, RequestImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
-                // Re-subscribe '_viewer' as an listener to the OnDisplayImage event
-                (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
+                // Update '_viewer's image key
+                _viewer.UpdateKey(key);
+                // Show the '_viewer' form
+                (_viewer as Form).Show();
             }
             // Call IImageViewer's 'UpdateKey' method to pass a new image key
             _viewer.UpdateKey(key);

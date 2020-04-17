@@ -62,7 +62,7 @@ namespace ModelLibrary
                 do
                 {
                     // Generate a random number between 0 - max integer value
-                    key = rand.Next(0, int.MaxValue);
+                    key = rand.Next(1, int.MaxValue);
                 }
                 while (_images.ContainsKey(key));
 
