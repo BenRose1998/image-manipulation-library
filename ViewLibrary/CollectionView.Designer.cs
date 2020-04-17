@@ -1,4 +1,4 @@
-﻿namespace COMP3304Assessment
+﻿namespace ViewLibrary
 {
     partial class CollectionView
     {

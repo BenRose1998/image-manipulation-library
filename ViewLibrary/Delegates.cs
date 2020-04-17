@@ -5,7 +5,7 @@ using System.Drawing;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ImageManipulationLibrary
+namespace ViewLibrary
 {
     /// <summary>
     /// Declare a delegate that is used to excute commands, call it ExecuteDelegate.

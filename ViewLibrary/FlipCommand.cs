@@ -8,28 +8,28 @@ using System.Threading.Tasks;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ImageManipulationLibrary
+namespace ViewLibrary
 {
     /// <summary>
-    /// Scale Command Class - Executes an the Scale command
+    /// Flip Command Class - Executes an the Flip command
     /// </summary>
-    public class ScaleCommand : ICommand
+    public class FlipCommand : ICommand
     {
         // DECLARE an Action to be executed, call it '_action':
-        private ScaleImageDelegate _action;
+        private FlipImageDelegate _action;
         private int _key;
-        private Size _size;
+        private Boolean _flipVertical;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="action"></param>
-        public ScaleCommand(ScaleImageDelegate action, int key, Size size)
+        public FlipCommand(FlipImageDelegate action, int key, Boolean flipVertical)
         {
             // INTIANIATE '_action' with action passed as parameter:
             _action = action;
             _key = key;
-            _size = size;
+            _flipVertical = flipVertical;
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace ImageManipulationLibrary
         public void Execute()
         {
             // Execute
-            _action(_key, _size);
+            _action(_key, _flipVertical);
         }
     }
 

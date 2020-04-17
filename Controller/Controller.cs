@@ -1,4 +1,5 @@
-﻿using ImageManipulationLibrary;
+﻿using ModelLibrary;
+using ViewLibrary;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,12 +11,12 @@ using System.Windows.Forms;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace COMP3304Assessment
+namespace ControllerLibrary
 {
     /// <summary>
     /// Controller - A high level class used to instantiate all main classes.
     /// </summary>
-    class Controller
+    public class Controller
     {
         // DECLARE an instance of the IModel interface, call it '_model':
         private IModel _model;

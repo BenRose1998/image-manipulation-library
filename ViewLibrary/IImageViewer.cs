@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModelLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ImageManipulationLibrary
+namespace ViewLibrary
 {
     public interface IImageViewer
     {

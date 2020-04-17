@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ImageManipulationLibrary
+namespace ViewLibrary
 {
     /// <summary>
     /// Request Image Command Class - Executes the Request Image command

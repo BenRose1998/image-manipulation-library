@@ -1,4 +1,4 @@
-﻿using ImageManipulationLibrary;
+﻿using ModelLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,12 +12,12 @@ using System.Windows.Forms;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace COMP3304Assessment
+namespace ViewLibrary
 {
     /// <summary>
     /// ImageViewer - The Windows Form class responsible for rendering a Form displaying Images and taking inputs (next image, previous image, upload image)
     /// </summary>
-    partial class ImageViewer : Form, IImageViewer, IDisplayImageEventListener
+    public partial class ImageViewer : Form, IImageViewer, IDisplayImageEventListener
     {
         // DECLARE
         private int _key;

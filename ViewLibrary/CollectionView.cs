@@ -1,4 +1,4 @@
-﻿using ImageManipulationLibrary;
+﻿using ModelLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Windows.Forms;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace COMP3304Assessment
+namespace ViewLibrary
 {
     /// <summary>
     /// 

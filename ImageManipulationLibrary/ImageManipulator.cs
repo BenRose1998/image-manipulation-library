@@ -11,7 +11,7 @@ using ImageProcessor.Imaging;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ImageManipulationLibrary
+namespace ModelLibrary
 {
     /// <summary>
     /// Image Manipulator - This class works as a wrapper or API around the ImageProcessor library.

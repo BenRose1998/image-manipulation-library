@@ -5,12 +5,11 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ImageManipulationLibrary;
 
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ImageManipulationLibrary
+namespace ModelLibrary
 {
     /// <summary>
     /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's method to
