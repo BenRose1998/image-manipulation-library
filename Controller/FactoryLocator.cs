@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// COMP3304 Assessment Final Milestone - by Ben Rose
+/// </summary>
 namespace ControllerLibrary
 {
     /// <summary>
-    /// 
+    /// FactoryLocator - A service locator for factories
     /// </summary>
     class FactoryLocator : IServiceLocator
     {
@@ -15,7 +18,7 @@ namespace ControllerLibrary
         private IDictionary<Type, IService> _factories;
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
         public FactoryLocator()
         {

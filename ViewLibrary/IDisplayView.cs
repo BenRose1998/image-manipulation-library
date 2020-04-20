@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 /// </summary>
 namespace ViewLibrary
 {
-    public interface IImageViewer
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IDisplayView
     {
         void Initialise(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage,
                                RotateImageDelegate rotateImage, ScaleImageDelegate scaleImage, SaveImageDelegate saveImage);

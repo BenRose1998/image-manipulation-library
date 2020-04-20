@@ -24,8 +24,8 @@ namespace ControllerLibrary
         // DECLARE an instance of the IServiceLocator interface, call it '_factoryLocator':
         private IServiceLocator _factoryLocator;
 
-        // DECLARE an instance of the IImageViewer interface, call it '_viewer':
-        private IImageViewer _viewer;
+        // DECLARE an instance of the IDisplayView interface, call it '_viewer':
+        private IDisplayView _viewer;
 
         public Controller()
         {
@@ -35,10 +35,10 @@ namespace ControllerLibrary
             // INSTANTIATE '_factoryLocator', with a new instance of FactoryLocator:
             _factoryLocator = new FactoryLocator();
 
-            // INSTANTIATE '_viewer', with a new instance of ImageViewer
-            _viewer = (_factoryLocator.Get<IImageViewer>() as IFactory<IImageViewer>).Create<ImageViewer>();
+            // INSTANTIATE '_viewer', with a new instance of DisplayView
+            _viewer = (_factoryLocator.Get<IDisplayView>() as IFactory<IDisplayView>).Create<DisplayView>();
             // Initialise '_viewer', setting image key to 0 (as default) and passing delegates:
-            _viewer.Initialise(0, ExecuteCommand, RequestImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
+            _viewer.Initialise(0, ExecuteCommand, _model.GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
 
             // Subscribe '_viewer' as a listener to the OnDisplayImage event:
             (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
@@ -62,36 +62,25 @@ namespace ControllerLibrary
         }
 
         /// <summary>
-        /// Implementation of DisplayImageDelegate
+        /// Implementation of DisplayImageDelegate (Strategy Pattern)
         /// </summary>
         /// <param name="key">The key of image to be displayed</param>
         public void DisplayImage(int key)
         {
-            // Check if the ImageViewer form has been disposed (user exited window)
+            // Check if the '_viewer' has been disposed (user exited window)
             if ((_viewer as Form).IsDisposed)
             {
-                // Update '_viewer's image key
-                _viewer.UpdateKey(key);
-                // Show the '_viewer' form
-                (_viewer as Form).Show();
+                // RE-INSTANTIATE '_viewer', with a new instance of DisplayView
+                _viewer = (_factoryLocator.Get<IDisplayView>() as IFactory<IDisplayView>).Create<DisplayView>();
+                // Initialise '_viewer', setting image key to the key parameter and passing delegates:
+                _viewer.Initialise(key, ExecuteCommand, _model.GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
+                // Subscribe '_viewer' as a listener to the OnDisplayImage event:
+                (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
             }
-            // Call IImageViewer's 'UpdateKey' method to pass a new image key
+            // Call IDisplayView's 'UpdateKey' method to pass a new image key
             _viewer.UpdateKey(key);
-            Console.WriteLine(key);
-            // Call ImageViewer's form Show method to display the form
+            // Call DisplayView's form Show method to display the form
             (_viewer as Form).Show();
         }
-
-        /// <summary>
-        /// Implementation of RequestImageDelegate
-        /// </summary>
-        /// <param name="key">The key of image being requested</param>
-        /// <param name="size">Size image should be (width & height)</param>
-        public void RequestImage(int key, Size size)
-        {
-            // Call Model's GetImage method, pass the image key and requested image size
-            _model.GetImage(key, size);
-        }
-
     }
 }

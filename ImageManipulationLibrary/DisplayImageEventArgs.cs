@@ -18,7 +18,7 @@ namespace ModelLibrary
         /// <summary>
         /// Property stores image
         /// </summary>
-        public Image _image { get; }
+        public Image image { get; }
 
         /// <summary>
         /// Constructor - Receives an Image, stores as member variable
@@ -26,7 +26,7 @@ namespace ModelLibrary
         /// <param name="img">Image to be displayed</param>
         public DisplayImageEventArgs(Image img)
         {
-            _image = img;
+            image = img;
         }
     }
 }

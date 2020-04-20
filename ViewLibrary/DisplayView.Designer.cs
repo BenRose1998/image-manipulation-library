@@ -1,6 +1,6 @@
 ﻿namespace ViewLibrary
 {
-    partial class ImageViewer
+    partial class DisplayView
     {
         /// <summary>
         /// Required designer variable.
@@ -193,15 +193,14 @@
             // 
             this.saveFileDialog1.Filter = "JPG Image(*.jpg)|*.jpg|PNG Image(*.png)|*.png";
             // 
-            // ImageViewer
+            // DisplayView
             // 
             this.ClientSize = new System.Drawing.Size(600, 680);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.panel1);
-            this.Name = "ImageViewer";
+            this.Name = "DisplayView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImageViewer_Closing);
-            this.ResizeEnd += new System.EventHandler(this.ImageViewer_ResizeEnd);
+            this.ResizeEnd += new System.EventHandler(this.DisplayView_ResizeEnd);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -30,15 +30,12 @@ namespace ModelLibrary
         /// <summary>
         /// Receives an Image and a desired width and height, uses ImageProcessor library to resize the image and it is returned
         /// </summary>
-        /// <param name="image"></param>
-        /// <param name="frameWidth"></param>
-        /// <param name="frameHeight"></param>
-        /// <returns>Returns resized Image</returns>
-        public Image Resize(Image image, int frameWidth, int frameHeight, Boolean stretch = false)
+        /// <param name="image">The image</param>
+        /// <param name="size">Width and height values stored in Size object</param>
+        /// <param name="stretch">Whether or not to stretch the image or maintain aspect ratio (defaulted to false)</param>
+        /// <returns>The editted image</returns>
+        public Image Resize(Image image, Size size, Boolean stretch = false)
         {
-            // Create a Size object to store the desired width and height values, call it 'size'
-            Size size = new Size(frameWidth, frameHeight);
-
             // DECLARE & INSTANTIATE a Stream, call it 'stream'. Make it a new MemoryStream to store the image sent from the ImageFactory when saved:
             Stream stream = new MemoryStream();
 
@@ -56,6 +53,12 @@ namespace ModelLibrary
             return img;
         }
 
+        /// <summary>
+        /// Receives an Image and a boolean, uses ImageProcessor library to flip the image and it is returned
+        /// </summary>
+        /// <param name="image">The image</param>
+        /// <param name="flipVertical">Whether or not to vertically flip the image (or flip horizontally)</param>
+        /// <returns>The editted image</returns>
         public Image Flip(Image image, Boolean flipVertical)
         {
             // DECLARE & INSTANTIATE a Stream, call it 'stream'. Make it a new MemoryStream to store the image sent from the ImageFactory when saved:
@@ -71,6 +74,12 @@ namespace ModelLibrary
             return img;
         }
 
+        /// <summary>
+        /// Receives an Image and an int (degrees), uses ImageProcessor library to rotate the image and it is returned
+        /// </summary>
+        /// <param name="image">The image</param>
+        /// <param name="degrees">The amount of rotation in degrees</param>
+        /// <returns>The editted image</returns>
         public Image Rotate(Image image, int degrees)
         {
             // DECLARE & INSTANTIATE a Stream, call it 'stream'. Make it a new MemoryStream to store the image sent from the ImageFactory when saved:

@@ -15,9 +15,9 @@ using System.Windows.Forms;
 namespace ViewLibrary
 {
     /// <summary>
-    /// ImageViewer - The Windows Form class responsible for rendering a Form displaying Images and taking inputs (next image, previous image, upload image)
+    /// DisplayView - The Windows Form class responsible for rendering a Form for displaying and editting an image (rotate, flip, scale, save image)
     /// </summary>
-    public partial class ImageViewer : Form, IImageViewer, IDisplayImageEventListener
+    public partial class DisplayView : Form, IDisplayView, IDisplayImageEventListener
     {
         // DECLARE
         private int _key;
@@ -63,6 +63,10 @@ namespace ViewLibrary
             _saveImageCommand += saveImage;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
         public void UpdateKey(int key)
         {
             // Set '_key' to the updated key passed as a parameter
@@ -73,6 +77,11 @@ namespace ViewLibrary
         }
 
         // Event Listener
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="args"></param>
         public void OnDisplayImage(object source, DisplayImageEventArgs args)
         {
             // Check for the new image data
@@ -86,8 +95,8 @@ namespace ViewLibrary
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that raised event</param>
+        /// <param name="e">Event data</param>
         private void FlipHorizontalButton_Click(object sender, EventArgs e)
         {
             ICommand flip = new FlipCommand(_flipImageCommand, _key, false);
@@ -97,8 +106,8 @@ namespace ViewLibrary
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that raised event</param>
+        /// <param name="e">Event data</param>
         private void FlipVerticallyButton_Click(object sender, EventArgs e)
         {
             ICommand flip = new FlipCommand(_flipImageCommand, _key, true);
@@ -108,8 +117,8 @@ namespace ViewLibrary
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that raised event</param>
+        /// <param name="e">Event data</param>
         private void RotateNegative90Button_Click(object sender, EventArgs e)
         {
             ICommand rotate = new RotateCommand(_rotateImageCommand, _key, -90);
@@ -119,8 +128,8 @@ namespace ViewLibrary
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that raised event</param>
+        /// <param name="e">Event data</param>
         private void RotatePositive90Button_Click(object sender, EventArgs e)
         {
             ICommand rotate = new RotateCommand(_rotateImageCommand, _key, 90);
@@ -130,8 +139,8 @@ namespace ViewLibrary
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that raised event</param>
+        /// <param name="e">Event data</param>
         private void ScaleButton_Click(object sender, EventArgs e)
         {
             Size size = new Size
@@ -147,8 +156,8 @@ namespace ViewLibrary
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Object that raised event</param>
+        /// <param name="e">Event data</param>
         private void SaveButton_Click(object sender, EventArgs e)
         {
             // Open save file explorer dialog and store the result in a DialogResult, call it 'result':
@@ -165,21 +174,13 @@ namespace ViewLibrary
         /// <summary>
         /// When form is resized - retrieve the image again with new image box size to rescale
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ImageViewer_ResizeEnd(object sender, EventArgs e)
+        /// <param name="sender">Object that raised event</param>
+        /// <param name="e">Event data</param>
+        private void DisplayView_ResizeEnd(object sender, EventArgs e)
         {
             // Execute the retrieve image command
             ICommand requestImage = new RequestImageCommand(_requestImageCommand, _key, pictureBox.Size);
             _execute(requestImage);
-        }
-
-        private void ImageViewer_Closing(object sender, FormClosingEventArgs e)
-        {
-            // Hide the form
-            this.Hide();
-            // Cancel the closing event
-            e.Cancel = true; 
         }
     }
 }

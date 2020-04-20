@@ -26,10 +26,12 @@ namespace ModelLibrary
 
         // DECLARE an event to store the new images event handler, call it '_newImagesEvent':
         private event EventHandler<NewImagesEventArgs> _newImagesEvent;
-
         // DECLARE an event to store the display image event handler, call it '_displayImageEvent':
         private event EventHandler<DisplayImageEventArgs> _displayImageEvent;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Model()
         {
             // INSTANTIATE '_images' as a new Dictionary to store a key and an Image object:
@@ -58,74 +60,80 @@ namespace ModelLibrary
                 // DECLARE an integer call it 'key', unique identifier for each image
                 int key;
 
-                // Loop - generate a random number, generate a new one if it already exists in the '_images' dictionary:
+                // Do While Loop - generate a random number, generate a new one if it already exists in the '_images' dictionary:
                 do
                 {
-                    // Generate a random number between 0 - max integer value
+                    // Generate a random number between 0 and max integer value
                     key = rand.Next(1, int.MaxValue);
                 }
                 while (_images.ContainsKey(key));
 
                 // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary (with generated key):
                 _images.Add(key, _imageFactory.Create(path));
-                // Add the image (resized) to the 'newImages' array:
-                newImages.Add(key, _manipulator.Resize(_images[key], 130, 130));
+                // Add the image (resized to low-res) to the 'newImages' array:
+                newImages.Add(key, _manipulator.Resize(_images[key], new Size(100, 100)));
             }
-            // Call 'OnNewImages' event, pass newImages dictionary
+            // Call 'OnNewImages' event method, pass newImages dictionary
             OnNewImages(newImages);
         }
 
         /// <summary>
-        /// Return a copy of the image specified by 'key', scaled according to the dimentsions of the visual container (ie frame) it will be viewed in.
+        /// Trigger OnDisplayImage event passing the image defined by 'key', scaled to the Size object passed
         /// </summary>
-        /// <param name="key">the unique identifier for the image to be returned</param>
+        /// <param name="key">the unique identifier for the image</param>
         /// <param name="size">size object, holds width & height of image</param>
-        /// <returns>the Image pointed identified by key</returns>
         public void GetImage(int key, Size size)
         {
-            // Call ImageManipulator's Resize method, pass the requested image, width and height and return it
-            OnDisplayImage(_manipulator.Resize(_images[key], size.Width, size.Height));
+            // Call ImageManipulator's Resize method, pass the requested image and size
+            // Call the OnDisplayImage event method, pass the editted image
+            OnDisplayImage(_manipulator.Resize(_images[key], size));
         }
 
         /// <summary>
-        /// 
+        /// Flip image based on specified orientation
         /// </summary>
-        /// <param name="image"></param>
-        /// <param name="size"></param>
-        /// <param name="flipVertical"></param>
+        /// <param name="key">the unique identifier for the image</param>
+        /// <param name="flipVertical">Whether to flip vertically (or horizontally)</param>
         public void FlipImage(int key, Boolean flipVertical)
         {
+            // Call ImageManipulator's Flip method, pass the requested image, and flipVertical
             _images[key] = _manipulator.Flip(_images[key], flipVertical);
+            // Call ImageUpdated, pass the key, this will trigger events to update the image on the forms
             ImageUpdated(key);
         }
 
         /// <summary>
-        /// 
+        /// Rotate image based on specified amount in degrees
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="degrees"></param>
+        /// <param name="key">the unique identifier for the image</param>
+        /// <param name="degrees">Amount of rotation in degrees</param>
         public void RotateImage(int key, int degrees)
         {
+            // Call ImageManipulator's Rotate method, pass the requested image, and degrees
             _images[key] = _manipulator.Rotate(_images[key], degrees);
+            // Call ImageUpdated, pass the key, this will trigger events to update the image on the forms
             ImageUpdated(key);
         }
 
         /// <summary>
-        /// 
+        /// Scale image based on specified values of Size object
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="size"></param>
+        /// <param name="key">the unique identifier for the image</param>
+        /// <param name="size">Scaling values as Size object</param>
         public void ScaleImage(int key, Size size)
         {
-            _images[key] = _manipulator.Resize(_images[key], size.Width, size.Height, true);
+            // Call ImageManipulator's Resize method, pass the requested image, size
+            // Pass a value of true for the stretch parameter so that the image's aspect ratio is not maintained
+            _images[key] = _manipulator.Resize(_images[key], size, true);
+            // Call ImageUpdated, pass the key, this will trigger events to update the image on the forms
             ImageUpdated(key);
         }
 
         /// <summary>
-        /// 
+        /// Save an Image to a file
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="filePath"></param>
+        /// <param name="key">the unique identifier for the image</param>
+        /// <param name="filePath">the directory path and file name in which to save the image</param>
         public void SaveImage(int key, String filePath)
         {
             // Create an ImageFormat variable call it 'format', default it to a Jpeg format:
@@ -146,32 +154,38 @@ namespace ModelLibrary
         }
 
         /// <summary>
-        /// Calls OnDisplayImage and OnNewImages methods, triggering events (and passing the image) so that form image can be updated
+        /// Calls OnDisplayImage and OnNewImages methods, triggering events (and passing the image) so that each form's image can be updated
         /// </summary>
-        /// <param name="key">unique identifier of image</param>
+        /// <param name="key">the unique identifier for the image</param>
         private void ImageUpdated(int key)
         {
+            // Call OnDisplayImage event method, pass image of specified key
             OnDisplayImage(_images[key]);
-            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } });
+            // Call OnNewImages event method, pass an Dictionary of images populated with the image of the specified key, pass as an IDictionary
+            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } } as IDictionary<int, Image>);
         }
 
         /// <summary>
-        /// Called when new images are loaded
+        /// Called when new images are loaded or images are editted
         /// </summary>
-        /// <param name="data">The image</param>
+        /// <param name="imgs">The images</param>
         private void OnNewImages(IDictionary<int, Image> imgs)
         {
+            // DECLARE & INSTANTIATE a NewImageEventArgs, pass in 'imgs':
             NewImagesEventArgs imageArgs = new NewImagesEventArgs(imgs);
+            // Trigger the event passing this (sender) and the 'imageArgs':
             _newImagesEvent(this, imageArgs);
         }
 
         /// <summary>
         /// Called when image is to be displayed
         /// </summary>
-        /// <param name="data">The image</param>
+        /// <param name="img">The image</param>
         private void OnDisplayImage(Image img)
         {
+            // DECLARE & INSTANTIATE a DisplayImageEventArgs, pass in 'img':
             DisplayImageEventArgs imageArgs = new DisplayImageEventArgs(img);
+            // Trigger the event passing this (sender) and the 'imageArgs':
             _displayImageEvent(this, imageArgs);
         }
 
