@@ -71,7 +71,7 @@
             this.pictureBox6.Location = new System.Drawing.Point(556, 148);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox6.TabIndex = 6;
             this.pictureBox6.TabStop = false;
             this.pictureBox6.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -81,7 +81,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(420, 148);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -91,7 +91,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(284, 148);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -101,7 +101,7 @@
             this.pictureBox3.Location = new System.Drawing.Point(148, 148);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -111,7 +111,7 @@
             this.pictureBox4.Location = new System.Drawing.Point(12, 148);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 10;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -121,7 +121,7 @@
             this.pictureBox5.Location = new System.Drawing.Point(556, 12);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 11;
             this.pictureBox5.TabStop = false;
             this.pictureBox5.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -131,7 +131,7 @@
             this.pictureBox7.Location = new System.Drawing.Point(420, 12);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox7.TabIndex = 12;
             this.pictureBox7.TabStop = false;
             this.pictureBox7.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -141,7 +141,7 @@
             this.pictureBox8.Location = new System.Drawing.Point(284, 12);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox8.TabIndex = 13;
             this.pictureBox8.TabStop = false;
             this.pictureBox8.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -151,7 +151,7 @@
             this.pictureBox9.Location = new System.Drawing.Point(148, 12);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox9.TabIndex = 14;
             this.pictureBox9.TabStop = false;
             this.pictureBox9.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
@@ -161,7 +161,7 @@
             this.pictureBox10.Location = new System.Drawing.Point(12, 12);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(130, 130);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox10.TabIndex = 15;
             this.pictureBox10.TabStop = false;
             this.pictureBox10.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);

@@ -10,13 +10,20 @@ using System.Threading.Tasks;
 /// </summary>
 namespace ModelLibrary
 {
+    /// <summary>
+    /// NewImagesEventArgs - Stores new or updated Image(s) to be displayed in CollectionView
+    /// </summary>
     public class NewImagesEventArgs : EventArgs
     {
         /// <summary>
-        /// Property stores updated image
+        /// Property stores new or updated image(s)
         /// </summary>
         public IDictionary<int, Image> images { get; }
 
+        /// <summary>
+        /// Constructor - Receives Image(s), store as member variable
+        /// </summary>
+        /// <param name="imgs">Image(s) to be displayed</param>
         public NewImagesEventArgs(IDictionary<int, Image> imgs)
         {
             images = imgs;

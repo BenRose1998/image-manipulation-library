@@ -10,16 +10,23 @@ using System.Threading.Tasks;
 /// </summary>
 namespace ModelLibrary
 {
+    /// <summary>
+    /// DisplayImageEventArgs - Stores an Image to be displayed in ImageViewer
+    /// </summary>
     public class DisplayImageEventArgs : EventArgs
     {
         /// <summary>
-        /// Property stores updated image
+        /// Property stores image
         /// </summary>
-        public Image image { get; }
+        public Image _image { get; }
 
+        /// <summary>
+        /// Constructor - Receives an Image, stores as member variable
+        /// </summary>
+        /// <param name="img">Image to be displayed</param>
         public DisplayImageEventArgs(Image img)
         {
-            image = img;
+            _image = img;
         }
     }
 }

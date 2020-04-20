@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 namespace ModelLibrary
 {
     /// <summary>
-    /// 
+    /// Interface for the DisplayImage event's publisher, facilitates EventHandler subscriptions
     /// </summary>
     public interface IDisplayImageEventPublisher
     {
         /// <summary>
-        /// Subscribe a listener to image events
+        /// Subscribe a listener to display image events
         /// </summary>
         /// <param name="listener">Reference to listener's method</param>
         void Subscribe(EventHandler<DisplayImageEventArgs> listener);
 
         /// <summary>
-        /// Unsubscribe a listener to image events
+        /// Unsubscribe a listener to display image events
         /// </summary>
         /// <param name="listener">Reference to listener's method</param>
         void Unsubscribe(EventHandler<DisplayImageEventArgs> listener);

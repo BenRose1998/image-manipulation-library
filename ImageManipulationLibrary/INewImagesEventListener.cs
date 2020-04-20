@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 namespace ModelLibrary
 {
     /// <summary>
-    /// 
+    /// Interface for the NewImage event's listener, defines Event's listener method
     /// </summary>
     public interface INewImagesEventListener
     {
         /// <summary>
-        /// 
+        /// Method called when event is triggered
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="args"></param>
+        /// <param name="source">Object that triggered event</param>
+        /// <param name="args">Arguments passed by event</param>
         void OnNewImages(object source, NewImagesEventArgs args);
     }
 }
