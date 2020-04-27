@@ -13,7 +13,7 @@ namespace ModelLibrary
     /// <summary>
     /// Used to create an instance of Image from a file
     /// </summary>
-    class ImgFactory : IImgFactory
+    public class ImgFactory : IImgFactory
     {
         public ImgFactory()
         {

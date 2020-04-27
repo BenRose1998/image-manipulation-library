@@ -21,8 +21,8 @@ namespace ModelLibrary
         private IDictionary<int, Image> _images;
         // DECLARE an IImageManipulator interface for the ImageManipulator object, call it '_manipulator':
         private IImageManipulator _manipulator;
-        // DECLARE an IImageFactory interface for the ImageFactory object, call it '_imageFactory':
-        private IImgFactory _imageFactory;
+        // DECLARE an IServiceLocator for the FactoryLocator, call it '_factoryLocator':
+        private IServiceLocator _factoryLocator;
 
         // DECLARE an event to store the new images event handler, call it '_newImagesEvent':
         private event EventHandler<NewImagesEventArgs> _newImagesEvent;
@@ -32,14 +32,14 @@ namespace ModelLibrary
         /// <summary>
         /// Constructor
         /// </summary>
-        public Model()
+        public Model(IServiceLocator factoryLocator)
         {
             // INSTANTIATE '_images' as a new Dictionary to store a key and an Image object:
             _images = new Dictionary<int, Image>();
             // INSTANTIATE '_manipulator' as an instance of ImageManipulator:
             _manipulator = new ImageManipulator();
-            // INSTANTIATE '_imageFactory' as an instance of ImageFactory:
-            _imageFactory = new ImgFactory();
+            // INSTANTIATE '_factoryLocator' with passed IServiceLocator
+            _factoryLocator = factoryLocator;
         }
 
         /// <summary>
@@ -68,8 +68,10 @@ namespace ModelLibrary
                 }
                 while (_images.ContainsKey(key));
 
-                // Call ImageFactory's Create method to create an image from it's path and add it to the '_images' dictionary (with generated key):
-                _images.Add(key, _imageFactory.Create(path));
+                // Get Image factory using '_factoryLocator', call ImageFactory's Create method to create an image from it's path
+                // and add it to the '_images' dictionary (with generated key):
+                _images.Add(key, (_factoryLocator.Get<Image>() as IImgFactory).Create(path));
+
                 // Add the image (resized to low-res) to the 'newImages' array:
                 newImages.Add(key, _manipulator.Resize(_images[key], new Size(100, 100)));
             }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ControllerLibrary
+namespace ModelLibrary
 {
     /// <summary>
     /// Interface for the factory that return an instance of a specified interface (E)

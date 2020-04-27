@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ControllerLibrary
+namespace ModelLibrary
 {
     /// <summary>
     /// IServiceLocator - Service locator interface, returns a service for creating the specified type
@@ -20,5 +20,7 @@ namespace ControllerLibrary
         /// <typeparam name="T">The type of the service being requested</typeparam>
         /// <returns>The service being requested</returns>
         IService Get<T>() where T : class;
+
+        void Add<T>(IService factory);
     }
 }

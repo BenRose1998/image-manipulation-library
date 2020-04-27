@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModelLibrary;
 
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
@@ -40,6 +41,11 @@ namespace ControllerLibrary
             }
             // Return the requested factory
             return _factories[typeof(T)];
+        }
+
+        public void Add<T>(IService factory)
+        {
+            _factories.Add(typeof(T), factory);
         }
 
     }

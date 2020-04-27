@@ -29,11 +29,14 @@ namespace ControllerLibrary
 
         public Controller()
         {
-            // INSTANTIATE '_model', with a new instance of Model:
-            _model = new Model();
-
             // INSTANTIATE '_factoryLocator', with a new instance of FactoryLocator:
             _factoryLocator = new FactoryLocator();
+
+            // Call 'factoryLocator's Add method, pass a new instance of ImgFactory, identified by the type it creates (Image):
+            _factoryLocator.Add<Image>(new ImgFactory());
+
+            // INSTANTIATE '_model', with a new instance of Model, pass reference to '_factoryLocator':
+            _model = new Model(_factoryLocator);
 
             // INSTANTIATE '_viewer', with a new instance of DisplayView
             _viewer = (_factoryLocator.Get<IDisplayView>() as IFactory<IDisplayView>).Create<DisplayView>();

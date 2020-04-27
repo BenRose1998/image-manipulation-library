@@ -35,6 +35,16 @@ namespace ViewLibrary
 
         private SaveImageDelegate _saveImageCommand;
 
+        /// <summary>
+        /// Pass 
+        /// </summary>
+        /// <param name="imageKey"></param>
+        /// <param name="execute"></param>
+        /// <param name="requestImage"></param>
+        /// <param name="flipImage"></param>
+        /// <param name="rotateImage"></param>
+        /// <param name="scaleImage"></param>
+        /// <param name="saveImage"></param>
         public void Initialise(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage, 
                                RotateImageDelegate rotateImage, ScaleImageDelegate scaleImage, SaveImageDelegate saveImage)
         {

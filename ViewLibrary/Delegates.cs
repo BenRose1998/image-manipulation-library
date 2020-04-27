@@ -8,7 +8,7 @@ using System.Drawing;
 namespace ViewLibrary
 {
     /// <summary>
-    /// Declare a delegate that is used to excute commands, call it ExecuteDelegate.
+    /// Declare a delegate that is used to execute commands, call it ExecuteDelegate.
     /// </summary>
     /// <param name="command"></param>
     public delegate void ExecuteDelegate(ICommand command);

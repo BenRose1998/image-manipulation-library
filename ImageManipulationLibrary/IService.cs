@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 /// <summary>
 /// COMP3304 Assessment Final Milestone - by Ben Rose
 /// </summary>
-namespace ControllerLibrary
+namespace ModelLibrary
 {
     /// <summary>
     /// Abstract service, so services (e.g. a Factory, etc.) can be stored together

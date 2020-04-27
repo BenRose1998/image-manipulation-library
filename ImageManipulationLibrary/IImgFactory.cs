@@ -13,7 +13,7 @@ namespace ModelLibrary
     /// <summary>
     /// Interface used to create an instance of Image from a file
     /// </summary>
-    interface IImgFactory
+    public interface IImgFactory : IService
     {
         /// <summary>
         /// Instantiates an instance of Image using FromFile method
