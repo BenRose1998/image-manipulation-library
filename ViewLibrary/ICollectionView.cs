@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace ViewLibrary
 {
     /// <summary>
-    /// 
+    /// Interface for the CollectionView form - which displays a multiple images
     /// </summary>
     public interface ICollectionView
     {

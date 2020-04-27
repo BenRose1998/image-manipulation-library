@@ -13,7 +13,7 @@ namespace ViewLibrary
     /// <summary>
     /// Flip Command Class - Executes an the Flip command
     /// </summary>
-    public class FlipCommand : ICommand
+    public class FlipImageCommand : ICommand
     {
         // DECLARE an Action to be executed, call it '_action':
         private FlipImageDelegate _action;
@@ -24,7 +24,7 @@ namespace ViewLibrary
         /// Constructor
         /// </summary>
         /// <param name="action"></param>
-        public FlipCommand(FlipImageDelegate action, int key, Boolean flipVertical)
+        public FlipImageCommand(FlipImageDelegate action, int key, Boolean flipVertical)
         {
             // INTIANIATE '_action' with action passed as parameter:
             _action = action;

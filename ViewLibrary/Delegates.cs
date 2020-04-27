@@ -8,20 +8,14 @@ using System.Drawing;
 namespace ViewLibrary
 {
     /// <summary>
-    /// Declare a delegate that is used to execute commands, call it ExecuteDelegate.
+    /// Declare a delegate that is used to execute commands, call it ExecuteDelegate:
     /// </summary>
     /// <param name="command"></param>
     public delegate void ExecuteDelegate(ICommand command);
 
-    /// <summary>
-    /// Declare a delegate for retrieving an image, call it RetrieveImageDelegate
-    /// </summary>
-    /// <returns>The note text</returns>
-    public delegate void RetrieveImageDelegate();
+    public delegate void DisplayImageDelegate(int key);
 
     public delegate void AddImageDelegate(IList<String> filenames);
-
-    public delegate void DisplayImageDelegate(int key);
 
     public delegate void RequestImageDelegate(int key, Size size);
 

@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace ModelLibrary
 {
     /// <summary>
-    /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's method to
-    /// modify these images.
+    /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's methods to
+    /// modify the images. Events are triggered to pass images to the Views.
     /// </summary>
-    public class Model : IModel, INewImagesEventPublisher, IDisplayImageEventPublisher
+    public class Model : IModelLoader, IModelRetriever, IModelEditor, INewImagesEventPublisher, IDisplayImageEventPublisher
     {
         // DECLARE an IDictionary interface for a Dictionary to store Image objects, call it '_images':
         private IDictionary<int, Image> _images;
@@ -32,6 +32,7 @@ namespace ModelLibrary
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="factoryLocator">Used to access factories for object creation</param>
         public Model(IServiceLocator factoryLocator)
         {
             // INSTANTIATE '_images' as a new Dictionary to store a key and an Image object:

@@ -18,8 +18,8 @@ namespace ControllerLibrary
     /// </summary>
     public class Controller
     {
-        // DECLARE an instance of the IModel interface, call it '_model':
-        private IModel _model;
+        // DECLARE an instance of the IModelEditor interface, call it '_model':
+        private IModelEditor _model;
 
         // DECLARE an instance of the IServiceLocator interface, call it '_factoryLocator':
         private IServiceLocator _factoryLocator;
@@ -38,18 +38,25 @@ namespace ControllerLibrary
             // INSTANTIATE '_model', with a new instance of Model, pass reference to '_factoryLocator':
             _model = new Model(_factoryLocator);
 
+            // CollectionView
+            // -------------------------------------------------------------------------------------------------
+
+            // DECLARE & INSTANTIATE 'collectionViewer', pass delegates:
+            CollectionView collectionViewer = new CollectionView(ExecuteCommand, (_model as IModelLoader).Load, DisplayImage);
+            // Subscribe 'collectionViewer' as a listener to the OnNewImages event:
+            (_model as INewImagesEventPublisher).Subscribe((collectionViewer as INewImagesEventListener).OnNewImages);
+
+            // DisplayView
+            // -------------------------------------------------------------------------------------------------
+
             // INSTANTIATE '_viewer', with a new instance of DisplayView
             _viewer = (_factoryLocator.Get<IDisplayView>() as IFactory<IDisplayView>).Create<DisplayView>();
             // Initialise '_viewer', setting image key to 0 (as default) and passing delegates:
-            _viewer.Initialise(0, ExecuteCommand, _model.GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
-
+            _viewer.Initialise(0, ExecuteCommand, (_model as IModelRetriever).GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
             // Subscribe '_viewer' as a listener to the OnDisplayImage event:
             (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
 
-            // DECLARE & INSTANTIATE 'collectionViewer', pass delegates:
-            CollectionView collectionViewer = new CollectionView(ExecuteCommand, _model.Load, DisplayImage);
-            // Subscribe 'collectionViewer' as a listener to the OnNewImages event:
-            (_model as INewImagesEventPublisher).Subscribe((collectionViewer as INewImagesEventListener).OnNewImages);
+            // -------------------------------------------------------------------------------------------------
 
             // Run the application, passing collectionViewer as the main form:
             Application.Run(collectionViewer);
@@ -65,7 +72,7 @@ namespace ControllerLibrary
         }
 
         /// <summary>
-        /// Implementation of DisplayImageDelegate (Strategy Pattern)
+        /// Implementation of DisplayImageDelegate (for DisplayImageCommand)
         /// </summary>
         /// <param name="key">The key of image to be displayed</param>
         public void DisplayImage(int key)
@@ -76,7 +83,7 @@ namespace ControllerLibrary
                 // RE-INSTANTIATE '_viewer', with a new instance of DisplayView
                 _viewer = (_factoryLocator.Get<IDisplayView>() as IFactory<IDisplayView>).Create<DisplayView>();
                 // Initialise '_viewer', setting image key to the key parameter and passing delegates:
-                _viewer.Initialise(key, ExecuteCommand, _model.GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
+                _viewer.Initialise(key, ExecuteCommand, (_model as IModelRetriever).GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
                 // Subscribe '_viewer' as a listener to the OnDisplayImage event:
                 (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
             }

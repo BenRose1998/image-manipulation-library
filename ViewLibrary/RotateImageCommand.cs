@@ -13,7 +13,7 @@ namespace ViewLibrary
     /// <summary>
     /// Rotate Command Class - Executes the Rotate command
     /// </summary>
-    public class RotateCommand : ICommand
+    public class RotateImageCommand : ICommand
     {
         // DECLARE an Action to be executed, call it '_action':
         private RotateImageDelegate _action;
@@ -24,7 +24,7 @@ namespace ViewLibrary
         /// Constructor
         /// </summary>
         /// <param name="action"></param>
-        public RotateCommand(RotateImageDelegate action, int key, int degrees)
+        public RotateImageCommand(RotateImageDelegate action, int key, int degrees)
         {
             // INTIANIATE '_action' with action passed as parameter:
             _action = action;

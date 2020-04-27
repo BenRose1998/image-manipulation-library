@@ -13,7 +13,7 @@ namespace ViewLibrary
     /// <summary>
     /// Scale Command Class - Executes an the Scale command
     /// </summary>
-    public class ScaleCommand : ICommand
+    public class ScaleImageCommand : ICommand
     {
         // DECLARE an Action to be executed, call it '_action':
         private ScaleImageDelegate _action;
@@ -24,7 +24,7 @@ namespace ViewLibrary
         /// Constructor
         /// </summary>
         /// <param name="action"></param>
-        public ScaleCommand(ScaleImageDelegate action, int key, Size size)
+        public ScaleImageCommand(ScaleImageDelegate action, int key, Size size)
         {
             // INTIANIATE '_action' with action passed as parameter:
             _action = action;

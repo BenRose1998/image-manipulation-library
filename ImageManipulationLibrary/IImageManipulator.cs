@@ -13,7 +13,7 @@ namespace ModelLibrary
     /// <summary>
     /// IImageManipulator - Interface for an ImageManipulator, receives images, edits them and returns
     /// </summary>
-    public interface IImageManipulator
+    interface IImageManipulator
     {
         /// <summary>
         /// Receives an Image and a desired width and height, uses ImageProcessor library to resize the image and it is returned

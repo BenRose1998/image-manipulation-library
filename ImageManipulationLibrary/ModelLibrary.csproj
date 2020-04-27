@@ -48,6 +48,8 @@
     <Compile Include="IDisplayImageEventListener.cs" />
     <Compile Include="IDisplayImageEventPublisher.cs" />
     <Compile Include="IFactory.cs" />
+    <Compile Include="IModelRetriever.cs" />
+    <Compile Include="IModelLoader.cs" />
     <Compile Include="INewImagesEventListener.cs" />
     <Compile Include="INewImagesEventPublisher.cs" />
     <Compile Include="IImgFactory.cs" />
@@ -55,7 +57,7 @@
     <Compile Include="DisplayImageEventArgs.cs" />
     <Compile Include="ImgFactory.cs" />
     <Compile Include="ImageManipulator.cs" />
-    <Compile Include="IModel.cs" />
+    <Compile Include="IModelEditor.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="IServiceLocator.cs" />
     <Compile Include="Model.cs" />

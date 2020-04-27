@@ -16,7 +16,7 @@ namespace ModelLibrary
     /// <summary>
     /// Image Manipulator - This class works as a wrapper or API around the ImageProcessor library.
     /// </summary>
-    public class ImageManipulator : IImageManipulator
+    class ImageManipulator : IImageManipulator
     {
         // DECLARE an variable of type ImageFactory to hold a reference to the ImageProcessor's ImageFactory class, call it '_imageFactory':
         private ImageFactory _imageFactory;

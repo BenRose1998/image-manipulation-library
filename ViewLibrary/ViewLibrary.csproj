@@ -49,7 +49,7 @@
       <DependentUpon>CollectionView.cs</DependentUpon>
     </Compile>
     <Compile Include="Delegates.cs" />
-    <Compile Include="FlipCommand.cs" />
+    <Compile Include="FlipImageCommand.cs" />
     <Compile Include="GenericCommand.cs" />
     <Compile Include="ICollectionView.cs" />
     <Compile Include="ICommand.cs" />
@@ -62,9 +62,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestImageCommand.cs" />
-    <Compile Include="RotateCommand.cs" />
+    <Compile Include="RotateImageCommand.cs" />
     <Compile Include="SaveImageCommand.cs" />
-    <Compile Include="ScaleCommand.cs" />
+    <Compile Include="ScaleImageCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CollectionView.resx">

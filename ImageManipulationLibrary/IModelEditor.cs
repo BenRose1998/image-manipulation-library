@@ -13,21 +13,8 @@ namespace ModelLibrary
     /// <summary>
     /// 
     /// </summary>
-    public interface IModel
+    public interface IModelEditor
     {
-        /// <summary>
-        /// Load the media items pointed to by 'pathfilenames' into the 'Model'
-        /// </summary>
-        /// <param name="pathfilenames">a list of strings; each string containing path/filename for an image file to be loaded</param>
-        void Load(IList<String> pathfilenames);
-
-        /// <summary>
-        /// Trigger OnDisplayImage event passing the image defined by 'key', scaled to the Size object passed
-        /// </summary>
-        /// <param name="key">the unique identifier for the image</param>
-        /// <param name="size">size object, holds width & height of image</param>
-        void GetImage(int key, Size size);
-
         /// <summary>
         /// Flip image based on specified orientation
         /// </summary>
