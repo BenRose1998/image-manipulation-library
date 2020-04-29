@@ -15,14 +15,12 @@ namespace ModelLibrary
     /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's methods to
     /// modify the images. Events are triggered to pass images to the Views.
     /// </summary>
-    public class Model : IModelLoader, IModelRetriever, IModelEditor, INewImagesEventPublisher, IDisplayImageEventPublisher
+    public class Model : IModelLoader, IModelRetriever, IModelEditor, IModelSaver, INewImagesEventPublisher, IDisplayImageEventPublisher
     {
-        // DECLARE an IDictionary interface for a Dictionary to store Image objects, call it '_images':
-        private IDictionary<int, Image> _images;
-        // DECLARE an IImageManipulator interface for the ImageManipulator object, call it '_manipulator':
+        // DECLARE an IImageManipulator interface to store a ImageManipulator instance, call it '_manipulator':
         private IImageManipulator _manipulator;
-        // DECLARE an IServiceLocator for the FactoryLocator, call it '_factoryLocator':
-        private IServiceLocator _factoryLocator;
+        // DECLARE an IImageRetriever interface to store a ImageHandler instance, call it '_imageHandler':
+        private IImageRetriever _imageHandler;
 
         // DECLARE an event to store the new images event handler, call it '_newImagesEvent':
         private event EventHandler<NewImagesEventArgs> _newImagesEvent;
@@ -35,49 +33,34 @@ namespace ModelLibrary
         /// <param name="factoryLocator">Used to access factories for object creation</param>
         public Model(IServiceLocator factoryLocator)
         {
-            // INSTANTIATE '_images' as a new Dictionary to store a key and an Image object:
-            _images = new Dictionary<int, Image>();
             // INSTANTIATE '_manipulator' as an instance of ImageManipulator:
             _manipulator = new ImageManipulator();
-            // INSTANTIATE '_factoryLocator' with passed IServiceLocator
-            _factoryLocator = factoryLocator;
+            // INSTANTIATE '_imageHandler' as an instance of ImageHandler, pass it a reference to the 'factoryLocator':
+            _imageHandler = new ImageHandler(factoryLocator);
         }
 
         /// <summary>
-        /// Load the media items pointed to by 'pathfilenames' into the 'Model'
+        /// Load the images pointed to by 'pathfilenames' into the 'ImageHandler', resize the images and trigger the OnNewImages event
         /// </summary>
         /// <param name="pathfilenames">a list of strings; each string containing path/filename for an image file to be loaded</param>
         public void Load(IList<String> pathfilenames)
         {
-            // DECLARE & INSTANTIATE an a Random object, call it 'rand':
-            Random rand = new System.Random();
+            // DECLARE an IDictionary with a new Dictionary to store a key (int) and an Image, call it 'loadedImages':
+            // Pass pathfilenames list to ImageHandler's Load method, store returned images in 'loadedImages':
+            IDictionary<int, Image> loadedImages = (_imageHandler as IImageLoader).Load(pathfilenames);
+            // DECLARE & INSTANTIATE an IDictionary with a new Dictionary to store a key (int) and a resized Image, call it 'resizedImages':
+            IDictionary<int, Image> resizedImages = new Dictionary<int, Image>();
 
-            // DECLARE & INSTANTIATE an IDictionary with a new Dictionary to store a key (int) and an Image, call it 'newImages':
-            IDictionary<int, Image> newImages = new Dictionary<int, Image>();
-
-            // Loop through all path file names
-            foreach (string path in pathfilenames)
+            // Loop through all images in 'loadedImages':
+            foreach (KeyValuePair<int, Image> img in loadedImages)
             {
-                // DECLARE an integer call it 'key', unique identifier for each image
-                int key;
-
-                // Do While Loop - generate a random number, generate a new one if it already exists in the '_images' dictionary:
-                do
-                {
-                    // Generate a random number between 0 and max integer value
-                    key = rand.Next(1, int.MaxValue);
-                }
-                while (_images.ContainsKey(key));
-
-                // Get Image factory using '_factoryLocator', call ImageFactory's Create method to create an image from it's path
-                // and add it to the '_images' dictionary (with generated key):
-                _images.Add(key, (_factoryLocator.Get<Image>() as IImgFactory).Create(path));
-
-                // Add the image (resized to low-res) to the 'newImages' array:
-                newImages.Add(key, _manipulator.Resize(_images[key], new Size(100, 100)));
+                // Resize each image to a low-res image (100 by 100) using ImageManipulator's Resize method, 
+                // Add the resized image to the 'resizedImages' Dictionary:
+                resizedImages[img.Key] = _manipulator.Resize(img.Value, new Size(100, 100));
             }
-            // Call 'OnNewImages' event method, pass newImages dictionary
-            OnNewImages(newImages);
+
+            // Call 'OnNewImages' event method, pass resizedImages Dictionary
+            OnNewImages(resizedImages);
         }
 
         /// <summary>
@@ -87,9 +70,10 @@ namespace ModelLibrary
         /// <param name="size">size object, holds width & height of image</param>
         public void GetImage(int key, Size size)
         {
-            // Call ImageManipulator's Resize method, pass the requested image and size
+            // Get requested image from ImageHandler
+            // Call ImageManipulator's Resize method, pass the image and size
             // Call the OnDisplayImage event method, pass the editted image
-            OnDisplayImage(_manipulator.Resize(_images[key], size));
+            OnDisplayImage(_manipulator.Resize(_imageHandler.Get(key), size));
         }
 
         /// <summary>
@@ -100,7 +84,7 @@ namespace ModelLibrary
         public void FlipImage(int key, Boolean flipVertical)
         {
             // Call ImageManipulator's Flip method, pass the requested image, and flipVertical
-            _images[key] = _manipulator.Flip(_images[key], flipVertical);
+            (_imageHandler as IImageUpdater).Update(key, _manipulator.Flip(_imageHandler.Get(key), flipVertical));
             // Call ImageUpdated, pass the key, this will trigger events to update the image on the forms
             ImageUpdated(key);
         }
@@ -113,7 +97,7 @@ namespace ModelLibrary
         public void RotateImage(int key, int degrees)
         {
             // Call ImageManipulator's Rotate method, pass the requested image, and degrees
-            _images[key] = _manipulator.Rotate(_images[key], degrees);
+            (_imageHandler as IImageUpdater).Update(key, _manipulator.Rotate(_imageHandler.Get(key), degrees));
             // Call ImageUpdated, pass the key, this will trigger events to update the image on the forms
             ImageUpdated(key);
         }
@@ -127,7 +111,7 @@ namespace ModelLibrary
         {
             // Call ImageManipulator's Resize method, pass the requested image, size
             // Pass a value of true for the stretch parameter so that the image's aspect ratio is not maintained
-            _images[key] = _manipulator.Resize(_images[key], size, true);
+            (_imageHandler as IImageUpdater).Update(key, _manipulator.Resize(_imageHandler.Get(key), size, true));
             // Call ImageUpdated, pass the key, this will trigger events to update the image on the forms
             ImageUpdated(key);
         }
@@ -153,7 +137,7 @@ namespace ModelLibrary
             }
 
             // Save image to file
-            _images[key].Save(filePath, format);
+            _imageHandler.Get(key).Save(filePath, format);
         }
 
         /// <summary>
@@ -163,9 +147,9 @@ namespace ModelLibrary
         private void ImageUpdated(int key)
         {
             // Call OnDisplayImage event method, pass image of specified key
-            OnDisplayImage(_images[key]);
+            OnDisplayImage(_imageHandler.Get(key));
             // Call OnNewImages event method, pass an Dictionary of images populated with the image of the specified key, pass as an IDictionary
-            OnNewImages(new Dictionary<int, Image>() { { key, _images[key] } } as IDictionary<int, Image>);
+            OnNewImages(new Dictionary<int, Image>() { { key, _imageHandler.Get(key) } } as IDictionary<int, Image>);
         }
 
         /// <summary>

@@ -7,8 +7,8 @@
     <ProjectGuid>{0517C188-5651-4AA1-9C02-0C763F85DDE7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageManipulationLibrary</RootNamespace>
-    <AssemblyName>ImageManipulationLibrary</AssemblyName>
+    <RootNamespace>ModelLibrary</RootNamespace>
+    <AssemblyName>ModelLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,6 +48,11 @@
     <Compile Include="IDisplayImageEventListener.cs" />
     <Compile Include="IDisplayImageEventPublisher.cs" />
     <Compile Include="IFactory.cs" />
+    <Compile Include="IImageUpdater.cs" />
+    <Compile Include="IImageLoader.cs" />
+    <Compile Include="IImageRetriever.cs" />
+    <Compile Include="ImageHandler.cs" />
+    <Compile Include="IModelSaver.cs" />
     <Compile Include="IModelRetriever.cs" />
     <Compile Include="IModelLoader.cs" />
     <Compile Include="INewImagesEventListener.cs" />

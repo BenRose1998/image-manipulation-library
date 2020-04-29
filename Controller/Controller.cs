@@ -52,7 +52,7 @@ namespace ControllerLibrary
             // INSTANTIATE '_viewer', with a new instance of DisplayView
             _viewer = (_factoryLocator.Get<IDisplayView>() as IFactory<IDisplayView>).Create<DisplayView>();
             // Initialise '_viewer', setting image key to 0 (as default) and passing delegates:
-            _viewer.Initialise(0, ExecuteCommand, (_model as IModelRetriever).GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
+            _viewer.Initialise(0, ExecuteCommand, (_model as IModelRetriever).GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, (_model as IModelSaver).SaveImage);
             // Subscribe '_viewer' as a listener to the OnDisplayImage event:
             (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
 
@@ -83,7 +83,7 @@ namespace ControllerLibrary
                 // RE-INSTANTIATE '_viewer', with a new instance of DisplayView
                 _viewer = (_factoryLocator.Get<IDisplayView>() as IFactory<IDisplayView>).Create<DisplayView>();
                 // Initialise '_viewer', setting image key to the key parameter and passing delegates:
-                _viewer.Initialise(key, ExecuteCommand, (_model as IModelRetriever).GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, _model.SaveImage);
+                _viewer.Initialise(key, ExecuteCommand, (_model as IModelRetriever).GetImage, _model.FlipImage, _model.RotateImage, _model.ScaleImage, (_model as IModelSaver).SaveImage);
                 // Subscribe '_viewer' as a listener to the OnDisplayImage event:
                 (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
             }

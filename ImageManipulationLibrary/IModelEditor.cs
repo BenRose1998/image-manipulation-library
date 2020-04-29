@@ -35,12 +35,5 @@ namespace ModelLibrary
         /// <param name="key">the unique identifier for the image</param>
         /// <param name="size">Scaling values as Size object</param>
         void ScaleImage(int key, Size size);
-
-        /// <summary>
-        /// Save an Image to a file
-        /// </summary>
-        /// <param name="key">the unique identifier for the image</param>
-        /// <param name="filePath">the directory path and file name in which to save the image</param>
-        void SaveImage(int key, String filePath);
     }
 }
