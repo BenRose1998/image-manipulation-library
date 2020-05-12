@@ -43,6 +43,11 @@ namespace ControllerLibrary
             return _factories[typeof(T)];
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="factory"></param>
         public void Add<T>(IService factory)
         {
             _factories.Add(typeof(T), factory);

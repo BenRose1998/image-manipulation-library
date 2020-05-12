@@ -21,6 +21,11 @@ namespace ModelLibrary
         /// <returns>The service being requested</returns>
         IService Get<T>() where T : class;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="factory"></param>
         void Add<T>(IService factory);
     }
 }
