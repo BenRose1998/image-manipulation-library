@@ -17,7 +17,7 @@ namespace ViewLibrary
     /// <summary>
     /// CollectionView - The Form responsible for rendering a Form for uploading and displaying images
     /// </summary>
-    public partial class CollectionView : Form, ICollectionView, INewImagesEventListener
+    public partial class CollectionView : Form, INewImagesEventListener
     {
         // DECLARE a ExecuteDelegate to store the delegate to be called to issue a command:
         private ExecuteDelegate _execute;

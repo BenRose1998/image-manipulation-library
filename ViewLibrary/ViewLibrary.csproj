@@ -51,8 +51,8 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="FlipImageCommand.cs" />
     <Compile Include="GenericCommand.cs" />
-    <Compile Include="ICollectionView.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="IDisplayViewUpdater.cs" />
     <Compile Include="IDisplayView.cs" />
     <Compile Include="DisplayView.cs">
       <SubType>Form</SubType>

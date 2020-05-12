@@ -11,7 +11,7 @@ using ModelLibrary;
 namespace ControllerLibrary
 {
     /// <summary>
-    /// A factory that return an instance of a specified interface (E)
+    /// A factory that returns an instance of a specified interface (E)
     /// </summary>
     /// <typeparam name="E">The interface</typeparam>
     public class Factory<E> : IFactory<E>

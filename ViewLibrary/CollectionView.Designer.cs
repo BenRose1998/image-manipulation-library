@@ -55,6 +55,7 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "\"Image Files (JPG,PNG,GIF)|*.JPG;*.PNG;*.GIF\"";
             // 
             // LoadImageButton
             // 

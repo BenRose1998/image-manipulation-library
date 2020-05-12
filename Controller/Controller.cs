@@ -42,9 +42,9 @@ namespace ControllerLibrary
             // -------------------------------------------------------------------------------------------------
 
             // DECLARE & INSTANTIATE 'collectionViewer', pass delegates:
-            CollectionView collectionViewer = new CollectionView(ExecuteCommand, (_model as IModelLoader).Load, DisplayImage);
+            INewImagesEventListener collectionViewer = new CollectionView(ExecuteCommand, (_model as IModelLoader).Load, DisplayImage);
             // Subscribe 'collectionViewer' as a listener to the OnNewImages event:
-            (_model as INewImagesEventPublisher).Subscribe((collectionViewer as INewImagesEventListener).OnNewImages);
+            (_model as INewImagesEventPublisher).Subscribe(collectionViewer.OnNewImages);
 
             // DisplayView
             // -------------------------------------------------------------------------------------------------
@@ -58,8 +58,8 @@ namespace ControllerLibrary
 
             // -------------------------------------------------------------------------------------------------
 
-            // Run the application, passing collectionViewer as the main form:
-            Application.Run(collectionViewer);
+            // Run the application, passing collectionViewer as a Form:
+            Application.Run(collectionViewer as Form);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace ControllerLibrary
                 (_model as IDisplayImageEventPublisher).Subscribe((_viewer as IDisplayImageEventListener).OnDisplayImage);
             }
             // Call IDisplayView's 'UpdateKey' method to pass a new image key
-            _viewer.UpdateKey(key);
+            (_viewer as IDisplayViewUpdater).UpdateKey(key);
             // Call DisplayView's form Show method to display the form
             (_viewer as Form).Show();
         }

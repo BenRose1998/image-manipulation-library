@@ -26,6 +26,7 @@ namespace ModelLibrary
         /// <param name="img">Image to be displayed</param>
         public DisplayImageEventArgs(Image img)
         {
+            // SET 'image' to passed 'img':
             image = img;
         }
     }

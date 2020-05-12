@@ -17,7 +17,7 @@ namespace ViewLibrary
     /// <summary>
     /// DisplayView - The Windows Form class responsible for rendering a Form for displaying and editting an image (rotate, flip, scale, save image)
     /// </summary>
-    public partial class DisplayView : Form, IDisplayView, IDisplayImageEventListener
+    public partial class DisplayView : Form, IDisplayView, IDisplayViewUpdater, IDisplayImageEventListener
     {
         // DECLARE an int to store the unique idenifier of the image to be displayed, call it '_key':
         private int _key;

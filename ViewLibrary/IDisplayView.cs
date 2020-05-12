@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace ViewLibrary
 {
     /// <summary>
-    /// Interface for the DisplayView form - which displays a single image
+    /// Interface for the DisplayView form - allows form to be initialised
     /// </summary>
     public interface IDisplayView
     {
@@ -27,18 +27,5 @@ namespace ViewLibrary
         /// <param name="saveImage">Action for SaveImageCommand</param>
         void Initialise(int imageKey, ExecuteDelegate execute, RequestImageDelegate requestImage, FlipImageDelegate flipImage,
                                RotateImageDelegate rotateImage, ScaleImageDelegate scaleImage, SaveImageDelegate saveImage);
-
-        /// <summary>
-        /// Used to update '_key', the unique identifier of the image to be displayed. Image is the requested.
-        /// </summary>
-        /// <param name="key">the unique identifier of the image</param>
-        void UpdateKey(int key);
-
-        /// <summary>
-        /// Event Listener for DisplayImage event, an image is received to be displayed
-        /// </summary>
-        /// <param name="source">Object that raised event</param>
-        /// <param name="args">image to be displayed</param>
-        void OnDisplayImage(object source, DisplayImageEventArgs args);
     }
 }
