@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace ViewLibrary
 {
     /// <summary>
-    /// DisplayView - The Windows Form class responsible for rendering a Form for displaying and editting an image (rotate, flip, scale, save image)
+    /// DisplayView - The Form responsible for rendering and editing an image (rotate, flip, scale, save image)
     /// </summary>
     public partial class DisplayView : Form, IDisplayView, IDisplayViewUpdater, IDisplayImageEventListener
     {
@@ -104,7 +104,7 @@ namespace ViewLibrary
         /// <param name="e">Event data</param>
         private void FlipHorizontalButton_Click(object sender, EventArgs e)
         {
-            // Execute the FlipImageCommand, pass the key and whether or not to rotate vertically (false):
+            // Execute the FlipImageCommand, pass the key and whether or not to flip vertically (false):
             ICommand flip = new FlipImageCommand(_flipImageCommand, _key, false);
             _execute(flip);
         }
@@ -116,7 +116,7 @@ namespace ViewLibrary
         /// <param name="e">Event data</param>
         private void FlipVerticallyButton_Click(object sender, EventArgs e)
         {
-            // Execute the FlipImageCommand, pass the key and whether or not to rotate vertically (true):
+            // Execute the FlipImageCommand, pass the key and whether or not to flip vertically (true):
             ICommand flip = new FlipImageCommand(_flipImageCommand, _key, true);
             _execute(flip);
         }

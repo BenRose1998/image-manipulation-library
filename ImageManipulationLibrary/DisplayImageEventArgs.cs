@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace ModelLibrary
 {
     /// <summary>
-    /// DisplayImageEventArgs - Stores an Image to be displayed in ImageViewer
+    /// DisplayImageEventArgs - Stores an Image to be displayed in DisplayView
     /// </summary>
     public class DisplayImageEventArgs : EventArgs
     {

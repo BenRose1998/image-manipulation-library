@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 namespace ModelLibrary
 {
     /// <summary>
-    /// Model Class - The purpose of this class is to store all Image objects in a container & call the ImageManipulator's methods to
-    /// modify the images. Events are triggered to pass images to the Views.
+    /// Model Class - Entry point of the ModelLibrary, composed of a ImageHandler and ImageManipulator, calls the ImageManipulator's methods to
+    /// modify images. Events are triggered to pass images to the Views.
     /// </summary>
     public class Model : IModelLoader, IModelRetriever, IModelEditor, IModelSaver, INewImagesEventPublisher, IDisplayImageEventPublisher
     {

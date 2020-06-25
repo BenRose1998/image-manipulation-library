@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ImageManipulationLibrary")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ModelLibrary")]
+[assembly: AssemblyDescription("Image Manipulation Tool - Model")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ImageManipulationLibrary")]
+[assembly: AssemblyCompany("Ben Rose")]
+[assembly: AssemblyProduct("Model")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

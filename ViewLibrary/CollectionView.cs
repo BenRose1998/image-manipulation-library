@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace ViewLibrary
 {
     /// <summary>
-    /// CollectionView - The Form responsible for rendering a Form for uploading and displaying images
+    /// CollectionView - The Form responsible for uploading and rendering images, images can be selected to be viewed in DisplayView form
     /// </summary>
     public partial class CollectionView : Form, INewImagesEventListener
     {
